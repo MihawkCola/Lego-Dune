@@ -37,11 +37,16 @@ public class PlayerCamera : MonoBehaviour
         distance = changeDistanceStart;
         inputs = new PlayerInput();
     }
+    private void OnEnable()
+    {
+        inputs.Player.Enable();
+    }
 
     // Update is called once per frame
     void LateUpdate()
     {
-        Debug.Log(inputs.Player.Camera.ReadValue<Vector2>());
+        //Debug.Log(inputs.Player.Camera.ReadValue<Vector2>());
+        Vector2 mouseInput = inputs.Player.Camera.ReadValue<Vector2>();
 
         if (changeDistanceStart != distanceStart) distanceStart = changeDistanceStart;
 
@@ -62,9 +67,11 @@ public class PlayerCamera : MonoBehaviour
         //rotation
         /*if (Input.GetMouseButton(0))
         {
-            axisY = (Input.GetAxis("Mouse X") * verticalSpeed + axisY) % 360.0f;
-            axisX = (Input.GetAxis("Mouse Y") * horizontalSpeed + axisX) % 360.0f;
+            axisY = (mouseInput.x * verticalSpeed + axisY) % 360.0f;
+            axisX = (mouseInput.y * horizontalSpeed + axisX) % 360.0f;
         }*/
+        axisY = (mouseInput.x * verticalSpeed * Time.deltaTime + axisY) % 360.0f ;
+        axisX = (mouseInput.y * horizontalSpeed * Time.deltaTime + axisX) % 360.0f;
         if (axisX > axisXMax) axisX = axisXMax;
         if (axisX < axisXMin) axisX = axisXMin;
 

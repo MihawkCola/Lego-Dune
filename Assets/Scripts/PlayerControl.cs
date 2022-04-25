@@ -73,7 +73,7 @@ public class PlayerControl : MonoBehaviour
         this.forceDirection += Vector3.right * (move.x * this.movmentForce);
         this.forceDirection += Vector3.forward * (move.y * this.movmentForce);
 
-        //rb.AddForce(this.forceDirection, ForceMode.Impulse);
+        rb.AddForce(this.forceDirection, ForceMode.Impulse);
         forceDirection = Vector3.zero;
 
 
@@ -82,7 +82,7 @@ public class PlayerControl : MonoBehaviour
         Vector3 movement = new Vector3(move.x, 0.0f, move.y);
         Vector3 movementVektor = transform.TransformDirection(movement) * movmentForce + rb.velocity.y * Vector3.up;
 
-        rb.velocity = new Vector3(movementVektor.x, rb.velocity.y, movementVektor.z); 
+        //rb.velocity = new Vector3(movementVektor.x, rb.velocity.y, movementVektor.z); 
         //rb.AddForce(movementVektor, ForceMode.VelocityChange);
 
 
