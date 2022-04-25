@@ -42,6 +42,11 @@ public class PlayerCamera : MonoBehaviour
         inputs.Player.Enable();
     }
 
+    private void OnDisable()
+    {
+        inputs.Player.Disable();
+    }
+
     // Update is called once per frame
     void LateUpdate()
     {
@@ -53,11 +58,11 @@ public class PlayerCamera : MonoBehaviour
         // ############## Scroll distance ##############
         //distance += -(Input.mouseScrollDelta.y * scrollScalle);
 
-        float distMaxTmp = distanceStart + distanceMax;
+        /*float distMaxTmp = distanceStart + distanceMax;
         if (distance > distMaxTmp) distance = distMaxTmp;
 
         float distMinTmp = distanceStart - distanceMin;
-        if (distance < distMinTmp) distance = distMinTmp;
+        if (distance < distMinTmp) distance = distMinTmp;*/
 
 
         //############## berechnungen der Kamera ##############
@@ -65,13 +70,16 @@ public class PlayerCamera : MonoBehaviour
         camPosition.z = distance;
 
         //rotation
+        // altes Input System
         /*if (Input.GetMouseButton(0))
         {
             axisY = (mouseInput.x * verticalSpeed + axisY) % 360.0f;
             axisX = (mouseInput.y * horizontalSpeed + axisX) % 360.0f;
         }*/
+
         axisY = (mouseInput.x * verticalSpeed * Time.deltaTime + axisY) % 360.0f ;
         axisX = (mouseInput.y * horizontalSpeed * Time.deltaTime + axisX) % 360.0f;
+
         if (axisX > axisXMax) axisX = axisXMax;
         if (axisX < axisXMin) axisX = axisXMin;
 
