@@ -83,7 +83,7 @@ public class PlayerControl : MonoBehaviour
         this.forceDirection += cam.transform.right * (move.x * this.movmentForce);
         this.forceDirection += this.cameraForward() * (move.y * this.movmentForce);
 
-        //rb.AddForce(this.forceDirection, ForceMode.Impulse);
+        rb.AddForce(this.forceDirection, ForceMode.Impulse);
         forceDirection = Vector3.zero;
 
 
@@ -93,14 +93,18 @@ public class PlayerControl : MonoBehaviour
         Vector3 movementVektor = transform.TransformDirection(movement) * movmentForce + rb.velocity.y * Vector3.up;
         //############### Bewegung des Carakter aus der sicht der Camera ###############
         //           (                  X                   ) (             Y            ) (            Z             )
-        rb.velocity = cam.transform.right * movementVektor.x + Vector3.up * rb.velocity.y + this.cameraForward() * movementVektor.z;
+        //rb.velocity = cam.transform.right * movementVektor.x + Vector3.up * rb.velocity.y + this.cameraForward() * movementVektor.z;
 
         //rb.velocity = new Vector3(movementVektor.x, rb.velocity.y, movementVektor.z);
         //rb.AddForce(movementVektor, ForceMode.VelocityChange);
 
-        /*Vector3 rotation = rb.velocity;
-        rotation.y = 0;
-        this.rb.rotation = Quaternion.LookRotation(rotation.normalized);*/
+        if (Vector3.Magnitude(rb.velocity) > 1) 
+        {
+            Vector3 rotation = rb.velocity;
+            rotation.y = 0;
+            this.rb.rotation = Quaternion.LookRotation(rotation.normalized);
+        }
+        
 
         //Beschleunigt das Runterfallen
         //Debug.Log( Physics.gravity.y * Time.fixedDeltaTime);
@@ -116,7 +120,7 @@ public class PlayerControl : MonoBehaviour
         
     }
 
-    //extra da wir bei Forward den Y wert raus nehmen müssen
+    //extra da wir bei Forward den Y wert raus nehmen mï¿½ssen
     private Vector3 cameraForward() 
     {
         Vector3 forward = cam.transform.forward;
