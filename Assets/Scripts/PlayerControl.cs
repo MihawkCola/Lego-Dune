@@ -133,8 +133,8 @@ public class PlayerControl : MonoBehaviour
     private void firstJump(InputAction.CallbackContext obj)
     {
         if (!this.isGrounded()) return;
-        rb.velocity = Vector3.up * this.firstJumpForce;
-        //this.forceDirection = Vector3.up * this.firstJumpForce;
+        //rb.velocity = Vector3.up * this.firstJumpForce;
+        this.forceDirection = Vector3.up * this.firstJumpForce;
         canDoubleJump = true;
         Debug.Log("JUMP");
     }
@@ -142,8 +142,8 @@ public class PlayerControl : MonoBehaviour
     {
         if (!canDoubleJump || this.isGrounded()) return;
 
-        rb.velocity = Vector3.up * this.secondJumpForce;
-        //this.forceDirection = Vector3.up * this.secondJumpForce;
+        //rb.velocity = Vector3.up * this.secondJumpForce;
+        this.forceDirection = Vector3.up * this.secondJumpForce;
         canDoubleJump = false;
         Debug.Log("SECOND JUMP");
     }
