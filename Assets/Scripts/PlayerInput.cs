@@ -62,6 +62,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Sneaking"",
+                    ""type"": ""Button"",
+                    ""id"": ""67daa31e-3eea-47c6-9be4-22b18e90fb1c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -163,6 +172,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""595f9d62-4608-43d8-a8e7-c6e493c6c671"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Sneaking"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -181,6 +201,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Hit = m_Player.FindAction("Hit", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
+        m_Player_Sneaking = m_Player.FindAction("Sneaking", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -244,6 +265,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Hit;
     private readonly InputAction m_Player_Camera;
+    private readonly InputAction m_Player_Sneaking;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -252,6 +274,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Hit => m_Wrapper.m_Player_Hit;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
+        public InputAction @Sneaking => m_Wrapper.m_Player_Sneaking;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -273,6 +296,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Camera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamera;
                 @Camera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamera;
                 @Camera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamera;
+                @Sneaking.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSneaking;
+                @Sneaking.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSneaking;
+                @Sneaking.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSneaking;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -289,6 +315,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Camera.started += instance.OnCamera;
                 @Camera.performed += instance.OnCamera;
                 @Camera.canceled += instance.OnCamera;
+                @Sneaking.started += instance.OnSneaking;
+                @Sneaking.performed += instance.OnSneaking;
+                @Sneaking.canceled += instance.OnSneaking;
             }
         }
     }
@@ -308,5 +337,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnHit(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
+        void OnSneaking(InputAction.CallbackContext context);
     }
 }

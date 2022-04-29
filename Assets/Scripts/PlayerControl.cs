@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
 {
     private Rigidbody rb;
     private Collider collider;
+    private Animator animator;
 
     private PlayerInput inputs;
 
@@ -36,15 +37,16 @@ public class PlayerControl : MonoBehaviour
     {
         inputs.Player.Jump.started += firstJump;
         inputs.Player.Jump.started += secondJump;
+        inputs.Player.Sneaking.started += sneaking;
         inputs.Player.Enable();
     }
 
-    
 
     private void OnDisable()
     {
         inputs.Player.Jump.started -= firstJump;
         inputs.Player.Jump.started -= secondJump;
+        inputs.Player.Sneaking.started -= sneaking;
         inputs.Player.Disable();
     }
 
@@ -54,6 +56,8 @@ public class PlayerControl : MonoBehaviour
         this.collider = GetComponent<Collider>();
         this.rb = GetComponent<Rigidbody>();
         colliderOffset = collider.bounds.extents.y;
+        this.animator = GetComponentInChildren<Animator>(true);
+        
     }
     // Update is called once per frame
     void Update()
@@ -147,7 +151,13 @@ public class PlayerControl : MonoBehaviour
         canDoubleJump = false;
         Debug.Log("SECOND JUMP");
     }
-    
+
+    private void sneaking(InputAction.CallbackContext obj)
+    {
+        animator.SetBool("isWalking", true);
+        Debug.Log("test");
+    }
+
     private bool isGrounded() {
         return Physics.Raycast(transform.position, Vector3.down, colliderOffset + 0.1f);
     }
