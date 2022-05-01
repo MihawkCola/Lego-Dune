@@ -75,7 +75,6 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         this.movementUpdate();
-
     }
 
     private void movementUpdate() {
@@ -83,24 +82,15 @@ public class PlayerControl : MonoBehaviour
         Vector2 move = inputs.Player.Movment.ReadValue<Vector2>();
         //Debug.Log(move);
 
+        movementAnimation(move);
+
         // movement Version 1
         this.forceDirection += cam.transform.right * (move.x * this.movmentForce);
         this.forceDirection += this.cameraForward() * (move.y * this.movmentForce);
 
         rb.AddForce(this.forceDirection, ForceMode.Impulse);
+        //Debug.Log(rb.velocity);
         forceDirection = Vector3.zero;
-
-
-
-        // movement Version 2
-        Vector3 movement = new Vector3(move.x, 0.0f, move.y);
-        Vector3 movementVektor = transform.TransformDirection(movement) * movmentForce + rb.velocity.y * Vector3.up;
-        //############### Bewegung des Carakter aus der sicht der Camera ###############
-        //           (                  X                   ) (             Y            ) (            Z             )
-        //rb.velocity = cam.transform.right * movementVektor.x + Vector3.up * rb.velocity.y + this.cameraForward() * movementVektor.z;
-
-        //rb.velocity = new Vector3(movementVektor.x, rb.velocity.y, movementVektor.z);
-        //rb.AddForce(movementVektor, ForceMode.VelocityChange);
 
         if (Vector3.Magnitude(rb.velocity) > 1) 
         {
@@ -111,12 +101,19 @@ public class PlayerControl : MonoBehaviour
         
 
         //Beschleunigt das Runterfallen
-        //Debug.Log( Physics.gravity.y * Time.fixedDeltaTime);
         if (rb.velocity.y < 0f) rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime * fallVelocity;
 
+        //Todo Maximal Speed einabaune
+    }
 
-        this.rotiereMovement(move);
+    private void movementAnimation(Vector2 move)
+    {
+        if (move.x >= 0.7f || move.y >= 0.7f) 
+        {
+            // rennen Animation;
+        }
 
+        //todo schleichen und normal laufen
     }
 
     private void rotiereMovement(Vector2 move)
