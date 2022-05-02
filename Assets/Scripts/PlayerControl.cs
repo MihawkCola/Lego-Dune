@@ -21,6 +21,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float fallVelocity = 1.0f;
     [SerializeField] private float maxSpeed = 5f;
 
+    [SerializeField] private float maxSpeedSneaking = 5f;
+    [SerializeField] private float maxSpeedRun = 5f;
+
     private Vector3 forceDirection = Vector3.zero;
 
     private bool canDoubleJump = false;
@@ -154,7 +157,7 @@ public class PlayerControl : MonoBehaviour
 
     private void sneaking(InputAction.CallbackContext obj)
     {
-        animator.SetBool("isWalking", true);
+        animator.SetBool("isSneak", true);
         Debug.Log("test");
     }
 
