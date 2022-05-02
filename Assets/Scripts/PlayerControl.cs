@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float secondJumpForce = 5;
     [SerializeField] private float movmentForce = 10.0f;
     [SerializeField] private float fallVelocity = 1.0f;
+    [SerializeField] private float maxSpeed = 5f;
 
     private Vector3 forceDirection = Vector3.zero;
 
@@ -84,7 +85,7 @@ public class PlayerControl : MonoBehaviour
 
         movementAnimation(move);
 
-        // movement Version 1
+        // movement
         this.forceDirection += cam.transform.right * (move.x * this.movmentForce);
         this.forceDirection += this.cameraForward() * (move.y * this.movmentForce);
 
@@ -92,18 +93,17 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log(rb.velocity);
         forceDirection = Vector3.zero;
 
-        if (Vector3.Magnitude(rb.velocity) > 1) 
-        {
-            Vector3 rotation = rb.velocity;
-            rotation.y = 0;
-            this.rb.rotation = Quaternion.LookRotation(rotation.normalized);
-        }
-        
+        // Beschleunigt das Runterfallen
+        if (rb.velocity.y < -0.1f) rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime * fallVelocity;
 
-        //Beschleunigt das Runterfallen
-        if (rb.velocity.y < 0f) rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime * fallVelocity;
 
-        //Todo Maximal Speed einabaune
+        // Speed limit;
+        Vector3 horizontalVelocity = rb.velocity;
+        horizontalVelocity.y = 0;
+        if (horizontalVelocity.magnitude > maxSpeed)
+            rb.velocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
+
+        this.rotiereMovement();
     }
 
     private void movementAnimation(Vector2 move)
@@ -116,9 +116,15 @@ public class PlayerControl : MonoBehaviour
         //todo schleichen und normal laufen
     }
 
-    private void rotiereMovement(Vector2 move)
+    private void rotiereMovement()
     {
-        
+        if (Vector3.Magnitude(rb.velocity) > 1)
+        {
+            Vector3 rotation = rb.velocity;
+            rotation.y = 0;
+            this.rb.rotation = Quaternion.LookRotation(rotation.normalized);
+        }
+
     }
 
     //extra da wir bei Forward den Y wert raus nehmen m�ssen
@@ -134,7 +140,6 @@ public class PlayerControl : MonoBehaviour
     private void firstJump(InputAction.CallbackContext obj)
     {
         if (!this.isGrounded()) return;
-        //rb.velocity = Vector3.up * this.firstJumpForce;
         this.forceDirection = Vector3.up * this.firstJumpForce;
         canDoubleJump = true;
         Debug.Log("JUMP");
@@ -142,8 +147,6 @@ public class PlayerControl : MonoBehaviour
     private void secondJump(InputAction.CallbackContext obj)
     {
         if (!canDoubleJump || this.isGrounded()) return;
-
-        //rb.velocity = Vector3.up * this.secondJumpForce;
         this.forceDirection = Vector3.up * this.secondJumpForce;
         canDoubleJump = false;
         Debug.Log("SECOND JUMP");
