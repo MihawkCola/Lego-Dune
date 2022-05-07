@@ -19,7 +19,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float secondJumpForce = 5;
     [SerializeField] private float movmentForce = 10.0f;
     [SerializeField] private float fallVelocity = 1.0f;
-    [SerializeField] private float maxSpeed = 5f;
+    [SerializeField] private float maxSpeedNormal = 5f;
 
     [SerializeField] private float maxSpeedSneaking = 5f;
     [SerializeField] private float maxSpeedRun = 5f;
@@ -27,6 +27,7 @@ public class PlayerControl : MonoBehaviour
     private Vector3 forceDirection = Vector3.zero;
 
     private bool canDoubleJump = false;
+    private float maxSpeed;
     private float colliderOffset;
 
 
@@ -35,13 +36,15 @@ public class PlayerControl : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        inputs = new PlayerInput(); 
+        inputs = new PlayerInput();
+        maxSpeed = maxSpeedNormal;
     }
     private void OnEnable()
     {
         inputs.Player.Jump.started += firstJump;
         inputs.Player.Jump.started += secondJump;
-        inputs.Player.Sneaking.started += sneaking;
+        inputs.Player.Sneaking.started += isRunning;
+        inputs.Player.Sneaking.canceled += isRunning;
         inputs.Player.Enable();
     }
 
@@ -50,7 +53,8 @@ public class PlayerControl : MonoBehaviour
     {
         inputs.Player.Jump.started -= firstJump;
         inputs.Player.Jump.started -= secondJump;
-        inputs.Player.Sneaking.started -= sneaking;
+        inputs.Player.Sneaking.started -= isRunning;
+        inputs.Player.Sneaking.canceled -= isRunning;
         inputs.Player.Disable();
     }
 
@@ -86,8 +90,6 @@ public class PlayerControl : MonoBehaviour
         Vector2 move = inputs.Player.Movment.ReadValue<Vector2>();
         //Debug.Log(move);
 
-        movementAnimation(move);
-
         // movement
         this.forceDirection += cam.transform.right * (move.x * this.movmentForce);
         this.forceDirection += this.cameraForward() * (move.y * this.movmentForce);
@@ -106,17 +108,11 @@ public class PlayerControl : MonoBehaviour
         if (horizontalVelocity.magnitude > maxSpeed)
             rb.velocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
 
+
+
+        //Debug.Log(rb.velocity.magnitude);
         this.rotiereMovement();
-    }
-
-    private void movementAnimation(Vector2 move)
-    {
-        if (move.x >= 0.7f || move.y >= 0.7f) 
-        {
-            // rennen Animation;
-        }
-
-        //todo schleichen und normal laufen
+        animator.SetFloat("speed", rb.velocity.magnitude / maxSpeed);
     }
 
     private void rotiereMovement()
@@ -155,10 +151,32 @@ public class PlayerControl : MonoBehaviour
         Debug.Log("SECOND JUMP");
     }
 
-    private void sneaking(InputAction.CallbackContext obj)
+    private void isRunning(InputAction.CallbackContext obj)
     {
-        animator.SetBool("isSneak", true);
-        Debug.Log("test");
+        if (animator.GetBool("isSneaking")) return;
+
+        animator.SetBool("isRun", !animator.GetBool("isRun"));
+        if (animator.GetBool("isRun")) {
+            maxSpeed = this.maxSpeedRun;
+        }
+        else
+        {
+            maxSpeed = this.maxSpeedNormal;
+        }
+    }
+    private void isSneaking(InputAction.CallbackContext obj)
+    {
+        if (animator.GetBool("isRun")) return;
+
+        animator.SetBool("isSneaking", !animator.GetBool("isSneaking"));
+        if (animator.GetBool("isSneaking"))
+        {
+            maxSpeed = this.maxSpeedSneaking;
+        }
+        else
+        {
+            maxSpeed = this.maxSpeedNormal;
+        }
     }
 
     private bool isGrounded() {
