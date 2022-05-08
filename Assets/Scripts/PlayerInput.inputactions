@@ -42,9 +42,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Sneaking",
+                    "name": "Running",
                     "type": "Button",
                     "id": "67daa31e-3eea-47c6-9be4-22b18e90fb1c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sneaking",
+                    "type": "Button",
+                    "id": "a269061d-6a47-41d4-a8d8-ddd42a49817d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -155,6 +164,17 @@
                     "name": "",
                     "id": "595f9d62-4608-43d8-a8e7-c6e493c6c671",
                     "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Running",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8bef15b9-b089-4949-9f3f-ade9542fed6f",
+                    "path": "<Keyboard>/ctrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

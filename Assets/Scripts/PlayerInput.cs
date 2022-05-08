@@ -64,9 +64,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Sneaking"",
+                    ""name"": ""Running"",
                     ""type"": ""Button"",
                     ""id"": ""67daa31e-3eea-47c6-9be4-22b18e90fb1c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Sneaking"",
+                    ""type"": ""Button"",
+                    ""id"": ""a269061d-6a47-41d4-a8d8-ddd42a49817d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -180,6 +189,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
+                    ""action"": ""Running"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8bef15b9-b089-4949-9f3f-ade9542fed6f"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
                     ""action"": ""Sneaking"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -201,6 +221,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Hit = m_Player.FindAction("Hit", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
+        m_Player_Running = m_Player.FindAction("Running", throwIfNotFound: true);
         m_Player_Sneaking = m_Player.FindAction("Sneaking", throwIfNotFound: true);
     }
 
@@ -265,6 +286,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Hit;
     private readonly InputAction m_Player_Camera;
+    private readonly InputAction m_Player_Running;
     private readonly InputAction m_Player_Sneaking;
     public struct PlayerActions
     {
@@ -274,6 +296,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Hit => m_Wrapper.m_Player_Hit;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
+        public InputAction @Running => m_Wrapper.m_Player_Running;
         public InputAction @Sneaking => m_Wrapper.m_Player_Sneaking;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -296,6 +319,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Camera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamera;
                 @Camera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamera;
                 @Camera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamera;
+                @Running.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRunning;
+                @Running.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRunning;
+                @Running.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRunning;
                 @Sneaking.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSneaking;
                 @Sneaking.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSneaking;
                 @Sneaking.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSneaking;
@@ -315,6 +341,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Camera.started += instance.OnCamera;
                 @Camera.performed += instance.OnCamera;
                 @Camera.canceled += instance.OnCamera;
+                @Running.started += instance.OnRunning;
+                @Running.performed += instance.OnRunning;
+                @Running.canceled += instance.OnRunning;
                 @Sneaking.started += instance.OnSneaking;
                 @Sneaking.performed += instance.OnSneaking;
                 @Sneaking.canceled += instance.OnSneaking;
@@ -337,6 +366,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnHit(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
+        void OnRunning(InputAction.CallbackContext context);
         void OnSneaking(InputAction.CallbackContext context);
     }
 }

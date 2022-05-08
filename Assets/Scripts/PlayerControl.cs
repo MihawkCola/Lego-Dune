@@ -43,8 +43,10 @@ public class PlayerControl : MonoBehaviour
     {
         inputs.Player.Jump.started += firstJump;
         inputs.Player.Jump.started += secondJump;
-        inputs.Player.Sneaking.started += isRunning;
-        inputs.Player.Sneaking.canceled += isRunning;
+        inputs.Player.Running.started += isRunning;
+        inputs.Player.Running.canceled += isRunning;
+        inputs.Player.Sneaking.started += isSneaking;
+        inputs.Player.Sneaking.canceled += isSneaking;
         inputs.Player.Enable();
     }
 
@@ -53,8 +55,10 @@ public class PlayerControl : MonoBehaviour
     {
         inputs.Player.Jump.started -= firstJump;
         inputs.Player.Jump.started -= secondJump;
-        inputs.Player.Sneaking.started -= isRunning;
-        inputs.Player.Sneaking.canceled -= isRunning;
+        inputs.Player.Running.started -= isRunning;
+        inputs.Player.Running.canceled -= isRunning;
+        inputs.Player.Sneaking.started -= isSneaking;
+        inputs.Player.Sneaking.canceled -= isSneaking;
         inputs.Player.Disable();
     }
 
@@ -112,15 +116,15 @@ public class PlayerControl : MonoBehaviour
 
         //Debug.Log(rb.velocity.magnitude);
         this.rotiereMovement();
-        animator.SetFloat("speed", rb.velocity.magnitude / maxSpeed);
+        animator.SetFloat("speed", rb.velocity.magnitude);
     }
 
     private void rotiereMovement()
-    {
-        if (Vector3.Magnitude(rb.velocity) > 1)
+    {   
+        Vector3 rotation = rb.velocity;
+        rotation.y = 0;
+        if (rotation.magnitude > 0.5)
         {
-            Vector3 rotation = rb.velocity;
-            rotation.y = 0;
             this.rb.rotation = Quaternion.LookRotation(rotation.normalized);
         }
 
@@ -153,7 +157,8 @@ public class PlayerControl : MonoBehaviour
 
     private void isRunning(InputAction.CallbackContext obj)
     {
-        if (animator.GetBool("isSneaking")) return;
+        //if (animator.GetBool("isSneaking")) return;
+        
 
         animator.SetBool("isRun", !animator.GetBool("isRun"));
         if (animator.GetBool("isRun")) {
@@ -166,10 +171,10 @@ public class PlayerControl : MonoBehaviour
     }
     private void isSneaking(InputAction.CallbackContext obj)
     {
-        if (animator.GetBool("isRun")) return;
+        //if (animator.GetBool("isRun")) return;
 
-        animator.SetBool("isSneaking", !animator.GetBool("isSneaking"));
-        if (animator.GetBool("isSneaking"))
+        animator.SetBool("isSneak", !animator.GetBool("isSneak"));
+        if (animator.GetBool("isSneak"))
         {
             maxSpeed = this.maxSpeedSneaking;
         }
