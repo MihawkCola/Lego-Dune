@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 9044287920561654792}
   - component: {fileID: 1520769321451377848}
   - component: {fileID: 6574914192981410824}
+  - component: {fileID: 4071587238320913112}
   m_Layer: 0
   m_Name: Button_Tile_Flat
   m_TagString: Untagged
@@ -126,6 +127,25 @@ MonoBehaviour:
   TriggerTime: 0.5
   TriggerMaterial: {fileID: -6471036075591924938, guid: c0f99433469ac4eb1a371d2c41466291, type: 3}
   DefaultMaterial: {fileID: 4452910715608115728, guid: 6ca1728b2faee844b9cf13eff3818c3c, type: 3}
+--- !u!95 &4071587238320913112
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5626299505636525830}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bcfb9e698cfb6c5409e0b2c2e00f3613, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5948726678148523962
 GameObject:
   m_ObjectHideFlags: 0

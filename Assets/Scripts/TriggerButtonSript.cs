@@ -9,11 +9,13 @@ public class TriggerButtonSript : MonoBehaviour
     [SerializeField] private Material DefaultMaterial = null;
     private float timer = 0;
     private bool isTrigger = false;
+    private Animator animator;
 
     private MeshRenderer mr;
     // Start is called before the first frame update
     void Start()
     {
+        this.animator = GetComponent<Animator>();
         this.mr = GetComponent<MeshRenderer>();
     }
 
@@ -30,6 +32,7 @@ public class TriggerButtonSript : MonoBehaviour
             mr.material = TriggerMaterial;
             isTrigger = true;
             Debug.Log("Trigger");
+            animator.SetBool("isTrigger",true);
         }
         else {
             timer += Time.deltaTime;

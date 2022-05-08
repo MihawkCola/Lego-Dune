@@ -23,6 +23,7 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] private float maxSpeedSneaking = 5f;
     [SerializeField] private float maxSpeedRun = 5f;
+    [SerializeField] private float groundDetection = 0.2f;
 
     private Vector3 forceDirection = Vector3.zero;
 
@@ -86,6 +87,7 @@ public class PlayerControl : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        animator.SetBool("isGround", this.isGrounded());
         this.movementUpdate();
     }
 
@@ -116,14 +118,21 @@ public class PlayerControl : MonoBehaviour
 
         //Debug.Log(rb.velocity.magnitude);
         this.rotiereMovement();
-        animator.SetFloat("speed", rb.velocity.magnitude);
+        this.setMovmentAnimation();
+    }
+
+    private void setMovmentAnimation()
+    {
+        Vector3 horizontalVelocity = rb.velocity;
+        horizontalVelocity.y = 0;
+        animator.SetFloat("speed", horizontalVelocity.magnitude);
     }
 
     private void rotiereMovement()
     {   
         Vector3 rotation = rb.velocity;
         rotation.y = 0;
-        if (rotation.magnitude > 0.5)
+        if (rotation.magnitude > 0.3)
         {
             this.rb.rotation = Quaternion.LookRotation(rotation.normalized);
         }
@@ -185,6 +194,6 @@ public class PlayerControl : MonoBehaviour
     }
 
     private bool isGrounded() {
-        return Physics.Raycast(transform.position, Vector3.down, colliderOffset + 0.1f);
+        return Physics.Raycast(transform.position, Vector3.down, colliderOffset + groundDetection);
     }
 }
