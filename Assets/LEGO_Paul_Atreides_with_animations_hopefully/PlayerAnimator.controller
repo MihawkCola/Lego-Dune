@@ -9,7 +9,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -2642325006671393805, guid: 60b1042ba1a468541b0b3a63451321eb, type: 3}
+    m_Motion: {fileID: 2763957844150749137, guid: a995a505d84e5c74facaa88151ad5ade, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -17,7 +17,7 @@ BlendTree:
     m_DirectBlendParameter: speed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -376648281689200064, guid: 60b1042ba1a468541b0b3a63451321eb, type: 3}
+    m_Motion: {fileID: -4742835102494716583, guid: a995a505d84e5c74facaa88151ad5ade, type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -296,6 +296,21 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!206 &-1736310080462120537
+BlendTree:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BlendTree
+  m_Childs: []
+  m_BlendParameter: speed
+  m_BlendParameterY: speed
+  m_MinThreshold: 0
+  m_MaxThreshold: 1
+  m_UseAutomaticThresholds: 1
+  m_NormalizedBlendValues: 0
+  m_BlendType: 0
 --- !u!1102 &-1384793324639600189
 AnimatorState:
   serializedVersion: 6
@@ -331,7 +346,7 @@ BlendTree:
   m_Name: normalMovment
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: -2642325006671393805, guid: 60b1042ba1a468541b0b3a63451321eb, type: 3}
+    m_Motion: {fileID: 2763957844150749137, guid: a995a505d84e5c74facaa88151ad5ade, type: 3}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -339,7 +354,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 996188997578406998, guid: 60b1042ba1a468541b0b3a63451321eb, type: 3}
+    m_Motion: {fileID: 6771243620433817093, guid: a995a505d84e5c74facaa88151ad5ade, type: 3}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -367,13 +382,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isRun
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
