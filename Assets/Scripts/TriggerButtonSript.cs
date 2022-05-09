@@ -5,7 +5,10 @@ using UnityEngine;
 public class TriggerButtonSript : MonoBehaviour
 {
     [SerializeField] private float TriggerTime = 0.5f;
+    [SerializeField] private Material TriggerMaterial = null;
+    [SerializeField] private Material DefaultMaterial = null;
     private float timer = 0;
+    private bool isTrigger = false;
     private Animator animator;
 
     private MeshRenderer mr;
@@ -13,7 +16,7 @@ public class TriggerButtonSript : MonoBehaviour
     void Start()
     {
         this.animator = GetComponent<Animator>();
-        animator.SetBool("isTrigger", true);
+        this.mr = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -26,8 +29,10 @@ public class TriggerButtonSript : MonoBehaviour
         
         if (timer > TriggerTime)
         {
+            mr.material = TriggerMaterial;
+            isTrigger = true;
             Debug.Log("Trigger");
-            animator.SetBool("isTrigger",false);
+            animator.SetBool("isTrigger",true);
         }
         else {
             timer += Time.deltaTime;
@@ -37,11 +42,12 @@ public class TriggerButtonSript : MonoBehaviour
     {
         this.timer = 0;
     }
-    private void Reset()
+    private void reset()
     {
-        animator.SetBool("isTrigger", false);
+        isTrigger = false;
+        mr.material = DefaultMaterial;
     }
     public bool IsTrigger() {
-        return animator.GetBool("isTrigger");
+        return isTrigger;
     }
 }

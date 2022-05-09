@@ -125,6 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TriggerTime: 0.5
+  TriggerMaterial: {fileID: -6471036075591924938, guid: c0f99433469ac4eb1a371d2c41466291, type: 3}
+  DefaultMaterial: {fileID: 4452910715608115728, guid: 6ca1728b2faee844b9cf13eff3818c3c, type: 3}
 --- !u!95 &4071587238320913112
 Animator:
   serializedVersion: 3
