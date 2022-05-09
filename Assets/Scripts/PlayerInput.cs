@@ -80,6 +80,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchPlayer"",
+                    ""type"": ""Button"",
+                    ""id"": ""1877bd6a-5281-45f6-941f-690bcb93108b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -203,6 +212,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Sneaking"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""778ee521-6f21-4108-b495-31c6709563c5"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchPlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -223,6 +243,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Running = m_Player.FindAction("Running", throwIfNotFound: true);
         m_Player_Sneaking = m_Player.FindAction("Sneaking", throwIfNotFound: true);
+        m_Player_SwitchPlayer = m_Player.FindAction("SwitchPlayer", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -288,6 +309,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_Running;
     private readonly InputAction m_Player_Sneaking;
+    private readonly InputAction m_Player_SwitchPlayer;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -298,6 +320,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @Running => m_Wrapper.m_Player_Running;
         public InputAction @Sneaking => m_Wrapper.m_Player_Sneaking;
+        public InputAction @SwitchPlayer => m_Wrapper.m_Player_SwitchPlayer;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -325,6 +348,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Sneaking.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSneaking;
                 @Sneaking.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSneaking;
                 @Sneaking.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSneaking;
+                @SwitchPlayer.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchPlayer;
+                @SwitchPlayer.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchPlayer;
+                @SwitchPlayer.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchPlayer;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -347,6 +373,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Sneaking.started += instance.OnSneaking;
                 @Sneaking.performed += instance.OnSneaking;
                 @Sneaking.canceled += instance.OnSneaking;
+                @SwitchPlayer.started += instance.OnSwitchPlayer;
+                @SwitchPlayer.performed += instance.OnSwitchPlayer;
+                @SwitchPlayer.canceled += instance.OnSwitchPlayer;
             }
         }
     }
@@ -368,5 +397,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnCamera(InputAction.CallbackContext context);
         void OnRunning(InputAction.CallbackContext context);
         void OnSneaking(InputAction.CallbackContext context);
+        void OnSwitchPlayer(InputAction.CallbackContext context);
     }
 }
