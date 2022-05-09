@@ -1979,6 +1979,7 @@ MeshFilter:
   m_GameObject: {fileID: 1277942201}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 --- !u!1 &1307437056 stripped
@@ -2112,6 +2113,8 @@ MeshFilter:
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
 >>>>>>> f013e82aad98f4786ce049de7fa5a4a937e1e8d6
 >>>>>>> parent of 22c903c (Revert "fd")
+=======
+>>>>>>> parent of 56c56d8 (fix button)
 --- !u!1 &1312221824
 GameObject:
   m_ObjectHideFlags: 0
@@ -2371,6 +2374,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
 >>>>>>> f013e82aad98f4786ce049de7fa5a4a937e1e8d6
 >>>>>>> parent of 22c903c (Revert "fd")
+=======
+>>>>>>> parent of 56c56d8 (fix button)
 --- !u!1001 &1733180063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3231,6 +3236,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e6f025d8f315ff441b6cc39ae6d8abbc, type: 3}
       propertyPath: m_RootOrder
 <<<<<<< HEAD
+<<<<<<< HEAD
       value: 3
 =======
 <<<<<<< HEAD
@@ -3239,6 +3245,9 @@ PrefabInstance:
       value: 2
 >>>>>>> f013e82aad98f4786ce049de7fa5a4a937e1e8d6
 >>>>>>> parent of 22c903c (Revert "fd")
+=======
+      value: 3
+>>>>>>> parent of 56c56d8 (fix button)
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e6f025d8f315ff441b6cc39ae6d8abbc, type: 3}
       propertyPath: m_LocalScale.x
