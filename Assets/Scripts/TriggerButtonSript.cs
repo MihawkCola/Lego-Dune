@@ -11,12 +11,10 @@ public class TriggerButtonSript : MonoBehaviour
     private bool isTrigger = false;
     private Animator animator;
 
-    private MeshRenderer mr;
     // Start is called before the first frame update
     void Start()
     {
         this.animator = GetComponent<Animator>();
-        this.mr = GetComponent<MeshRenderer>();
     }
 
     // Update is called once per frame
@@ -29,10 +27,8 @@ public class TriggerButtonSript : MonoBehaviour
         
         if (timer > TriggerTime)
         {
-            mr.material = TriggerMaterial;
-            isTrigger = true;
             Debug.Log("Trigger");
-            animator.SetBool("isTrigger",true);
+            animator.SetBool("isTrigger", true);
         }
         else {
             timer += Time.deltaTime;
@@ -44,8 +40,7 @@ public class TriggerButtonSript : MonoBehaviour
     }
     private void reset()
     {
-        isTrigger = false;
-        mr.material = DefaultMaterial;
+        animator.SetBool("isTrigger", false);
     }
     public bool IsTrigger() {
         return isTrigger;
