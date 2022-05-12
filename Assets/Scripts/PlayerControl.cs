@@ -12,6 +12,7 @@ public class PlayerControl : MonoBehaviour
     private Animator animator;
 
     private PlayerInput inputs;
+    private bool movEnable = false;
 
     [SerializeField] private Camera cam;
 
@@ -32,27 +33,23 @@ public class PlayerControl : MonoBehaviour
     private float colliderOffset;
 
 
-    Vector3 vertical, horizontal;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        inputs = new PlayerInput();
         maxSpeed = maxSpeedNormal;
     }
-    private void OnEnable()
-    {
+
+    public void InputOn() {
         inputs.Player.Jump.started += firstJump;
         inputs.Player.Jump.started += secondJump;
         inputs.Player.Running.started += isRunning;
         inputs.Player.Running.canceled += isRunning;
         inputs.Player.Sneaking.started += isSneaking;
         inputs.Player.Sneaking.canceled += isSneaking;
-        inputs.Player.Enable();
+        movEnable = true;
+
     }
-
-
-    private void OnDisable()
+    public void InputOff()
     {
         inputs.Player.Jump.started -= firstJump;
         inputs.Player.Jump.started -= secondJump;
@@ -60,17 +57,22 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Running.canceled -= isRunning;
         inputs.Player.Sneaking.started -= isSneaking;
         inputs.Player.Sneaking.canceled -= isSneaking;
-        inputs.Player.Disable();
+        movEnable = false;
+    }
+
+    public bool IsInputsSet()
+    {
+        return inputs != null;
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
         this.collider = GetComponent<Collider>();
         this.rb = GetComponent<Rigidbody>();
         colliderOffset = collider.bounds.extents.y;
         this.animator = GetComponentInChildren<Animator>(true);
-        
     }
     // Update is called once per frame
     void Update()
@@ -88,7 +90,11 @@ public class PlayerControl : MonoBehaviour
     private void FixedUpdate()
     {
         animator.SetBool("isGround", this.isGrounded());
-        this.movementUpdate();
+        if(this.movEnable) this.movementUpdate();
+
+        this.rotiereMovement();
+        this.setMovmentAnimation();
+        this.velocityDown();
     }
 
     private void movementUpdate() {
@@ -104,10 +110,6 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log(rb.velocity);
         forceDirection = Vector3.zero;
 
-        // Beschleunigt das Runterfallen
-        if (rb.velocity.y < -0.1f) rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime * fallVelocity;
-
-
         // Speed limit;
         Vector3 horizontalVelocity = rb.velocity;
         horizontalVelocity.y = 0;
@@ -117,10 +119,10 @@ public class PlayerControl : MonoBehaviour
 
 
         //Debug.Log(rb.velocity.magnitude);
-        this.rotiereMovement();
-        this.setMovmentAnimation();
     }
-
+    private void velocityDown() {
+        if (rb.velocity.y < -0.1f) rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime * fallVelocity;
+    }
     private void setMovmentAnimation()
     {
         Vector3 horizontalVelocity = rb.velocity;
@@ -195,5 +197,8 @@ public class PlayerControl : MonoBehaviour
 
     private bool isGrounded() {
         return Physics.Raycast(transform.position, Vector3.down, colliderOffset + groundDetection);
+    }
+    public void setCam(Camera camera) {
+        this.cam = camera;
     }
 }

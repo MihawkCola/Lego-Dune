@@ -9,6 +9,9 @@ ModelImporter:
   - first:
       74: 1842879772390471643
     second: Armature|WormIdle
+  - first:
+      74: -2463924061742871593
+    second: Armature|WormAttack (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
