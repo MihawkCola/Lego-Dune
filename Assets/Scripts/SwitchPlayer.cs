@@ -5,45 +5,64 @@ using UnityEngine.InputSystem;
 
 public class SwitchPlayer : MonoBehaviour
 {
-    public GameObject otherPlayer;
+    [SerializeField] private GameObject player1;
+    [SerializeField] private GameObject player2;
+    [SerializeField] private Camera mainCam;
+
     private PlayerInput inputs;
+    private PlayerControl player1C;
+    private PlayerControl player2C;
+    private PlayerCamera cameraC;
+    private bool isSwitch = false;
 
-    private void Awake()
+    private void Start()
     {
-        inputs = new PlayerInput();
-        otherPlayer.GetComponent<PlayerControl>().enabled = false;
-        otherPlayer.GetComponentInChildren<Camera>().enabled = false;
-        GetComponent<PlayerControl>().enabled = true;
-        GetComponentInChildren<Camera>().enabled = true;
+        inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
+        this.player1C = player1.GetComponent<PlayerControl>();
+        this.player2C = player2.GetComponent<PlayerControl>();
+        this.cameraC = this.mainCam.GetComponent<PlayerCamera>();
+        
+        this.player1C.setCam(mainCam);
 
+        this.player2C.setCam(mainCam);
+
+        
+        this.cameraC.setTarget(player1);
+        this.InputOn();
+        StartCoroutine(EnableInputFirstPlayer());
     }
-    private void OnEnable()
+    public void InputOn()
     {
         inputs.Player.SwitchPlayer.started += isPlayer;
-        inputs.Player.Enable();
     }
 
-
-    private void OnDisable()
+    public void InputOff()
     {
         inputs.Player.SwitchPlayer.started -= isPlayer;
-        inputs.Player.Disable();
     }
+    private IEnumerator EnableInputFirstPlayer()
+    {
+        while(!player1C.IsInputsSet())
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        player1C.InputOn();
+    }
+
     private void isPlayer(InputAction.CallbackContext obj)
     {
-        if(otherPlayer.GetComponent<PlayerControl>().enabled) 
+        if(isSwitch = !isSwitch) 
         {
-            otherPlayer.GetComponent<PlayerControl>().enabled = false;
-            GetComponent<PlayerControl>().enabled = true;
-            otherPlayer.GetComponentInChildren<Camera>().enabled = false;
-            GetComponentInChildren<Camera>().enabled = true;
+            this.cameraC.setTarget(player2);
+            this.player1C.InputOff();
+            this.player2C.InputOn();
         }
         else
         {
-            GetComponent<PlayerControl>().enabled = false;
-            otherPlayer.GetComponent<PlayerControl>().enabled = true;
-            GetComponentInChildren<Camera>().enabled = false;
-            otherPlayer.GetComponentInChildren<Camera>().enabled = true;
+            this.cameraC.setTarget(player1);
+            this.player2C.InputOff();
+            this.player1C.InputOn();
         }
 
         

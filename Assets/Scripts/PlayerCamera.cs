@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
@@ -31,25 +32,21 @@ public class PlayerCamera : MonoBehaviour
     public float changeDistanceStart;
     private float distanceStart;
 
-    private void Awake()
+    private Vector3 camPlayerVectorBetween;
+
+    private void Start()
     {
         distanceStart = distance;
         distance = changeDistanceStart;
-        inputs = new PlayerInput();
-    }
-    private void OnEnable()
-    {
-        inputs.Player.Enable();
-    }
-
-    private void OnDisable()
-    {
-        inputs.Player.Disable();
+        inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+        if (isCameraMoving)
+            return;
+
         //Debug.Log(inputs.Player.Camera.ReadValue<Vector2>());
         Vector2 mouseInput = inputs.Player.Camera.ReadValue<Vector2>();
 
@@ -96,5 +93,39 @@ public class PlayerCamera : MonoBehaviour
 
         transform.position = focus + rotationPosition;
         transform.LookAt(focus);
+    }
+    private Vector3 CamPlayerVectorBetween() {
+        if (target == null)
+            return Vector3.zero;
+
+        return transform.position - target.transform.position;
+    }
+
+    public void setTarget(GameObject target) {
+        camPlayerVectorBetween = CamPlayerVectorBetween();
+        this.target = target;
+        isCameraMoving = true;
+    }
+
+    bool isCameraMoving = false;
+    [SerializeField] float cameraDamping = 1;
+    [SerializeField] float cameraSwitchMinDistance = 0.1f;
+
+    private void Update()
+    {
+        if (isCameraMoving)
+        {
+            //Debug.Log("Moving!");
+
+            transform.position =  Vector3.Lerp(transform.position, target.transform.position + camPlayerVectorBetween, cameraDamping * Time.deltaTime);
+            Debug.Log("Moving!");
+
+            if (Vector3.Distance(transform.position, target.transform.position + camPlayerVectorBetween) < cameraSwitchMinDistance)
+            {
+                isCameraMoving = false;
+                Debug.Log("False!");
+            }
+                
+        }
     }
 }
