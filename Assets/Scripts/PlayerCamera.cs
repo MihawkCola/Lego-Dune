@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using System;
 
 public class PlayerCamera : MonoBehaviour
 {
@@ -34,6 +35,10 @@ public class PlayerCamera : MonoBehaviour
 
     private Vector3 camPlayerVectorBetween;
 
+    private bool isCameraMoving = false;
+    [SerializeField] private float cameraDamping = 1;
+    [SerializeField] private float cameraSwitchMinDistance = 0.1f;
+
     private void Start()
     {
         distanceStart = distance;
@@ -44,8 +49,9 @@ public class PlayerCamera : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (isCameraMoving)
-            return;
+        if (!isCameraMoving) this.updateCamera();
+    }
+    public void updateCamera() {
 
         //Debug.Log(inputs.Player.Camera.ReadValue<Vector2>());
         Vector2 mouseInput = inputs.Player.Camera.ReadValue<Vector2>();
@@ -74,7 +80,7 @@ public class PlayerCamera : MonoBehaviour
             axisX = (mouseInput.y * horizontalSpeed + axisX) % 360.0f;
         }*/
 
-        axisY = (mouseInput.x * verticalSpeed * Time.deltaTime + axisY) % 360.0f ;
+        axisY = (mouseInput.x * verticalSpeed * Time.deltaTime + axisY) % 360.0f;
         axisX = (mouseInput.y * horizontalSpeed * Time.deltaTime + axisX) % 360.0f;
 
         if (axisX > axisXMax) axisX = axisXMax;
@@ -101,15 +107,32 @@ public class PlayerCamera : MonoBehaviour
         return transform.position - target.transform.position;
     }
 
-    public void setTarget(GameObject target) {
-        camPlayerVectorBetween = CamPlayerVectorBetween();
+    public void setTarget(GameObject target)
+    {
         this.target = target;
-        isCameraMoving = true;
     }
 
-    bool isCameraMoving = false;
-    [SerializeField] float cameraDamping = 1;
-    [SerializeField] float cameraSwitchMinDistance = 0.1f;
+    public void changeCameraTarget(GameObject target) {
+        camPlayerVectorBetween = CamPlayerVectorBetween();
+        this.target = target;
+        if (camPlayerVectorBetween == Vector3.zero) {
+            camPosition.y = height;
+            camPosition.z = distance;
+            Quaternion rotation = Quaternion.Euler(axisX, axisY, 0.0f);
+
+            Vector3 rotationPosition = rotation * camPosition;
+
+
+            //update camera
+            Vector3 focus = target.transform.position + offset;
+
+            transform.LookAt(focus);
+
+            camPlayerVectorBetween = offset + rotationPosition; 
+        }
+        Debug.Log(camPlayerVectorBetween);
+        isCameraMoving = true;
+    }
 
     private void Update()
     {
@@ -118,12 +141,12 @@ public class PlayerCamera : MonoBehaviour
             //Debug.Log("Moving!");
 
             transform.position =  Vector3.Lerp(transform.position, target.transform.position + camPlayerVectorBetween, cameraDamping * Time.deltaTime);
-            Debug.Log("Moving!");
+            //Debug.Log("Moving!");
 
             if (Vector3.Distance(transform.position, target.transform.position + camPlayerVectorBetween) < cameraSwitchMinDistance)
             {
                 isCameraMoving = false;
-                Debug.Log("False!");
+                //Debug.Log("False!");
             }
                 
         }

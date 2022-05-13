@@ -18,16 +18,15 @@ public class SwitchPlayer : MonoBehaviour
     private void Start()
     {
         inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
+
         this.player1C = player1.GetComponent<PlayerControl>();
         this.player2C = player2.GetComponent<PlayerControl>();
         this.cameraC = this.mainCam.GetComponent<PlayerCamera>();
         
         this.player1C.setCam(mainCam);
-
         this.player2C.setCam(mainCam);
 
-        
-        this.cameraC.setTarget(player1);
+        this.cameraC.changeCameraTarget(player1);
         this.InputOn();
         StartCoroutine(EnableInputFirstPlayer());
     }
@@ -54,13 +53,13 @@ public class SwitchPlayer : MonoBehaviour
     {
         if(isSwitch = !isSwitch) 
         {
-            this.cameraC.setTarget(player2);
+            this.cameraC.changeCameraTarget(player2);
             this.player1C.InputOff();
             this.player2C.InputOn();
         }
         else
         {
-            this.cameraC.setTarget(player1);
+            this.cameraC.changeCameraTarget(player1);
             this.player2C.InputOff();
             this.player1C.InputOn();
         }
