@@ -89,6 +89,42 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IncreaseHealth"",
+                    ""type"": ""Button"",
+                    ""id"": ""da7e7974-b480-41fc-be02-66eb0cd3364f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DecreaseHealth"",
+                    ""type"": ""Button"",
+                    ""id"": ""e794a382-1f7b-4bbe-a471-4596e87a9b36"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetHealth"",
+                    ""type"": ""Button"",
+                    ""id"": ""4abd266b-6caf-4a9b-857f-f3399f420793"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Coins"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d834487-f81e-4a60-a8a1-340281f37701"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -223,6 +259,50 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""SwitchPlayer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""237e0687-4103-452e-a490-619c79075d79"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IncreaseHealth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc7aba57-53d7-4640-9fa4-968f349d7d78"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DecreaseHealth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91ffae13-58b9-483b-b255-edd18a3b61dc"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetHealth"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bbfd8262-7272-4a32-84ed-4065d9dab38b"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Coins"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -244,6 +324,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_Running = m_Player.FindAction("Running", throwIfNotFound: true);
         m_Player_Sneaking = m_Player.FindAction("Sneaking", throwIfNotFound: true);
         m_Player_SwitchPlayer = m_Player.FindAction("SwitchPlayer", throwIfNotFound: true);
+        m_Player_IncreaseHealth = m_Player.FindAction("IncreaseHealth", throwIfNotFound: true);
+        m_Player_DecreaseHealth = m_Player.FindAction("DecreaseHealth", throwIfNotFound: true);
+        m_Player_ResetHealth = m_Player.FindAction("ResetHealth", throwIfNotFound: true);
+        m_Player_Coins = m_Player.FindAction("Coins", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -310,6 +394,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Running;
     private readonly InputAction m_Player_Sneaking;
     private readonly InputAction m_Player_SwitchPlayer;
+    private readonly InputAction m_Player_IncreaseHealth;
+    private readonly InputAction m_Player_DecreaseHealth;
+    private readonly InputAction m_Player_ResetHealth;
+    private readonly InputAction m_Player_Coins;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -321,6 +409,10 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Running => m_Wrapper.m_Player_Running;
         public InputAction @Sneaking => m_Wrapper.m_Player_Sneaking;
         public InputAction @SwitchPlayer => m_Wrapper.m_Player_SwitchPlayer;
+        public InputAction @IncreaseHealth => m_Wrapper.m_Player_IncreaseHealth;
+        public InputAction @DecreaseHealth => m_Wrapper.m_Player_DecreaseHealth;
+        public InputAction @ResetHealth => m_Wrapper.m_Player_ResetHealth;
+        public InputAction @Coins => m_Wrapper.m_Player_Coins;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -351,6 +443,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @SwitchPlayer.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchPlayer;
                 @SwitchPlayer.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchPlayer;
                 @SwitchPlayer.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnSwitchPlayer;
+                @IncreaseHealth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIncreaseHealth;
+                @IncreaseHealth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIncreaseHealth;
+                @IncreaseHealth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnIncreaseHealth;
+                @DecreaseHealth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDecreaseHealth;
+                @DecreaseHealth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDecreaseHealth;
+                @DecreaseHealth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDecreaseHealth;
+                @ResetHealth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnResetHealth;
+                @ResetHealth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnResetHealth;
+                @ResetHealth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnResetHealth;
+                @Coins.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCoins;
+                @Coins.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCoins;
+                @Coins.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCoins;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -376,6 +480,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @SwitchPlayer.started += instance.OnSwitchPlayer;
                 @SwitchPlayer.performed += instance.OnSwitchPlayer;
                 @SwitchPlayer.canceled += instance.OnSwitchPlayer;
+                @IncreaseHealth.started += instance.OnIncreaseHealth;
+                @IncreaseHealth.performed += instance.OnIncreaseHealth;
+                @IncreaseHealth.canceled += instance.OnIncreaseHealth;
+                @DecreaseHealth.started += instance.OnDecreaseHealth;
+                @DecreaseHealth.performed += instance.OnDecreaseHealth;
+                @DecreaseHealth.canceled += instance.OnDecreaseHealth;
+                @ResetHealth.started += instance.OnResetHealth;
+                @ResetHealth.performed += instance.OnResetHealth;
+                @ResetHealth.canceled += instance.OnResetHealth;
+                @Coins.started += instance.OnCoins;
+                @Coins.performed += instance.OnCoins;
+                @Coins.canceled += instance.OnCoins;
             }
         }
     }
@@ -398,5 +514,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnRunning(InputAction.CallbackContext context);
         void OnSneaking(InputAction.CallbackContext context);
         void OnSwitchPlayer(InputAction.CallbackContext context);
+        void OnIncreaseHealth(InputAction.CallbackContext context);
+        void OnDecreaseHealth(InputAction.CallbackContext context);
+        void OnResetHealth(InputAction.CallbackContext context);
+        void OnCoins(InputAction.CallbackContext context);
     }
 }
