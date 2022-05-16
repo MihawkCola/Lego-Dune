@@ -12,21 +12,22 @@ public class CoinsScript : MonoBehaviour
     public Image coinLeft;
     public Image coinRight;
     public Text coinText;
-    public int coinAmount = 0;
+    public int coinAmount;
 
     // Start is called before the first frame update
     void Start()
     {
         inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
+        coinAmount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        setCoinAmount(100);
+        increaseCoinAmount(100);
     }
 
-    public void setCoinAmount(int coins)
+    public void increaseCoinAmount(int coins)
     {
         Debug.Log("Click"+coins);
         coinAmount += coins;
@@ -34,6 +35,15 @@ public class CoinsScript : MonoBehaviour
         coinLeft.GetComponent<RectTransform>().anchoredPosition = new Vector2(-coinText.GetComponent<RectTransform>().sizeDelta.x/2 - coinLeft.GetComponent<RectTransform>().sizeDelta.x/2, -18);
         coinRight.GetComponent<RectTransform>().anchoredPosition = new Vector2(coinText.GetComponent<RectTransform>().sizeDelta.x/2 + coinRight.GetComponent<RectTransform>().sizeDelta.x/2, -18);
        
+    }
+
+    public void decreaseCoinAmount(int coins)
+    {
+        coinAmount = (coinAmount - coins >= 0) ? coinAmount - coins : 0;
+        coinText.GetComponent<Text>().text = coinAmount.ToString();
+        coinLeft.GetComponent<RectTransform>().anchoredPosition = new Vector2(-coinText.GetComponent<RectTransform>().sizeDelta.x / 2 - coinLeft.GetComponent<RectTransform>().sizeDelta.x / 2, -18);
+        coinRight.GetComponent<RectTransform>().anchoredPosition = new Vector2(coinText.GetComponent<RectTransform>().sizeDelta.x / 2 + coinRight.GetComponent<RectTransform>().sizeDelta.x / 2, -18);
+
     }
 
     public void InputOn()
@@ -50,6 +60,6 @@ public class CoinsScript : MonoBehaviour
     private void coins(InputAction.CallbackContext obj)
     {
         Debug.Log("hier!");
-        setCoinAmount(10);
+        increaseCoinAmount(10);
     }
 }
