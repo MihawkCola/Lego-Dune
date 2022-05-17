@@ -96,9 +96,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Coins",
+                    "name": "CoinsPlus",
                     "type": "Button",
                     "id": "4d834487-f81e-4a60-a8a1-340281f37701",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CoinsMinus",
+                    "type": "Button",
+                    "id": "1750d421-4eac-462d-8ff4-102a00b1ec0f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -241,7 +250,7 @@
                 {
                     "name": "",
                     "id": "237e0687-4103-452e-a490-619c79075d79",
-                    "path": "<Keyboard>/z",
+                    "path": "<Keyboard>/m",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -278,7 +287,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Coins",
+                    "action": "CoinsPlus",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "996cfbb4-e2aa-404e-b2c1-6d38147ceed8",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CoinsMinus",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

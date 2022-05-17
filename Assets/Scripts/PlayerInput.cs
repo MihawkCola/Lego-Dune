@@ -118,9 +118,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Coins"",
+                    ""name"": ""CoinsPlus"",
                     ""type"": ""Button"",
                     ""id"": ""4d834487-f81e-4a60-a8a1-340281f37701"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CoinsMinus"",
+                    ""type"": ""Button"",
+                    ""id"": ""1750d421-4eac-462d-8ff4-102a00b1ec0f"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -263,7 +272,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""237e0687-4103-452e-a490-619c79075d79"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/m"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -300,7 +309,18 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Coins"",
+                    ""action"": ""CoinsPlus"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""996cfbb4-e2aa-404e-b2c1-6d38147ceed8"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CoinsMinus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -327,7 +347,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_IncreaseHealth = m_Player.FindAction("IncreaseHealth", throwIfNotFound: true);
         m_Player_DecreaseHealth = m_Player.FindAction("DecreaseHealth", throwIfNotFound: true);
         m_Player_ResetHealth = m_Player.FindAction("ResetHealth", throwIfNotFound: true);
-        m_Player_Coins = m_Player.FindAction("Coins", throwIfNotFound: true);
+        m_Player_CoinsPlus = m_Player.FindAction("CoinsPlus", throwIfNotFound: true);
+        m_Player_CoinsMinus = m_Player.FindAction("CoinsMinus", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -397,7 +418,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_IncreaseHealth;
     private readonly InputAction m_Player_DecreaseHealth;
     private readonly InputAction m_Player_ResetHealth;
-    private readonly InputAction m_Player_Coins;
+    private readonly InputAction m_Player_CoinsPlus;
+    private readonly InputAction m_Player_CoinsMinus;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -412,7 +434,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @IncreaseHealth => m_Wrapper.m_Player_IncreaseHealth;
         public InputAction @DecreaseHealth => m_Wrapper.m_Player_DecreaseHealth;
         public InputAction @ResetHealth => m_Wrapper.m_Player_ResetHealth;
-        public InputAction @Coins => m_Wrapper.m_Player_Coins;
+        public InputAction @CoinsPlus => m_Wrapper.m_Player_CoinsPlus;
+        public InputAction @CoinsMinus => m_Wrapper.m_Player_CoinsMinus;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -452,9 +475,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ResetHealth.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnResetHealth;
                 @ResetHealth.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnResetHealth;
                 @ResetHealth.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnResetHealth;
-                @Coins.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCoins;
-                @Coins.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCoins;
-                @Coins.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCoins;
+                @CoinsPlus.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCoinsPlus;
+                @CoinsPlus.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCoinsPlus;
+                @CoinsPlus.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCoinsPlus;
+                @CoinsMinus.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCoinsMinus;
+                @CoinsMinus.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCoinsMinus;
+                @CoinsMinus.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCoinsMinus;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -489,9 +515,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @ResetHealth.started += instance.OnResetHealth;
                 @ResetHealth.performed += instance.OnResetHealth;
                 @ResetHealth.canceled += instance.OnResetHealth;
-                @Coins.started += instance.OnCoins;
-                @Coins.performed += instance.OnCoins;
-                @Coins.canceled += instance.OnCoins;
+                @CoinsPlus.started += instance.OnCoinsPlus;
+                @CoinsPlus.performed += instance.OnCoinsPlus;
+                @CoinsPlus.canceled += instance.OnCoinsPlus;
+                @CoinsMinus.started += instance.OnCoinsMinus;
+                @CoinsMinus.performed += instance.OnCoinsMinus;
+                @CoinsMinus.canceled += instance.OnCoinsMinus;
             }
         }
     }
@@ -517,6 +546,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnIncreaseHealth(InputAction.CallbackContext context);
         void OnDecreaseHealth(InputAction.CallbackContext context);
         void OnResetHealth(InputAction.CallbackContext context);
-        void OnCoins(InputAction.CallbackContext context);
+        void OnCoinsPlus(InputAction.CallbackContext context);
+        void OnCoinsMinus(InputAction.CallbackContext context);
     }
 }

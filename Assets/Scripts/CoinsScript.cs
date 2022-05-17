@@ -18,13 +18,14 @@ public class CoinsScript : MonoBehaviour
     void Start()
     {
         inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
+        this.InputOn();
         coinAmount = 0;
+        increaseCoinAmount(0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        increaseCoinAmount(100);
     }
 
     public void increaseCoinAmount(int coins)
@@ -48,18 +49,26 @@ public class CoinsScript : MonoBehaviour
 
     public void InputOn()
     {
-        inputs.Player.Coins.started += coins;
+        inputs.Player.CoinsPlus.started += coinsP;
+        inputs.Player.CoinsMinus.started += coinsM;
+
     }
 
 
     public void InputOff()
     {
-        inputs.Player.Coins.started -= coins;
+        inputs.Player.CoinsPlus.started -= coinsP;
+        inputs.Player.CoinsMinus.started -= coinsM;
+
     }
 
-    private void coins(InputAction.CallbackContext obj)
+    private void coinsP(InputAction.CallbackContext obj)
     {
-        Debug.Log("hier!");
-        increaseCoinAmount(10);
+        increaseCoinAmount(99);
+    }
+
+    private void coinsM(InputAction.CallbackContext obj)
+    {
+        decreaseCoinAmount(99);
     }
 }
