@@ -38,11 +38,13 @@ public class TriggerButtonSript : MonoBehaviour
     {
         this.timer = 0;
     }
-    private void reset()
+    public void reset()
     {
         animator.SetBool("isTrigger", false);
+        //this.GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.white);
     }
     public bool IsTrigger() {
-        return isTrigger;
+        return animator.GetBool("isTrigger");
     }
+
 }
