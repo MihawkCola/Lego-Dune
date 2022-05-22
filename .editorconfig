@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0472: Das Ergebnis des Ausdrucks lautet immer gleich, da ein Wert dieses Typs niemals 'null' entspricht
+dotnet_diagnostic.CS0472.severity = none

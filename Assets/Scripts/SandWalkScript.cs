@@ -13,11 +13,15 @@ public class SandWalkScript : MonoBehaviour
     private int[] sequence = new int[3];
     private int next = 0;
     public Slider slider;
+    private GameObject lastButton0;
+    private GameObject lastButton;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        lastButton0 = lastButton = buttons[0];
+        slider.value = 1;
         setColors();
         generateSequence();
         generateColors();
@@ -27,7 +31,7 @@ public class SandWalkScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (next == cubes.Length)
+        /*if (next == cubes.Length)
         {
             generateSequence();
             generateColors();
@@ -37,7 +41,7 @@ public class SandWalkScript : MonoBehaviour
         /*if (next == 0 && buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().IsTrigger())
         {
             buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
-        }*/
+        }
         if (buttons[sequence[next]].GetComponentInChildren<TriggerButtonSript>().IsTrigger())
         {
             slider.value += 0.1f;
@@ -48,8 +52,58 @@ public class SandWalkScript : MonoBehaviour
             }
             next++;
 
+        }*/
+    }
+
+    internal void buttonTriggered(TriggerButtonSript triggerButtonSript)
+    {
+        Debug.Log("nr: " + triggerButtonSript.getNumber());
+
+        /*if (next == cubes.Length)
+        {
+            generateSequence();
+            generateColors();
+            buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
+            next = 0;
+        }
+        /*if (next == 0 && buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().IsTrigger())
+        {
+            buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
+        }
+        if (triggerButtonSript.getNumber() == next)//buttons[sequence[next]].GetComponentInChildren<TriggerButtonSript>().IsTrigger())
+        {
+            slider.value += 0.1f;
+            cubes[next].GetComponent<Image>().color = Color.clear;
+            if (next > 0)
+            {
+                buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
+            }
+            next++;
+
+        }*/
+        if (next == cubes.Length)
+        {
+            generateSequence();
+            generateColors();
+            buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
+            next = 0;
         }
 
+        if (triggerButtonSript.getNumber() == next)
+        {
+            slider.value += 0.2f;
+            cubes[next].GetComponent<Image>().color = Color.clear;
+            if (next > 0)
+            {
+                buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
+            }
+            next++;
+            
+        } /*else
+        {
+            slider.value -= 0.2f;
+            triggerButtonSript.reset();
+        }*/
     }
 
 
@@ -58,6 +112,10 @@ public class SandWalkScript : MonoBehaviour
         while (true) {
             yield return new WaitForSeconds(1);
             slider.value -= 0.01f;
+            if (next == 0 && lastButton.GetComponentInChildren<TriggerButtonSript>().IsTrigger())
+            {
+                lastButton.GetComponentInChildren<TriggerButtonSript>().reset();
+            }
         }
     }
 
@@ -79,23 +137,47 @@ public class SandWalkScript : MonoBehaviour
 
     }
 
-    // TODO !
     private void generateSequence()
     {
-        sequence[0] = 0;
-        sequence[1] = 1;
-        sequence[2] = 2;
+        lastButton = lastButton0;
+        sequence = getRandomSequence(3, 3);
+        for (int i = 0; i < sequence.Length; i++)
+        {
+            buttons[sequence[i]].GetComponentInChildren<TriggerButtonSript>().setNumber(i);
+            if(sequence[i] == sequence.Length - 1)
+            {
+                lastButton0 = buttons[i];
+            }
+        }
+
+    }
+
+    private int[] getRandomSequence(int wanted, int range)
+    {
+        int[] erg = new int[wanted];
+        int pos;
+        List<int> list = new List<int>();
+        for (int i = 0; i < range; i++)
+        {
+            list.Add(i);
+        }
+        for (int i = 0; i < wanted; i++)
+        {
+            pos = UnityEngine.Random.Range(0, list.Count);
+            erg[i] = list[pos];
+            list.RemoveAt(pos);
+        }
+        return erg;
     }
     private void generateColors()
     {
         Debug.Log(cubes.Length);
+        int[] chosenColors = getRandomSequence(cubes.Length, colors.Length);
         for (int i = 0; i < cubes.Length; i++)
         {
-            int x = (UnityEngine.Random.Range(0, colors.Length) + i) % colors.Length;
-            cubes[i].GetComponent<Image>().color = colors[x];
+            cubes[i].GetComponent<Image>().color = colors[chosenColors[i]];
             // eigtl. Button_Tile_Flat
-            buttons[sequence[i]].transform.Find("Button_Outer_Ring").gameObject.GetComponent<Renderer>().material.SetColor("_Color", colors[x]);
-
+            buttons[sequence[i]].transform.Find("Button_Outer_Ring").gameObject.GetComponent<Renderer>().material.SetColor("_Color", colors[chosenColors[i]]);
         }
 
     }

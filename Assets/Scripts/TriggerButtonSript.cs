@@ -10,6 +10,7 @@ public class TriggerButtonSript : MonoBehaviour
     private float timer = 0;
     private bool isTrigger = false;
     private Animator animator;
+    private int number;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,7 @@ public class TriggerButtonSript : MonoBehaviour
         {
             Debug.Log("Trigger");
             animator.SetBool("isTrigger", true);
+            GetComponentInParent<SandWalkScript>().buttonTriggered(this);
         }
         else {
             timer += Time.deltaTime;
@@ -45,6 +47,16 @@ public class TriggerButtonSript : MonoBehaviour
     }
     public bool IsTrigger() {
         return animator.GetBool("isTrigger");
+    }
+
+    public void setNumber(int n)
+    {
+        number = n;
+    }
+
+    public int getNumber()
+    {
+        return number;
     }
 
 }
