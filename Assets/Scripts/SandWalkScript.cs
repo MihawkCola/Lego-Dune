@@ -55,55 +55,58 @@ public class SandWalkScript : MonoBehaviour
         }*/
     }
 
+    
+
     internal void buttonTriggered(TriggerButtonSript triggerButtonSript)
     {
         Debug.Log("nr: " + triggerButtonSript.getNumber());
 
-        /*if (next == cubes.Length)
+        
+
+        if (triggerButtonSript.getNumber() == next)
         {
-            generateSequence();
-            generateColors();
-            buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
-            next = 0;
-        }
-        /*if (next == 0 && buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().IsTrigger())
-        {
-            buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
-        }
-        if (triggerButtonSript.getNumber() == next)//buttons[sequence[next]].GetComponentInChildren<TriggerButtonSript>().IsTrigger())
-        {
-            slider.value += 0.1f;
+            Debug.Log("if: " + triggerButtonSript.getNumber());
+            if(slider.value + 0.2f > 1)
+            {
+                slider.value = 1;
+            }
+            else
+            {
+                slider.value += 0.2f;
+            }
+            
             cubes[next].GetComponent<Image>().color = Color.clear;
-            if (next > 0)
+            /*if (next > 0)
             {
                 buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
-            }
+            }*/
             next++;
+            
 
-        }*/
+        } else
+        {
+            Debug.Log("else: " + triggerButtonSript.getNumber());
+            if (slider.value - 0.2f <0 )
+            {
+                slider.value = 0;
+            }
+            else
+            {
+                slider.value -= 0.2f;
+            }
+            //triggerButtonSript.reset();
+        }
+    }
+
+    internal void buttonNotTriggered(TriggerButtonSript triggerButtonSript)
+    {
         if (next == cubes.Length)
         {
             generateSequence();
             generateColors();
-            buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
+            //buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
             next = 0;
         }
-
-        if (triggerButtonSript.getNumber() == next)
-        {
-            slider.value += 0.2f;
-            cubes[next].GetComponent<Image>().color = Color.clear;
-            if (next > 0)
-            {
-                buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
-            }
-            next++;
-            
-        } /*else
-        {
-            slider.value -= 0.2f;
-            triggerButtonSript.reset();
-        }*/
     }
 
 
@@ -112,10 +115,10 @@ public class SandWalkScript : MonoBehaviour
         while (true) {
             yield return new WaitForSeconds(1);
             slider.value -= 0.01f;
-            if (next == 0 && lastButton.GetComponentInChildren<TriggerButtonSript>().IsTrigger())
+            /*if (next == 0 && lastButton.GetComponentInChildren<TriggerButtonSript>().IsTrigger())
             {
                 lastButton.GetComponentInChildren<TriggerButtonSript>().reset();
-            }
+            }*/
         }
     }
 

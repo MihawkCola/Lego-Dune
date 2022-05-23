@@ -23,10 +23,16 @@ public class TriggerButtonSript : MonoBehaviour
     {
         
     }
-    private void OnTriggerStay(Collider other)
+
+    private void OnTriggerEnter(Collider other)
+    {
+        animator.SetBool("isTrigger", true);
+        GetComponentInParent<SandWalkScript>().buttonTriggered(this);
+    }
+    /*private void OnTriggerStay(Collider other)
     {
         
-        if (timer > TriggerTime)
+        if (timer > TriggerTime) 
         {
             Debug.Log("Trigger");
             animator.SetBool("isTrigger", true);
@@ -35,10 +41,12 @@ public class TriggerButtonSript : MonoBehaviour
         else {
             timer += Time.deltaTime;
         }
-    }
+    }*/
     private void OnTriggerExit(Collider other)
     {
-        this.timer = 0;
+        //this.timer = 0;
+        animator.SetBool("isTrigger", false);
+        GetComponentInParent<SandWalkScript>().buttonNotTriggered(this);
     }
     public void reset()
     {
