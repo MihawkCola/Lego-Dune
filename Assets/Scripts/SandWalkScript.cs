@@ -10,52 +10,35 @@ public class SandWalkScript : MonoBehaviour
     public GameObject[] buttons;
     public Image[] cubes;
     private Color[] colors;
+    int[] chosenColors;
     private int[] sequence = new int[3];
     private int next = 0;
     public Slider slider;
-    private GameObject lastButton0;
-    private GameObject lastButton;
+    public ParticleSystem particleSys;
+    private GameObject player;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        lastButton0 = lastButton = buttons[0];
         slider.value = 1;
         setColors();
         generateSequence();
         generateColors();
+        var main = particleSys.main;
+        main.startColor = colors[chosenColors[next]];
         StartCoroutine(wait());
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*if (next == cubes.Length)
-        {
-            generateSequence();
-            generateColors();
-            buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
-            next = 0;
-        }
-        /*if (next == 0 && buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().IsTrigger())
-        {
-            buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
-        }
-        if (buttons[sequence[next]].GetComponentInChildren<TriggerButtonSript>().IsTrigger())
-        {
-            slider.value += 0.1f;
-            cubes[next].GetComponent<Image>().color = Color.clear;
-            if (next > 0)
-            {
-                buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
-            }
-            next++;
-
-        }*/
     }
 
-    
+    internal void setPlayer(GameObject player)
+    {
+        this.player = player;
+    }
 
     internal void buttonTriggered(TriggerButtonSript triggerButtonSript)
     {
@@ -74,27 +57,21 @@ public class SandWalkScript : MonoBehaviour
             {
                 slider.value += 0.2f;
             }
-            
             cubes[next].GetComponent<Image>().color = Color.clear;
-            /*if (next > 0)
-            {
-                buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
-            }*/
             next++;
             
-
         } else
         {
             Debug.Log("else: " + triggerButtonSript.getNumber());
             if (slider.value - 0.2f <0 )
             {
                 slider.value = 0;
+                //player.GetComponent<HealthScript>().decreaseHealth();
             }
             else
             {
                 slider.value -= 0.2f;
             }
-            //triggerButtonSript.reset();
         }
     }
 
@@ -104,21 +81,24 @@ public class SandWalkScript : MonoBehaviour
         {
             generateSequence();
             generateColors();
-            //buttons[sequence[next - 1]].GetComponentInChildren<TriggerButtonSript>().reset();
             next = 0;
         }
     }
-
 
     private IEnumerator wait()
     {
         while (true) {
             yield return new WaitForSeconds(1);
-            slider.value -= 0.01f;
-            /*if (next == 0 && lastButton.GetComponentInChildren<TriggerButtonSript>().IsTrigger())
+            if (slider.value - 0.05f < 0)
             {
-                lastButton.GetComponentInChildren<TriggerButtonSript>().reset();
-            }*/
+                slider.value = 0;
+                GameObject.Find("PlayerPaul").gameObject.GetComponent<HealthScript>().decreaseHealth();
+                //player.GetComponent<HealthScript>().decreaseHealth();
+            }
+            else
+            {
+                slider.value -= 0.05f;
+            }
         }
     }
 
@@ -137,22 +117,15 @@ public class SandWalkScript : MonoBehaviour
         colors[9] = new Color32(255, 255, 0, 255);
         colors[10] = new Color32(0, 255, 255, 255);
         colors[11] = new Color32(255, 0, 255, 255);
-
     }
 
     private void generateSequence()
     {
-        lastButton = lastButton0;
         sequence = getRandomSequence(3, 3);
         for (int i = 0; i < sequence.Length; i++)
         {
             buttons[sequence[i]].GetComponentInChildren<TriggerButtonSript>().setNumber(i);
-            if(sequence[i] == sequence.Length - 1)
-            {
-                lastButton0 = buttons[i];
-            }
         }
-
     }
 
     private int[] getRandomSequence(int wanted, int range)
@@ -175,7 +148,7 @@ public class SandWalkScript : MonoBehaviour
     private void generateColors()
     {
         Debug.Log(cubes.Length);
-        int[] chosenColors = getRandomSequence(cubes.Length, colors.Length);
+        chosenColors = getRandomSequence(cubes.Length, colors.Length);
         for (int i = 0; i < cubes.Length; i++)
         {
             cubes[i].GetComponent<Image>().color = colors[chosenColors[i]];

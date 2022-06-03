@@ -36,7 +36,7 @@ public class HealthScript : MonoBehaviour
         }
     }
 
-    void decreaseHealth() {
+    public void decreaseHealth() {
         if (health > 0)
         {
             health--;

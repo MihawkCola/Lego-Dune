@@ -51,7 +51,6 @@ public class TriggerButtonSript : MonoBehaviour
     public void reset()
     {
         animator.SetBool("isTrigger", false);
-        //this.GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.white);
     }
     public bool IsTrigger() {
         return animator.GetBool("isTrigger");
