@@ -58,14 +58,12 @@ public class SwitchPlayer : MonoBehaviour
             this.cameraC.changeCameraTarget(player2);
             this.player1C.InputOff();
             this.player2C.InputOn();
-            this.GetComponentInParent<SandWalkScript>().setPlayer(player2);
         }
         else
         {
             this.cameraC.changeCameraTarget(player1);
             this.player2C.InputOff();
             this.player1C.InputOn();
-            this.GetComponentInParent<SandWalkScript>().setPlayer(player1);
         }
 
 

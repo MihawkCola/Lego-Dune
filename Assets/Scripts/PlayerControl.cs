@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerControl : MonoBehaviour
 {
     private Rigidbody rb;
-    private Collider collider;
+    private Collider coll;
     private Animator animator;
 
     private PlayerInput inputs;
@@ -47,7 +47,6 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Sneaking.started += isSneaking;
         inputs.Player.Sneaking.canceled += isSneaking;
         movEnable = true;
-
     }
     public void InputOff()
     {
@@ -69,9 +68,9 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
-        this.collider = GetComponent<Collider>();
+        this.coll = GetComponent<Collider>();
         this.rb = GetComponent<Rigidbody>();
-        colliderOffset = collider.bounds.extents.y;
+        colliderOffset = coll.bounds.extents.y;
         this.animator = GetComponentInChildren<Animator>(true);
     }
     // Update is called once per frame

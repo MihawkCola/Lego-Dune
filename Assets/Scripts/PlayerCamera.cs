@@ -130,7 +130,6 @@ public class PlayerCamera : MonoBehaviour
 
             camPlayerVectorBetween = offset + rotationPosition; 
         }
-        Debug.Log(camPlayerVectorBetween);
         isCameraMoving = true;
     }
 
