@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Waffe
+  - BlueCoin
+  - GoldCoin
+  - SilverCoin
+  - PurpleCoin
   layers:
   - Default
   - TransparentFX

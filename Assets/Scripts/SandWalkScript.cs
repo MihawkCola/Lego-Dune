@@ -92,7 +92,7 @@ public class SandWalkScript : MonoBehaviour
             if (slider.value - 0.05f < 0)
             {
                 slider.value = 0;
-                GameObject.Find("PlayerPaul").gameObject.GetComponent<HealthScript>().decreaseHealth();
+                //GameObject.Find("PlayerPaul").gameObject.GetComponent<HealthScript>().decreaseHealth();
                 //player.GetComponent<HealthScript>().decreaseHealth();
             }
             else
