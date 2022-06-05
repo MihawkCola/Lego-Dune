@@ -5,41 +5,41 @@ using UnityEngine;
 public class ButtonScript : MonoBehaviour
 {
     private Animator animator;
-    private Step step;
+    private Stage stage;
     private int number;
 
     void Awake()
     {
         this.animator = this.transform.GetComponent<Animator>();
+        stage = this.GetComponentInParent<Stage>();
     }
-
-    void Start()
+    private void OnDisable()
     {
-        step = this.GetComponentInParent<Step>();
+        this.animator.SetBool("disable", true);
+        this.GetComponent<BoxCollider>().enabled = false;
     }
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-
+        this.animator.SetBool("disable", false);
+        this.GetComponent<BoxCollider>().enabled = true;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        animator.SetBool("isFailed", true);
+        //Debug.Log("Trigger");
+        if (this.stage.checkSuccess(number)) 
+            animator.SetBool("isSuccess", true);
+        else 
+            animator.SetBool("isFailed", true);
     }
     private void OnTriggerExit(Collider other)
     {
-        animator.SetBool("isFailed", false);
+        this.reset();
     }
     public void reset()
     {
         animator.SetBool("isFailed", false);
-        animator.SetBool("isSucces", false);
-    }
-    public bool IsTrigger()
-    {
-        animator.SetBool("isSucces", true);
-        return animator.GetBool("isSucces");
+        animator.SetBool("isSuccess", false);
     }
 
     public void setNumber(int n)
