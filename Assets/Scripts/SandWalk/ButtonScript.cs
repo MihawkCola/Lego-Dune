@@ -26,7 +26,8 @@ public class ButtonScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //Debug.Log("Trigger");
+        if (this.animator.GetBool("isSuccess") || this.animator.GetBool("isFailed")) return;
+            
         if (this.stage.checkSuccess(number)) 
             animator.SetBool("isSuccess", true);
         else 

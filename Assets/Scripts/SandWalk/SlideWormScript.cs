@@ -21,12 +21,12 @@ public class SlideWormScript : MonoBehaviour
     private void OnEnable()
     {
         coroutine = this.StartCoroutine(this.timeDecrease());
-        this.slider.gameObject.SetActive(true);
+        //this.slider.gameObject.SetActive(true);
     }
     private void OnDisable()
     {
         this.StopCoroutine(coroutine);
-        this.slider.gameObject.SetActive(false);
+        //this.slider.gameObject.SetActive(false);
     }
     public void decreaseSlider(float decrease) 
     {

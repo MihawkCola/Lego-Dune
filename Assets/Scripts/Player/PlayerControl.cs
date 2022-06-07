@@ -32,8 +32,6 @@ public class PlayerControl : MonoBehaviour
     private float maxSpeed;
     private float colliderOffset;
 
-    public GameObject hud;
-
 
     private void Awake()
     {
@@ -201,13 +199,5 @@ public class PlayerControl : MonoBehaviour
     }
     public void setCam(Camera camera) {
         this.cam = camera;
-    }
-
-
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Coin") {
-            hud.GetComponent<CoinsScript>().increaseCoinAmount(10);
-        }
     }
 }

@@ -8,11 +8,17 @@ public class SandWalk : MonoBehaviour
     public float disableEnableDelay;
 
     public Color[] colorsPoll;
+    private Color[] reandomColors;
 
 
     private Stage[] stages;
     private SlideWormScript slideWormScript;
     private int stageIndex;
+
+    private void Awake()
+    {
+
+    }
     void Start()
     {
         this.slideWormScript = this.GetComponent<SlideWormScript>();
@@ -26,6 +32,21 @@ public class SandWalk : MonoBehaviour
         }
         this.stages[0].enabled = true;
     }
+
+    private void generateRandomColor()
+    {
+        List<Color> colors = new List<Color>(this.colorsPoll);
+        this.reandomColors = new Color[this.colorsPoll.Length];
+
+        for (int i = 0; i < this.reandomColors.Length; i++)
+        {
+            int randomIndex = UnityEngine.Random.Range(0, colors.Count);
+
+            this.reandomColors[i] = colors[randomIndex];
+            colors.RemoveAt(randomIndex);
+        }
+    }
+
     public void nextStage() {
         stageIndex++;
         this.stages[stageIndex-1].enabled = false;
@@ -42,6 +63,14 @@ public class SandWalk : MonoBehaviour
     {
         Debug.Log("Sandwalk ist beendet");
         //ToDo
+    }
+    public Color[] getColors() 
+    {
+        if(this.reandomColors == null) this.generateRandomColor();
+        return this.reandomColors;
+    }
+    public Stage getActiveStage() {
+        return this.stages[stageIndex];
     }
 
 }

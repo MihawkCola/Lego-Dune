@@ -7,7 +7,7 @@ public class Stage : MonoBehaviour
     private int buttonsCount;
     private ButtonScript[] buttonS;
     private Transform[] buttonGameobject;
-    private Color[] colorButton;
+    //private Color[] colorButton;
 
     private List<int> sequence;
     private int indexSequence;
@@ -42,7 +42,11 @@ public class Stage : MonoBehaviour
         }
         this.initColors();
         this.disableButtons();
-
+    }
+    void Start()
+    {
+        this.isFinish = false;
+        this.initSequence(this.startSequenzNumber);
     }
     private void OnDisable()
     {
@@ -51,11 +55,6 @@ public class Stage : MonoBehaviour
     private void OnEnable()
     {
         this.Invoke("enableButtons", this.sandWalk.disableEnableDelay);
-    }
-    void Start()
-    {
-        this.isFinish = false;
-        this.initSequence(this.startSequenzNumber);
     }
     private void Reset()
     {
@@ -66,17 +65,9 @@ public class Stage : MonoBehaviour
 
     private void initColors()
     {
-        List<Color> colors = new List<Color>(this.sandWalk.colorsPoll);
-        this.colorButton = new Color[this.buttonsCount];
-
         for (int i = 0; i < this.buttonsCount; i++)
         {
-            int randomIndex = Random.Range(0, colors.Count);
-
-            this.colorButton[i] = colors[randomIndex];
-            colors.RemoveAt(randomIndex);
-
-            this.buttonGameobject[i].Find("Button_Outer_Ring").gameObject.GetComponent<Renderer>().material.SetColor("_Color", colorButton[i]);
+            this.buttonGameobject[i].Find("Button_Outer_Ring").gameObject.GetComponent<Renderer>().material.SetColor("_Color", this.sandWalk.getColors()[i]);
         }
     }
     private void initSequence(int size)
@@ -136,5 +127,8 @@ public class Stage : MonoBehaviour
     {
         this.isFinish = true;
         this.sandWalk.nextStage();
+    }
+    public int[] getSequence() {
+        return this.sequence.ToArray();
     }
 }
