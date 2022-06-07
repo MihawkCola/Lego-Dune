@@ -10,6 +10,7 @@ public class SlideWormScript : MonoBehaviour
     [SerializeField] private float decreaseValueOverTime;
     [SerializeField] private float decreaseValueFailed;
     [SerializeField] private float successValueRepetition;
+    [SerializeField] private float slideRate;
 
     private Coroutine coroutine;
     private HealthController healthController;
@@ -63,7 +64,7 @@ public class SlideWormScript : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(slideRate);
             this.decreaseSlider(this.decreaseValueOverTime);
         }
     }

@@ -775,11 +775,6 @@ Transform:
   m_Father: {fileID: 464513455}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &268526747 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 3475617804017185981, guid: e5bb3faf7772bdc4aacc4145a27e44dd, type: 3}
-  m_PrefabInstance: {fileID: 1942539456}
-  m_PrefabAsset: {fileID: 0}
 --- !u!64 &275603947
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -943,6 +938,7 @@ MonoBehaviour:
   decreaseValueOverTime: 0.05
   decreaseValueFailed: 0.1
   successValueRepetition: 0.5
+  slideRate: 1
 --- !u!114 &316542731
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3602,19 +3598,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1206765937}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a29dec7792a49046862155d569d27a0, type: 3}
+  m_Script: {fileID: 11500000, guid: 9558cd650b67f7340a0e8212d1b3b63f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  cubes:
-  - {fileID: 1379234181}
-  - {fileID: 2028239607}
-  - {fileID: 1685575510}
-  slider: {fileID: 2065979405}
-  particleSys: {fileID: 268526747}
+  blueCoin: {fileID: 2086216115207034401, guid: ce4219df90257d74fa20a7bfb7a31245, type: 3}
+  goldCoin: {fileID: 1316751666591311619, guid: 4d2728471d281dc4daccf8c5b496d3b5, type: 3}
+  silverCoin: {fileID: 8185404256211701207, guid: 35e2fcb1360b4404d96de216db833194, type: 3}
+  purpleCoin: {fileID: 5446693387248773804, guid: 54bc22930fdde66468c0a95a5bc46453, type: 3}
 --- !u!1 &1227336014
 GameObject:
   m_ObjectHideFlags: 0
