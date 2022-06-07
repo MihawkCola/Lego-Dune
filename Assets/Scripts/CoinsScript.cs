@@ -30,7 +30,7 @@ public class CoinsScript : MonoBehaviour
 
     public void increaseCoinAmount(int coins)
     {
-        Debug.Log("Click"+coins);
+        //Debug.Log("Click"+coins);
         coinAmount += coins;
         coinText.GetComponent<Text>().text = coinAmount.ToString();
         coinLeft.GetComponent<RectTransform>().anchoredPosition = new Vector2(-coinText.GetComponent<RectTransform>().sizeDelta.x/2 - coinLeft.GetComponent<RectTransform>().sizeDelta.x/2, -18);
