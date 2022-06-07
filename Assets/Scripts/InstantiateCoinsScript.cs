@@ -21,10 +21,10 @@ public class InstantiateCoinsScript : MonoBehaviour
 
         for (int x = 0; x < blueCoinAmount; ++x)
         {
-            Instantiate(blueCoin, new Vector3(5.0f+x, 0.4f, 2.0f+x), Quaternion.identity);
-            Instantiate(goldCoin, new Vector3(5.0f+x, 0.4f, 3.0f+x), Quaternion.identity);
-            Instantiate(silverCoin, new Vector3(5.0f+x, 0.4f, 1.0f+x), Quaternion.identity);
-            Instantiate(purpleCoin, new Vector3(5.0f+x, 0.4f, 4.0f+x), Quaternion.identity);
+            Instantiate(blueCoin, new Vector3(5.0f, 0.4f, 2.0f), Quaternion.identity);
+            Instantiate(goldCoin, new Vector3(5.0f, 0.4f, 3.0f), Quaternion.identity);
+            Instantiate(silverCoin, new Vector3(5.0f, 0.4f, 1.0f), Quaternion.identity);
+            Instantiate(purpleCoin, new Vector3(5.0f, 0.4f, 4.0f), Quaternion.identity);
         }
     }
 }

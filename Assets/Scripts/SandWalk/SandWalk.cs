@@ -17,10 +17,6 @@ public class SandWalk : MonoBehaviour
 
     private void Awake()
     {
-
-    }
-    void Start()
-    {
         this.slideWormScript = this.GetComponent<SlideWormScript>();
         Transform stages = this.transform.Find("Stages");
 
@@ -30,6 +26,9 @@ public class SandWalk : MonoBehaviour
             this.stages[i] = stages.transform.GetChild(i).GetComponent<Stage>();
             this.stages[i].enabled = false;
         }
+    }
+    void Start()
+    {  
         this.stages[0].enabled = true;
     }
 
