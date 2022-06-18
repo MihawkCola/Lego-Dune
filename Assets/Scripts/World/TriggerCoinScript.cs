@@ -28,7 +28,7 @@ public class TriggerCoinScript : MonoBehaviour
                 value = 10000;
                 break;
             default:
-                value = 0;
+                value = 1;
                 break;
         }
     }
@@ -38,7 +38,8 @@ public class TriggerCoinScript : MonoBehaviour
         if (other.tag == "Player")
         {
             hud.GetComponent<CoinsScript>().increaseCoinAmount(value);
-            Destroy(gameObject);
+            Destroy(this.transform.parent.gameObject);
+            //Destroy(this.gameObject);
         }
     }
 }

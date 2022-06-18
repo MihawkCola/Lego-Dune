@@ -26,6 +26,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float maxSpeedRun = 5f;
     [SerializeField] private float groundDetection = 0.2f;
 
+
+
     private Vector3 forceDirection = Vector3.zero;
 
     private bool canDoubleJump = false;
@@ -46,6 +48,7 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Running.canceled += isRunning;
         inputs.Player.Sneaking.started += isSneaking;
         inputs.Player.Sneaking.canceled += isSneaking;
+        inputs.Player.Attack.started += isAttacking;
         movEnable = true;
     }
     public void InputOff()
@@ -56,6 +59,7 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Running.canceled -= isRunning;
         inputs.Player.Sneaking.started -= isSneaking;
         inputs.Player.Sneaking.canceled -= isSneaking;
+        inputs.Player.Attack.started -= isAttacking;
         movEnable = false;
     }
 
@@ -194,6 +198,10 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    private void isAttacking(InputAction.CallbackContext obj)
+    {
+        animator.SetTrigger("Attack");
+    }
     private bool isGrounded() {
         return Physics.Raycast(transform.position, Vector3.down, colliderOffset + groundDetection);
     }
