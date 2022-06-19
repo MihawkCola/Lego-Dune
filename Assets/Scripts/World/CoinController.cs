@@ -45,26 +45,39 @@ public class CoinController : MonoBehaviour
     {
         for (int i = 0; i < number; i++)
         {
-            Vector3 spawnPoint = point + Vector3.up * Random.Range(0f, 0.5f) + Vector3.forward * Random.Range(-0.4f,0.4f) + Vector3.right * Random.Range(-0.4f, 0.4f);
-            GameObject coinO = this.creatCoin(coin, spawnPoint);
+            Vector3 spawnPointOffset = Vector3.right * Random.Range(-0.4f, 0.4f) + Vector3.up * Random.Range(0f, 0.5f) + Vector3.forward * Random.Range(-0.4f, 0.4f);
+            Vector3 newPoint = point + spawnPointOffset;
+
+            GameObject coinO = this.creatCoin(coin, newPoint);
             Rigidbody rb = coinO.GetComponent<Rigidbody>();
-            rb.AddExplosionForce(350 + Random.Range(0, 100), point, 5f, 1f);
-           // yield return new WaitForSeconds(0.1f);
+            rb.AddExplosionForce(250 + Random.Range(0, 100), newPoint, 5f, 1f);
         }
     }
     private IEnumerator spawnOverTime(float startDelay, float betweenDelay, Vector3 point, int numberPurple, int numberBlue, int numberGold, int numberSilver)
     {
         yield return new WaitForSeconds(startDelay);
+
+        if(numberSilver != 0) {
+            coinExplosion(Coin.Silver, point, numberSilver);
+            yield return new WaitForSeconds(betweenDelay);
+        }
+
+        if (numberGold != 0) 
+        {
+            coinExplosion(Coin.Gold, point, numberGold);
+            yield return new WaitForSeconds(betweenDelay);
+        }
+
+        if (numberBlue != 0) 
+        {
+            coinExplosion(Coin.Blue, point, numberBlue);
+            yield return new WaitForSeconds(betweenDelay);
+        }
+
         coinExplosion(Coin.Purple, point, numberPurple);
-
-        yield return new WaitForSeconds(startDelay);
-        coinExplosion(Coin.Blue, point, numberBlue);
-
-        yield return new WaitForSeconds(startDelay);
-        coinExplosion(Coin.Gold, point, numberGold);
-
-        yield return new WaitForSeconds(startDelay);
-        coinExplosion(Coin.Silver, point, numberSilver);
-
+    }
+    public void multiCoinsExplosion(float startDelay, float betweenDelay, Vector3 point, int numberPurple, int numberBlue, int numberGold, int numberSilver) 
+    {
+        this.StartCoroutine(this.spawnOverTime(startDelay, betweenDelay, point, numberPurple, numberBlue, numberGold, numberSilver));
     }
 }

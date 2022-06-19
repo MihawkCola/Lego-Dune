@@ -65,7 +65,16 @@ public class SwitchPlayer : MonoBehaviour
             this.player2C.InputOff();
             this.player1C.InputOn();
         }
-
-
+    }
+    //ToDo Hier SwitchPlayer sollte keine Controlle über die Main Camera haben muss in eine Anderes Script verlagert werden
+    public void disableCamera(Camera other) 
+    {
+        this.mainCam.gameObject.SetActive(false);
+        other.gameObject.SetActive(true);
+    }
+    public void activateCamera(Camera other) 
+    {
+        other.gameObject.SetActive(false);
+        this.mainCam.gameObject.SetActive(true);
     }
 }

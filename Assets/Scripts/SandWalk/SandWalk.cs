@@ -14,9 +14,11 @@ public class SandWalk : MonoBehaviour
     private Stage[] stages;
     private SlideWormScript slideWormScript;
     private int stageIndex;
+    private AnimationController a_controller;
 
     private void Awake()
     {
+        this.a_controller = this.transform.GetComponentInChildren<AnimationController>();
         this.slideWormScript = this.GetComponent<SlideWormScript>();
         Transform stages = this.transform.Find("Stages");
 
@@ -26,10 +28,23 @@ public class SandWalk : MonoBehaviour
             this.stages[i] = stages.transform.GetChild(i).GetComponent<Stage>();
             this.stages[i].enabled = false;
         }
+
+        this.enabled = true;
+        slideWormScript.enabled = false;
     }
-    void Start()
-    {  
+    public void StartGame()
+    {
         this.stages[0].enabled = true;
+        this.a_controller.StartAnimation();
+    }
+    public void StartSlide() 
+    {
+        slideWormScript.enabled = true;
+    }
+
+    public void StopSlide()
+    {
+        slideWormScript.enabled = false;
     }
 
     private void generateRandomColor()
@@ -68,8 +83,8 @@ public class SandWalk : MonoBehaviour
         if(this.reandomColors == null) this.generateRandomColor();
         return this.reandomColors;
     }
-    public Stage getActiveStage() {
-        return this.stages[stageIndex];
+    public int[] getActiveStageSequence() {
+        return this.stages[stageIndex].getSequence();
     }
 
 }

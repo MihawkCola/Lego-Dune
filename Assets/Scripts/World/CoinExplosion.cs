@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class CoinExplosion : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float explosionDelay;
+    [SerializeField] private float beetwenDelay;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private int numberPurple;
+    [SerializeField] private int numberBlue;
+    [SerializeField] private int numberGold;
+    [SerializeField] private int numberSilver;
+
+    private CoinController coinController;
+
+    private void Start()
     {
-        
+        GameObject gameObjectCoins = GameObject.Find("CoinController");
+        if (gameObject != null)
+            coinController = gameObjectCoins.GetComponent<CoinController>();
+        else
+            Debug.Log("Es wurde kein CoinController gefunden");
+    }
+    private void OnDestroy()
+    {
+        this.coinController.multiCoinsExplosion(explosionDelay, beetwenDelay, this.transform.position, numberPurple, numberBlue, numberGold, numberSilver);
     }
 }

@@ -14,7 +14,7 @@ public class SlideWormScript : MonoBehaviour
 
     private Coroutine coroutine;
     private HealthController healthController;
-    void Start()
+    void Awake()
     {
         this.healthController = this.players.GetComponent<HealthController>();
         this.slider.value = 1;

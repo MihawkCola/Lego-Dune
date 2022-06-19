@@ -41,12 +41,12 @@ public class Stage : MonoBehaviour
             this.buttonGameobject[i] = this.transform.GetChild(i);
         }
         this.initColors();
+        this.initSequence(this.startSequenzNumber);
         this.disableButtons();
     }
     void Start()
     {
         this.isFinish = false;
-        this.initSequence(this.startSequenzNumber);
     }
     private void OnDisable()
     {
@@ -60,7 +60,7 @@ public class Stage : MonoBehaviour
     {
         this.indexSequence = 0;
         this.isFinish = false;
-        this.initSequence(this.startSequenzNumber);
+        //this.initSequence(this.startSequenzNumber);
     }
 
     private void initColors()
