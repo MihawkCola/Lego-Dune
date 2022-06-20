@@ -41,7 +41,19 @@ PrefabInstance:
     m_TransformParent: {fileID: 3985449826282367735}
     m_Modifications:
     - target: {fileID: 1951315124652893136, guid: fefe0fbd88cb65448be9282889c50e1d, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951315124652893136, guid: fefe0fbd88cb65448be9282889c50e1d, type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951315124652893136, guid: fefe0fbd88cb65448be9282889c50e1d, type: 3}
       propertyPath: SizeModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951315124652893136, guid: fefe0fbd88cb65448be9282889c50e1d, type: 3}
+      propertyPath: ColorModule.enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1951315124652893136, guid: fefe0fbd88cb65448be9282889c50e1d, type: 3}
@@ -176,6 +188,14 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1655021355545361852}
     m_Modifications:
+    - target: {fileID: 1951315124652893136, guid: d9876174d4fd59d48856b203ec1d70f7, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951315124652893136, guid: d9876174d4fd59d48856b203ec1d70f7, type: 3}
+      propertyPath: stopAction
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1951315124652893136, guid: d9876174d4fd59d48856b203ec1d70f7, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.ctime0
       value: 9830

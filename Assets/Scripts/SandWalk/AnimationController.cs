@@ -47,6 +47,8 @@ public class AnimationController : MonoBehaviour
         tmp.transform.parent = this.transform;
 
         var main  = tmp.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
+        //var col = main.colorOverLifetime;
+        //col.enabled = false;
         main.startColor = this.colors[this.sequence[0]];
     }
     public void EndAnimation()
