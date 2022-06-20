@@ -9,11 +9,14 @@ public class CoinController : MonoBehaviour
     public GameObject silverCoin;
     public GameObject purpleCoin;
 
+    private Transform level;
     public enum Coin { Purple, Blue, Gold, Silver };
 
     private void Start()
     {
-        this.StartCoroutine(this.spawnOverTime(2f,2f,this.transform.position,10,10,10,10));
+        this.level = GameObject.Find("Level").transform;
+        //testen
+        //this.StartCoroutine(this.spawnOverTime(2f,2f,this.transform.position,10,10,10,10));
         //spawnCoins(Coin.Blue, this.transform.position, 100);
     }
     public void spawnCoin(Coin coin, Vector3 point)
@@ -31,7 +34,10 @@ public class CoinController : MonoBehaviour
         else if (coin == Coin.Gold)
             tmp = goldCoin;
 
-        return Instantiate(tmp, point, Quaternion.identity);
+        GameObject coinG = Instantiate(tmp, point, Quaternion.identity);
+        if(this.level != null)
+            coinG.transform.parent = level.transform;
+        return coinG;
     }
     public void spawnCoins(Coin coin, Vector3 point, int number)
     {

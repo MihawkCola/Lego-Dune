@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    [SerializeField] private Transform players;
     [SerializeField] private GameObject notePrefab;
     [SerializeField] private GameObject testCube;
 
@@ -21,7 +20,7 @@ public class AnimationController : MonoBehaviour
     private void Awake()
     {
         this.sandWalk = this.transform.parent.GetComponent<SandWalk>();
-        this.playerC = this.players.GetComponent<SwitchPlayer>();
+        this.playerC = GameObject.Find("Players").GetComponent<SwitchPlayer>();
         this.cam = this.transform.Find("Camera").GetComponent<Camera>();
         this.input = GameObject.Find("PlayerInput");
         this.notePosition = this.transform.Find("NotePosition").transform.position;
@@ -44,7 +43,11 @@ public class AnimationController : MonoBehaviour
             this.testCube.GetComponent<Renderer>().material.SetColor("_Color", this.colors[this.sequence[i]]);
         }*/
 
-        Instantiate(notePrefab, notePosition, Quaternion.identity);
+        GameObject tmp = Instantiate(notePrefab, notePosition, Quaternion.identity);
+        tmp.transform.parent = this.transform;
+
+        var main  = tmp.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
+        main.startColor = this.colors[this.sequence[0]];
     }
     public void EndAnimation()
     {

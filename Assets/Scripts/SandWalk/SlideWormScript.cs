@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SlideWormScript : MonoBehaviour
 {
-    [SerializeField] private Transform players;
+    private Transform players;
     [SerializeField] private Slider slider;
     [SerializeField] private float decreaseValueOverTime;
     [SerializeField] private float decreaseValueFailed;
@@ -16,8 +16,12 @@ public class SlideWormScript : MonoBehaviour
     private HealthController healthController;
     void Awake()
     {
-        this.healthController = this.players.GetComponent<HealthController>();
         this.slider.value = 1;
+    }
+    private void Start()
+    {
+        this.players = GameObject.Find("players").transform;
+        this.healthController = this.players.GetComponent<HealthController>();
     }
     private void OnEnable()
     {

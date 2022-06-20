@@ -24,6 +24,7 @@ public class CoinExplosion : MonoBehaviour
     }
     private void OnDestroy()
     {
+        if (this.coinController == null) return;
         this.coinController.multiCoinsExplosion(explosionDelay, beetwenDelay, this.transform.position, numberPurple, numberBlue, numberGold, numberSilver);
     }
 }
