@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour
 {
     [SerializeField] private GameObject notePrefab;
-    [SerializeField] private GameObject testCube;
+    [SerializeField] private float startSpawnDelay;
 
     private SandWalk sandWalk;
     private SwitchPlayer playerC;
@@ -15,6 +15,7 @@ public class AnimationController : MonoBehaviour
 
     private Color[] colors;
     private int[] sequence;
+    private int index = 0;
 
     private Vector3 notePosition;
     private void Awake()
@@ -32,28 +33,48 @@ public class AnimationController : MonoBehaviour
     }
     public void StartAnimation()
     {
+        this.index = 0;
         this.sandWalk.StopSlide();
         this.playerC.disableCamera(cam);
         this.input.SetActive(false);
         this.wormAnimator.SetBool("isSing", true);
         this.sequence = this.sandWalk.getActiveStageSequence();
-        /*for (int i = 0; i < this.sequence.Length; i++) {
-            Debug.Log(this.sequence[i]);
-            Debug.Log(this.colors[this.sequence[i]]);
-            this.testCube.GetComponent<Renderer>().material.SetColor("_Color", this.colors[this.sequence[i]]);
-        }*/
 
-        GameObject tmp = Instantiate(notePrefab, notePosition, Quaternion.identity);
-        tmp.transform.parent = this.transform;
+        this.Invoke("nextNote", this.startSpawnDelay);
+    }
 
-        var main  = tmp.transform.GetChild(0).GetChild(0).GetComponent<ParticleSystem>();
-        //var col = main.colorOverLifetime;
-        //col.enabled = false;
-        main.startColor = this.colors[this.sequence[0]];
+    public void nextNote() 
+    {
+        if (this.index >= this.sequence.Length)
+        {
+            this.EndAnimation();
+            return;
+        }
+            
+        this.spawnNote();
+        index++;
+    }
+    private void spawnNote() 
+    {
+        GameObject note = Instantiate(notePrefab, notePosition, Quaternion.identity);
+        note.transform.parent = this.transform;
+
+        Transform musicalNoteCircle = note.transform.Find("MusicalNoteCircle");
+        musicalNoteCircle.transform.LookAt(cam.transform.position);
+        musicalNoteCircle.transform.Rotate(0, 90, 0);
+        //cam.transform.LookAt(musicalNoteCircle.transform.position);
+
+        Transform musicalNoteMain = note.transform.Find("MusicalNoteMain");
+
+        var main = musicalNoteMain.GetComponent<ParticleSystem>();
+
+        if (this.index >= this.sequence.Length) return;
+        main.startColor = this.colors[this.sequence[index]];
     }
     public void EndAnimation()
     {
         this.playerC.activateCamera(cam);
+        this.wormAnimator.SetBool("isSing", false);
         this.sandWalk.StartSlide();
         this.input.SetActive(true);
     }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class NoteAnimation : MonoBehaviour
 {
-
-    // Start is called before the first frame update
-    void Start()
+    public void noteIsFinish() 
     {
-        
+        if (this.transform.childCount - 1 > 0) return;
+            
+        this.transform.GetComponentInParent<AnimationController>().nextNote();
+        Destroy(this.gameObject);
     }
-
     
 }

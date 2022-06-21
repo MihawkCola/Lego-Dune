@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SlideWormScript : MonoBehaviour
 {
     private Transform players;
-    [SerializeField] private Slider slider;
+    private Slider slider;
     [SerializeField] private float decreaseValueOverTime;
     [SerializeField] private float decreaseValueFailed;
     [SerializeField] private float successValueRepetition;
@@ -16,11 +16,13 @@ public class SlideWormScript : MonoBehaviour
     private HealthController healthController;
     void Awake()
     {
+        // sollte über ein HUD Controller geholt werden
+        this.slider = GameObject.Find("HUD").transform.Find("Slider").GetComponent<Slider>();
         this.slider.value = 1;
     }
     private void Start()
     {
-        this.players = GameObject.Find("players").transform;
+        this.players = GameObject.Find("Players").transform;
         this.healthController = this.players.GetComponent<HealthController>();
     }
     private void OnEnable()

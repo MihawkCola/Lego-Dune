@@ -91,6 +91,7 @@ public class Stage : MonoBehaviour
         this.indexSequence = 0;
         this.sequence.Add(Random.Range(0, this.buttonsCount));
         this.slideWormScript.repetitionSuccess();
+        this.sandWalk.StartAnimation();
         Debug.Log(this.sequence[this.sequence.Count - 1]);
     }
     public bool checkSuccess(int buttonNumber)

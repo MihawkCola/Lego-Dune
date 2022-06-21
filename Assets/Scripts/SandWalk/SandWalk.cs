@@ -35,6 +35,11 @@ public class SandWalk : MonoBehaviour
     public void StartGame()
     {
         this.stages[0].enabled = true;
+        this.StartAnimation();
+    }
+
+    public void StartAnimation() 
+    {
         this.a_controller.StartAnimation();
     }
     public void StartSlide() 
@@ -71,6 +76,7 @@ public class SandWalk : MonoBehaviour
             return;
         }
         this.stages[stageIndex].enabled = true;
+        this.StartAnimation();
     }
 
     private void finish()
