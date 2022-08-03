@@ -18,7 +18,7 @@ public class HealthScript : MonoBehaviour
     {
         inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
         this.InputOn();
-        //resetHealth();
+        resetHealth();
 
     }
 
@@ -50,7 +50,7 @@ public class HealthScript : MonoBehaviour
         }
     }
 
-    void resetHealth() {
+    public void resetHealth() {
         foreach (Image img in healthHearts)
         {
             img.GetComponent<RectTransform>().sizeDelta = new Vector2(39, 37);
