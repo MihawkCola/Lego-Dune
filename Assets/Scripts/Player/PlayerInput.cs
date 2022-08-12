@@ -324,6 +324,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""591da79b-54f9-496f-8f49-a64568b7c93c"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchPlayer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""237e0687-4103-452e-a490-619c79075d79"",
                     ""path"": ""<Keyboard>/m"",
                     ""interactions"": """",
