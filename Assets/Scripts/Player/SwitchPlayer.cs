@@ -29,7 +29,10 @@ public class SwitchPlayer : MonoBehaviour
         this.cameraC.changeCameraTarget(player1);
         this.InputOn();
         StartCoroutine(EnableInputFirstPlayer());
+
+        this.player1.GetComponent<HealthScript>().activeDeath = true;
         //this.GetComponentInParent<SandWalkScript>().setPlayer(player1);
+
 
     }
     public void InputOn()
@@ -58,23 +61,30 @@ public class SwitchPlayer : MonoBehaviour
             this.cameraC.changeCameraTarget(player2);
             this.player1C.InputOff();
             this.player2C.InputOn();
+
+            this.player2.GetComponent<HealthScript>().activeDeath = true;
+            this.player1.GetComponent<HealthScript>().activeDeath = false;
         }
         else
         {
             this.cameraC.changeCameraTarget(player1);
             this.player2C.InputOff();
             this.player1C.InputOn();
+
+            this.player1.GetComponent<HealthScript>().activeDeath = true;
+            this.player2.GetComponent<HealthScript>().activeDeath = false;
         }
     }
-    //ToDo Hier SwitchPlayer sollte keine Controlle über die Main Camera haben muss in eine Anderes Script verlagert werden
     public void disableCamera(Camera other) 
     {
         this.mainCam.gameObject.SetActive(false);
+        inputs.Disable();
         other.gameObject.SetActive(true);
     }
     public void activateCamera(Camera other) 
     {
         other.gameObject.SetActive(false);
+        inputs.Enable();
         this.mainCam.gameObject.SetActive(true);
     }
 }

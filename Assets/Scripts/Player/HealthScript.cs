@@ -13,6 +13,15 @@ public class HealthScript : MonoBehaviour
     public int health;
     private PlayerInput inputs;
 
+    private GameObject wormObeject;
+    private Animator wormAnimator;
+
+    public bool activeDeath = false;
+    public Camera deathCam;
+    
+    private SwitchPlayer playerScript;
+
+    [SerializeField] private GameObject playerModel;
 
     void Start()
     {
@@ -20,6 +29,10 @@ public class HealthScript : MonoBehaviour
         this.InputOn();
         resetHealth();
 
+        this.wormObeject = this.transform.Find("LEGOWormAnimations").gameObject;
+        this.wormAnimator = wormObeject.GetComponent<Animator>();
+        
+        this.playerScript = this.transform.parent.GetComponent<SwitchPlayer>();
     }
 
     void increaseHealth() { 
@@ -43,11 +56,32 @@ public class HealthScript : MonoBehaviour
             healthHearts[health].GetComponent<Animator>().enabled = false;
             healthHearts[health].GetComponent<RectTransform>().sizeDelta = new Vector2(39, 37);
             healthHearts[health].gameObject.SetActive(false);
-            if(health != 0)
+            if (health != 0)
             {
                 healthHearts[health - 1].GetComponent<Animator>().enabled = true;
             }
+            else {
+                this.death();
+            }
         }
+
+    }
+
+    private void death()
+    {
+        if (!activeDeath) return;
+
+        this.playerScript.disableCamera(this.deathCam);
+
+        wormObeject.SetActive(true);
+        wormAnimator.SetTrigger("death");
+        StartCoroutine(disablePlayer());
+    }
+
+    private IEnumerator disablePlayer()
+    {
+        yield return new WaitForSeconds(4.5f);
+        playerModel.SetActive(false);
     }
 
     public void resetHealth() {

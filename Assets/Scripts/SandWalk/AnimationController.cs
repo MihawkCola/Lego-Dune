@@ -10,7 +10,6 @@ public class AnimationController : MonoBehaviour
     private SandWalk sandWalk;
     private SwitchPlayer playerC;
     private Camera cam;
-    private GameObject input;
     private Animator wormAnimator;
 
     private Color[] colors;
@@ -23,7 +22,6 @@ public class AnimationController : MonoBehaviour
         this.sandWalk = this.transform.parent.GetComponent<SandWalk>();
         this.playerC = GameObject.Find("Players").GetComponent<SwitchPlayer>();
         this.cam = this.transform.Find("Camera").GetComponent<Camera>();
-        this.input = GameObject.Find("PlayerInput");
         this.notePosition = this.transform.Find("NotePosition").transform.position;
         this.wormAnimator = this.GetComponentInChildren<Animator>();
     }
@@ -36,7 +34,7 @@ public class AnimationController : MonoBehaviour
         this.index = 0;
         this.sandWalk.StopSlide();
         this.playerC.disableCamera(cam);
-        this.input.SetActive(false);
+
         this.wormAnimator.SetBool("isSing", true);
         this.sequence = this.sandWalk.getActiveStageSequence();
 
@@ -76,7 +74,6 @@ public class AnimationController : MonoBehaviour
         this.playerC.activateCamera(cam);
         this.wormAnimator.SetBool("isSing", false);
         this.sandWalk.StartSlide();
-        this.input.SetActive(true);
     }
 
 }
