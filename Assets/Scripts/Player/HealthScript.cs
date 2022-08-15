@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class HealthScript : MonoBehaviour
@@ -74,14 +75,13 @@ public class HealthScript : MonoBehaviour
         this.playerScript.disableCamera(this.deathCam);
 
         wormObeject.SetActive(true);
+        wormObeject.transform.parent = null;
         wormAnimator.SetTrigger("death");
-        StartCoroutine(disablePlayer());
+        StartCoroutine(resetLevel());
     }
-
-    private IEnumerator disablePlayer()
-    {
-        yield return new WaitForSeconds(4.5f);
-        playerModel.SetActive(false);
+    private IEnumerator resetLevel() {
+        yield return new WaitForSeconds(8f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void resetHealth() {

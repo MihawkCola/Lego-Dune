@@ -113,6 +113,7 @@ public class PlayerCamera : MonoBehaviour
     }
 
     public void changeCameraTarget(GameObject target) {
+        inputs.Disable();
         camPlayerVectorBetween = CamPlayerVectorBetween();
         this.target = target;
         if (camPlayerVectorBetween == Vector3.zero) {
@@ -145,6 +146,7 @@ public class PlayerCamera : MonoBehaviour
             if (Vector3.Distance(transform.position, target.transform.position + camPlayerVectorBetween) < cameraSwitchMinDistance)
             {
                 isCameraMoving = false;
+                inputs.Enable();
                 //Debug.Log("False!");
             }
                 

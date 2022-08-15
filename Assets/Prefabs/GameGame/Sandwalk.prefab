@@ -125,7 +125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdfb804b0b15499449a716ce9c9e9e49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
   decreaseValueOverTime: 0.05
   decreaseValueFailed: 0.1
   successValueRepetition: 0.5
