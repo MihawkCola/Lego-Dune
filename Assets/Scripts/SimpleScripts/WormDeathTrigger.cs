@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class WormDeathTrigger : MonoBehaviour
 {
+
+    private AudioSource[] sounds;
+    AudioSource deathSound;
+
+    private void Start()
+    {
+        sounds = GetComponents<AudioSource>();
+        deathSound = sounds[1];
+    }
     private void OnTriggerEnter(Collider other)
     {
 
@@ -12,5 +21,7 @@ public class WormDeathTrigger : MonoBehaviour
 
         if (figure == null) return;
         figure.gameObject.SetActive(false);
+        deathSound.Play();
+
     }
 }
