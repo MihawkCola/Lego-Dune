@@ -59,7 +59,11 @@ public class HealthScript : MonoBehaviour
         }
     }
 
-    public void decreaseHealth() {
+    private void decreaseHealthTest() {
+        decreaseHealth(DamageTyp.Worm);
+    }
+    public bool decreaseHealth(DamageTyp damageType)
+    {
         if (health > 0)
         {
             health--;
@@ -69,26 +73,48 @@ public class HealthScript : MonoBehaviour
             if (health != 0)
             {
                 healthHearts[health - 1].GetComponent<Animator>().enabled = true;
-                hitSound.Play();
+
+                damageAnimation(damageType);
             }
-            else {
-                this.death();
+            else
+            {
+                this.death(damageType);
             }
         }
-
+        return health <= 0;
+    }
+    private void damageAnimation(DamageTyp damageType)
+    {
+        if (damageType == DamageTyp.Worm) {
+            this.playerScript.shakePlayerCamera(1.5f, Math.Abs(health - healthHearts.Length) * 0.05f + 0.07f);
+            return;
+        }
+        // weitere als if hinzufuegen
+        hitSound.Play();
     }
 
-    private void death()
+    private void death(DamageTyp damageType)
     {
         if (!activeDeath) return;
 
-        this.playerScript.disableCamera(this.deathCam);
+        deathType(damageType);
 
-        wormObeject.SetActive(true);
-        wormObeject.transform.parent = null;
-        wormAnimator.SetTrigger("death");
-        deathSound.Play();
         StartCoroutine(resetLevel());
+    }
+    private void deathType(DamageTyp damageType)
+    {
+        if (damageType == DamageTyp.Worm) {
+            this.playerScript.disableCamera(this.deathCam);
+
+            wormObeject.SetActive(true);
+            wormObeject.transform.parent = null;
+            wormAnimator.SetTrigger("death");
+
+            GameObject hud = GameObject.Find("HUD");
+            hud.SetActive(false);
+            return;
+        }
+        // weitere als if hinzufuegen
     }
     private IEnumerator resetLevel() {
         yield return new WaitForSeconds(8f);
@@ -137,7 +163,7 @@ public class HealthScript : MonoBehaviour
     {
         Debug.Log("decrease");
 
-        decreaseHealth();
+        decreaseHealthTest();
     }
 
     private void reset(InputAction.CallbackContext obj)

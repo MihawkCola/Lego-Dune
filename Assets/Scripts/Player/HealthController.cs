@@ -16,9 +16,12 @@ public class HealthController : MonoBehaviour
             this.healthScript[i] = this.health[i].GetComponent<HealthScript>();
         }
     }
-    public void decreaseHealthAll() 
+    public bool decreaseHealthAll(DamageTyp damageTyp) 
     {
+        bool allDeath = true;
         foreach (HealthScript health in this.healthScript)
-            health.decreaseHealth();
+            allDeath = allDeath & health.decreaseHealth(damageTyp);
+
+        return allDeath;
     }
 }

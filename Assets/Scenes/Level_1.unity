@@ -3911,6 +3911,18 @@ PrefabInstance:
       propertyPath: healthHearts.Array.data[3]
       value: 
       objectReference: {fileID: 1954687427}
+    - target: {fileID: 8515080486411583766, guid: f6840b3481add834fa8f6e72a0139c18, type: 3}
+      propertyPath: cameraDamping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515080486411583766, guid: f6840b3481add834fa8f6e72a0139c18, type: 3}
+      propertyPath: changeDistanceStart
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8515080486411583766, guid: f6840b3481add834fa8f6e72a0139c18, type: 3}
+      propertyPath: cameraSwitchMinDistance
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 8515080486510992074, guid: f6840b3481add834fa8f6e72a0139c18, type: 3}
       propertyPath: m_Name
       value: Players

@@ -39,6 +39,11 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float cameraDamping = 1;
     [SerializeField] private float cameraSwitchMinDistance = 0.1f;
 
+    //Shakecamera
+    private float duration = 1f;
+    private float magnitude = 1f;
+    private bool goShake = false;
+
     private void Start()
     {
         distanceStart = distance;
@@ -52,7 +57,6 @@ public class PlayerCamera : MonoBehaviour
         if (!isCameraMoving) this.updateCamera();
     }
     public void updateCamera() {
-
         //Debug.Log(inputs.Player.Camera.ReadValue<Vector2>());
         Vector2 mouseInput = inputs.Player.Camera.ReadValue<Vector2>();
 
@@ -98,6 +102,9 @@ public class PlayerCamera : MonoBehaviour
         Vector3 focus = target.transform.position + offset;
 
         transform.position = focus + rotationPosition;
+
+        if(this.goShake) this.camshake();
+
         transform.LookAt(focus);
     }
     private Vector3 CamPlayerVectorBetween() {
@@ -152,4 +159,24 @@ public class PlayerCamera : MonoBehaviour
                 
         }
     }
+    //Quelle: https://www.youtube.com/watch?v=9A9yj8KnM8c&ab_channel=Brackeys
+    // keine 1 zu 1 Umsetzung nur Inspiration
+    public void camshake() {
+        if (Time.time < this.duration)
+        {
+            float x = UnityEngine.Random.Range(-1f, 1f) * magnitude + transform.position.x;
+            float y = UnityEngine.Random.Range(-1f, 1f) * magnitude + transform.position.y;
+
+            transform.position = new Vector3(x, y, transform.position.z);
+        }
+        else {
+            this.goShake = false;
+        }
+    }
+    public void startSake(float duration, float magnitude) {
+        this.duration = Time.time + duration;
+        this.magnitude = magnitude;
+        this.goShake = true;
+    }
+
 }

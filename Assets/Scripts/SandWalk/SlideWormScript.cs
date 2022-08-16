@@ -40,7 +40,8 @@ public class SlideWormScript : MonoBehaviour
         if (slider.value - decrease < 0) 
         {
             slider.value = 1;
-            this.players.GetComponent<HealthController>().decreaseHealthAll();
+            bool allDeath = this.players.GetComponent<HealthController>().decreaseHealthAll(DamageTyp.Worm);
+            if(allDeath) this.gameObject.SetActive(false);
             //ToDo SandWalk soll die Noten neue zeigen und reset Sequence Reihenfolge
             return;
         }

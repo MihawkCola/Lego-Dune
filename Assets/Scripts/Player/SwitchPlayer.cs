@@ -87,4 +87,8 @@ public class SwitchPlayer : MonoBehaviour
         inputs.Enable();
         this.mainCam.gameObject.SetActive(true);
     }
+    public void shakePlayerCamera(float duration, float magnitude)
+    {
+        this.cameraC.startSake(duration, magnitude);
+    }
 }
