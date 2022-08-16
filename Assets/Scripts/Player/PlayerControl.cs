@@ -26,7 +26,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float maxSpeedRun = 5f;
     [SerializeField] private float groundDetection = 0.2f;
 
-
+    private AudioSource[] sounds;
+    AudioSource jumpSound;
+    AudioSource attackSound;
 
     private Vector3 forceDirection = Vector3.zero;
 
@@ -76,6 +78,10 @@ public class PlayerControl : MonoBehaviour
         this.rb = GetComponent<Rigidbody>();
         colliderOffset = coll.bounds.extents.y;
         this.animator = GetComponentInChildren<Animator>(true);
+
+        sounds = GetComponents<AudioSource>();
+        jumpSound = sounds[2];
+        attackSound = sounds[3];
     }
     // Update is called once per frame
     void Update()
@@ -157,6 +163,7 @@ public class PlayerControl : MonoBehaviour
     private void firstJump(InputAction.CallbackContext obj)
     {
         if (!this.isGrounded()) return;
+        jumpSound.Play();
         this.forceDirection = Vector3.up * this.firstJumpForce;
         canDoubleJump = true;
         Debug.Log("JUMP");
@@ -200,6 +207,7 @@ public class PlayerControl : MonoBehaviour
 
     private void isAttacking(InputAction.CallbackContext obj)
     {
+        attackSound.Play();
         animator.SetTrigger("Attack");
     }
     private bool isGrounded() {

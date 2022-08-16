@@ -12,12 +12,17 @@ public class CoinController : MonoBehaviour
     private Transform level;
     public enum Coin { Purple, Blue, Gold, Silver };
 
+    AudioSource coinSound;
+
+
     private void Start()
     {
         this.level = GameObject.Find("Level").transform;
         //testen
         //this.StartCoroutine(this.spawnOverTime(2f,2f,this.transform.position,10,10,10,10));
         //spawnCoins(Coin.Blue, this.transform.position, 100);
+
+        coinSound = GetComponent<AudioSource>();
     }
     public void spawnCoin(Coin coin, Vector3 point)
     {
@@ -57,6 +62,7 @@ public class CoinController : MonoBehaviour
             GameObject coinO = this.creatCoin(coin, newPoint);
             Rigidbody rb = coinO.GetComponent<Rigidbody>();
             rb.AddExplosionForce(250 + Random.Range(0, 100), newPoint, 5f, 1f);
+            coinSound.Play();
         }
     }
     private IEnumerator spawnOverTime(float startDelay, float betweenDelay, Vector3 point, int numberPurple, int numberBlue, int numberGold, int numberSilver)

@@ -21,8 +21,12 @@ public class HealthScript : MonoBehaviour
     public Camera deathCam;
     
     private SwitchPlayer playerScript;
-
+    
     [SerializeField] private GameObject playerModel;
+
+    private AudioSource[] sounds;
+    AudioSource deathSound;
+    AudioSource hitSound;
 
     void Start()
     {
@@ -34,6 +38,11 @@ public class HealthScript : MonoBehaviour
         this.wormAnimator = wormObeject.GetComponent<Animator>();
         
         this.playerScript = this.transform.parent.GetComponent<SwitchPlayer>();
+
+        sounds = GetComponents<AudioSource>();
+        deathSound = sounds[1];
+        hitSound = sounds[0];
+
     }
 
     void increaseHealth() { 
@@ -60,6 +69,7 @@ public class HealthScript : MonoBehaviour
             if (health != 0)
             {
                 healthHearts[health - 1].GetComponent<Animator>().enabled = true;
+                hitSound.Play();
             }
             else {
                 this.death();
@@ -77,6 +87,7 @@ public class HealthScript : MonoBehaviour
         wormObeject.SetActive(true);
         wormObeject.transform.parent = null;
         wormAnimator.SetTrigger("death");
+        deathSound.Play();
         StartCoroutine(resetLevel());
     }
     private IEnumerator resetLevel() {
