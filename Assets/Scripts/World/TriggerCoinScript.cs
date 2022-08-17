@@ -33,19 +33,32 @@ public class TriggerCoinScript : MonoBehaviour
                 break;
         }
         coinSound = GetComponent<AudioSource>();
-        coinSound.Play();
-
     }
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+            GameObject coinGameobject = this.transform.parent.gameObject;
+            this.GetComponent<Collider>().enabled = false;
 
             coinSound.Play();
             hud.GetComponent<CoinsScript>().increaseCoinAmount(value);
-            Destroy(this.transform.parent.gameObject);
+
+
+            this.transform.parent = null;
+            Destroy(coinGameobject);
+            StartCoroutine(destroySelf());
             //Destroy(this.gameObject);
         }
     }
+    private IEnumerator destroySelf()
+    {
+        while (true) {
+            yield return new WaitForSeconds(1f);
+            if(!coinSound.isPlaying)
+                Destroy(this.gameObject);
+        }
+    }
+
 }

@@ -86,22 +86,13 @@ public class HealthScript : MonoBehaviour
     private void damageAnimation(DamageTyp damageType)
     {
         if (damageType == DamageTyp.Worm) {
-<<<<<<< Updated upstream
             this.playerScript.shakePlayerCamera(1.5f, Math.Abs(health - healthHearts.Length) * 0.07f + 0.03f);
             if (activeDeath) 
                 hitSound.Play();
-=======
-            this.playerScript.shakePlayerCamera(1.5f, Math.Abs(health - healthHearts.Length) * 0.05f + 0.07f);
-            hitSound.Play();
->>>>>>> Stashed changes
             return;
         }
 
         // weitere als if hinzufuegen
-<<<<<<< Updated upstream
-=======
-        
->>>>>>> Stashed changes
     }
 
     private void death(DamageTyp damageType)
@@ -109,11 +100,7 @@ public class HealthScript : MonoBehaviour
         if (!activeDeath) return;
 
         deathType(damageType);
-<<<<<<< Updated upstream
         
-=======
-        deathSound.Play();
->>>>>>> Stashed changes
         StartCoroutine(resetLevel());
     }
     private void deathType(DamageTyp damageType)
