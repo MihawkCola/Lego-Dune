@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DestroyExplosion : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class DestroyExplosion : MonoBehaviour
 
     private GameObject coinEploxionG;
 
+    private NavMeshObstacle obstacle;
+
     void Start()
     {
         this.stones = this.transform.parent.Find("Stones");
@@ -18,6 +21,7 @@ public class DestroyExplosion : MonoBehaviour
 
         coinEploxionG = this.transform.parent.Find("CoinExplosion").gameObject;
 
+        this.obstacle = GetComponent<NavMeshObstacle>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,6 +39,9 @@ public class DestroyExplosion : MonoBehaviour
             if (rb != null)
                 rb.AddExplosionForce(this.power, this.transform.position - localPosFromHit.normalized, this.radius, this.upwardsModifier);
         }
+
+        this.obstacle.enabled = false;
+
         if (coinEploxionG != null)
             Destroy(coinEploxionG);
         Destroy(this.gameObject);

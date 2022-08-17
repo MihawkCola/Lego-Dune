@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.InputSystem;
 
 //inspiriert Quelle: https://www.youtube.com/watch?v=WIl6ysorTE0&t=128s&ab_channel=OneWheelStudio
@@ -20,10 +21,10 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float secondJumpForce = 5;
     [SerializeField] private float movmentForce = 10.0f;
     [SerializeField] private float fallVelocity = 1.0f;
-    [SerializeField] private float maxSpeedNormal = 5f;
+    public float maxSpeedNormal = 5f;
 
     [SerializeField] private float maxSpeedSneaking = 5f;
-    [SerializeField] private float maxSpeedRun = 5f;
+    public float maxSpeedRun = 5f;
     [SerializeField] private float groundDetection = 0.2f;
 
     private AudioSource[] sounds;
@@ -36,11 +37,14 @@ public class PlayerControl : MonoBehaviour
     private float maxSpeed;
     private float colliderOffset;
 
+    private NavMeshAgent agent;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         maxSpeed = maxSpeedNormal;
+        agent = GetComponent<NavMeshAgent>();
     }
 
     public void InputOn() {
@@ -52,6 +56,7 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Sneaking.canceled += isSneaking;
         inputs.Player.Attack.started += isAttacking;
         movEnable = true;
+        agent.enabled = false;
     }
     public void InputOff()
     {
@@ -63,6 +68,7 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Sneaking.canceled -= isSneaking;
         inputs.Player.Attack.started -= isAttacking;
         movEnable = false;
+        agent.enabled = true;
     }
 
     public bool IsInputsSet()
@@ -135,6 +141,12 @@ public class PlayerControl : MonoBehaviour
     private void setMovmentAnimation()
     {
         Vector3 horizontalVelocity = rb.velocity;
+
+        if (agent != null)
+        {
+            if (agent.enabled)
+                horizontalVelocity = agent.velocity;
+        }
         horizontalVelocity.y = 0;
         animator.SetFloat("speed", horizontalVelocity.magnitude);
     }

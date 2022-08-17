@@ -13,6 +13,7 @@ public class SwitchPlayer : MonoBehaviour
     private PlayerControl player1C;
     private PlayerControl player2C;
     private PlayerCamera cameraC;
+
     private bool isSwitch = false;
 
     private void Start()
@@ -64,6 +65,7 @@ public class SwitchPlayer : MonoBehaviour
 
             this.player2.GetComponent<HealthScript>().activeDeath = true;
             this.player1.GetComponent<HealthScript>().activeDeath = false;
+
         }
         else
         {

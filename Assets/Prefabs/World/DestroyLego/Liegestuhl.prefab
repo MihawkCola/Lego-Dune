@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3261161909973130355}
   - component: {fileID: 6679895538774563850}
   - component: {fileID: 8644490102598100859}
+  - component: {fileID: 38953875933898245}
   m_Layer: 0
   m_Name: ExplosionPoint
   m_TagString: Untagged
@@ -61,6 +62,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5671041, y: 1.4609258, z: 1.8325617}
   m_Center: {x: -0.011599049, y: 0.838647, z: 0.014117122}
+--- !u!208 &38953875933898245
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759023320322986982}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.28355205, y: 0.730463, z: 0.916281}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.01159905, y: 0.838647, z: 0.01411712}
+  m_TimeToStationary: 0.5
 --- !u!1 &5458764131511392450
 GameObject:
   m_ObjectHideFlags: 0
