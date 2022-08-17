@@ -88,8 +88,8 @@ public class PlayerControl : MonoBehaviour
         this.animator = GetComponentInChildren<Animator>(true);
 
         sounds = GetComponents<AudioSource>();
-        jumpSound = sounds[2];
-        attackSound = sounds[3];
+        jumpSound = sounds[3];
+        attackSound = sounds[2];
     }
     // Update is called once per frame
     void Update()

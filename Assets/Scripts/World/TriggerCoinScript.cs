@@ -7,6 +7,7 @@ public class TriggerCoinScript : MonoBehaviour
 
     private GameObject hud;
     private int value;
+    AudioSource coinSound;
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +32,17 @@ public class TriggerCoinScript : MonoBehaviour
                 value = 1;
                 break;
         }
+        coinSound = GetComponent<AudioSource>();
+        coinSound.Play();
+
     }
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+
+            coinSound.Play();
             hud.GetComponent<CoinsScript>().increaseCoinAmount(value);
             Destroy(this.transform.parent.gameObject);
             //Destroy(this.gameObject);
