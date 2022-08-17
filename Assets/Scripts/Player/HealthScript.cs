@@ -87,10 +87,12 @@ public class HealthScript : MonoBehaviour
     {
         if (damageType == DamageTyp.Worm) {
             this.playerScript.shakePlayerCamera(1.5f, Math.Abs(health - healthHearts.Length) * 0.05f + 0.07f);
+            if (activeDeath) 
+                hitSound.Play();
             return;
         }
+
         // weitere als if hinzufuegen
-        hitSound.Play();
     }
 
     private void death(DamageTyp damageType)
@@ -98,7 +100,7 @@ public class HealthScript : MonoBehaviour
         if (!activeDeath) return;
 
         deathType(damageType);
-
+        
         StartCoroutine(resetLevel());
     }
     private void deathType(DamageTyp damageType)
@@ -108,6 +110,8 @@ public class HealthScript : MonoBehaviour
 
             wormObeject.SetActive(true);
             wormObeject.transform.parent = null;
+
+            this.deathCam.transform.parent = null;
             wormAnimator.SetTrigger("death");
 
             GameObject hud = GameObject.Find("HUD");

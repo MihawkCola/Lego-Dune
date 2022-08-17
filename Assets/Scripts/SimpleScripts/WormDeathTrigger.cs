@@ -13,6 +13,7 @@ public class WormDeathTrigger : MonoBehaviour
         if (figure == null) return;
         figure.gameObject.SetActive(false);
 
-
+        other.GetComponents<AudioSource>()[1].Play();
+        other.tag = "Untagged";
     }
 }
