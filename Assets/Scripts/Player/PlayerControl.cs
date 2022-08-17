@@ -39,12 +39,14 @@ public class PlayerControl : MonoBehaviour
 
     private NavMeshAgent agent;
 
+    private SecondPlayerAi secondPlayerAi;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         maxSpeed = maxSpeedNormal;
         agent = GetComponent<NavMeshAgent>();
+        secondPlayerAi = GetComponent<SecondPlayerAi>();
     }
 
     public void InputOn() {
@@ -56,7 +58,7 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Sneaking.canceled += isSneaking;
         inputs.Player.Attack.started += isAttacking;
         movEnable = true;
-        agent.enabled = false;
+        secondPlayerAi.enabled = false;
     }
     public void InputOff()
     {
@@ -68,7 +70,7 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Sneaking.canceled -= isSneaking;
         inputs.Player.Attack.started -= isAttacking;
         movEnable = false;
-        agent.enabled = true;
+        secondPlayerAi.enabled = true;
     }
 
     public bool IsInputsSet()
@@ -141,13 +143,17 @@ public class PlayerControl : MonoBehaviour
     private void setMovmentAnimation()
     {
         Vector3 horizontalVelocity = rb.velocity;
-
-        if (agent != null)
-        {
-            if (agent.enabled)
-                horizontalVelocity = agent.velocity;
-        }
         horizontalVelocity.y = 0;
+        //Debug.Log(this.gameObject.name);
+        //Debug.Log(horizontalVelocity.magnitude);
+
+        if (agent.velocity.magnitude > 0.1) {
+            if (agent.enabled) {
+                horizontalVelocity = agent.velocity;
+                horizontalVelocity.y = 0;
+            }
+        }
+
         animator.SetFloat("speed", horizontalVelocity.magnitude);
     }
 

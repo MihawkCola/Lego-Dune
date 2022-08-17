@@ -15,6 +15,7 @@ public class SecondPlayerAi : MonoBehaviour
     public bool notWalk = false;
 
 
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -25,7 +26,6 @@ public class SecondPlayerAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!agent.enabled) return;
         rangeSpeed();
         if(!notWalk) goToPlayer();
     }
@@ -42,5 +42,13 @@ public class SecondPlayerAi : MonoBehaviour
         }
 
         agent.speed = control.maxSpeedNormal;
+    }
+    private void OnDisable()
+    {
+        agent.enabled = false;
+    }
+    private void OnEnable()
+    {
+        agent.enabled = true;
     }
 }

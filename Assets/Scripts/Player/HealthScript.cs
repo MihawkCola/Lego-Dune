@@ -86,7 +86,7 @@ public class HealthScript : MonoBehaviour
     private void damageAnimation(DamageTyp damageType)
     {
         if (damageType == DamageTyp.Worm) {
-            this.playerScript.shakePlayerCamera(1.5f, Math.Abs(health - healthHearts.Length) * 0.05f + 0.07f);
+            this.playerScript.shakePlayerCamera(1.5f, Math.Abs(health - healthHearts.Length) * 0.07f + 0.03f);
             if (activeDeath) 
                 hitSound.Play();
             return;
