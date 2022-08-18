@@ -685,7 +685,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 1
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.15
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: 2178dbf3bf2a583419da16c346d7bca2, type: 2}
 --- !u!1 &181280732
@@ -4314,6 +4314,10 @@ PrefabInstance:
       propertyPath: m_AngularSpeed
       value: 120
       objectReference: {fileID: 0}
+    - target: {fileID: 5663103160246385406, guid: f6840b3481add834fa8f6e72a0139c18, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 7720977322218813824, guid: d2489391f4705054992675ada61f351e, type: 3}
     - target: {fileID: 5781255785995542986, guid: f6840b3481add834fa8f6e72a0139c18, type: 3}
       propertyPath: m_PlayOnAwake
       value: 0

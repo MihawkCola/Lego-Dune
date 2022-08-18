@@ -120,7 +120,13 @@ public class PlayerCamera : MonoBehaviour
     }
 
     public void changeCameraTarget(GameObject target) {
-        inputs.Disable();
+
+        if (inputs != null)
+            inputs.Disable();
+        else
+            GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput().Disable();
+        
+        
         camPlayerVectorBetween = CamPlayerVectorBetween();
         this.target = target;
         if (camPlayerVectorBetween == Vector3.zero) {
@@ -148,7 +154,8 @@ public class PlayerCamera : MonoBehaviour
             //Debug.Log("Moving!");
 
             transform.position =  Vector3.Lerp(transform.position, target.transform.position + camPlayerVectorBetween, cameraDamping * Time.deltaTime);
-            //Debug.Log("Moving!");
+            //Debug.Log("Moving!"); 
+            //transform.LookAt(target.transform.position + offset);
 
             if (Vector3.Distance(transform.position, target.transform.position + camPlayerVectorBetween) < cameraSwitchMinDistance)
             {
