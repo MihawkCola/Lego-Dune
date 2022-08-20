@@ -17,6 +17,8 @@ public class AnimationController : MonoBehaviour
     private int index = 0;
 
     private Vector3 notePosition;
+
+    private AudioSource singingSound;
     private void Awake()
     {
         this.sandWalk = this.transform.parent.GetComponent<SandWalk>();
@@ -28,13 +30,14 @@ public class AnimationController : MonoBehaviour
     private void Start()
     {
         this.colors = this.sandWalk.getColors();
+        singingSound = GetComponent<AudioSource>();
     }
     public void StartAnimation()
     {
         this.index = 0;
         this.sandWalk.StopSlide();
         this.playerC.disableCamera(cam);
-
+        singingSound.Play();
         this.wormAnimator.SetBool("isSing", true);
         this.sequence = this.sandWalk.getActiveStageSequence();
 

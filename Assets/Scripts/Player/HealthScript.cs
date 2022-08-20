@@ -119,6 +119,7 @@ public class HealthScript : MonoBehaviour
             return;
         }
         // weitere als if hinzufuegen
+        deathSound.Play();
     }
     private IEnumerator resetLevel() {
         yield return new WaitForSeconds(8f);

@@ -17,7 +17,10 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] private Camera cam;
 
-    [SerializeField] private float firstJumpForce = 10;
+    [SerializeField] private GameObject pauseMenu;
+
+
+   [SerializeField] private float firstJumpForce = 10;
     [SerializeField] private float secondJumpForce = 5;
     [SerializeField] private float movmentForce = 10.0f;
     [SerializeField] private float fallVelocity = 1.0f;
@@ -28,8 +31,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float groundDetection = 0.2f;
 
     private AudioSource[] sounds;
-    AudioSource jumpSound;
-    AudioSource attackSound;
+    private AudioSource jumpSound;
+    private AudioSource attackSound;
 
     private Vector3 forceDirection = Vector3.zero;
 
@@ -60,6 +63,8 @@ public class PlayerControl : MonoBehaviour
         movEnable = true;
         secondPlayerAi.enabled = false;
     }
+
+
     public void InputOff()
     {
         inputs.Player.Jump.started -= firstJump;
