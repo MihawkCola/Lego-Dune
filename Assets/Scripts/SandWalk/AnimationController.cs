@@ -19,8 +19,11 @@ public class AnimationController : MonoBehaviour
     private Vector3 notePosition;
 
     private AudioSource singingSound;
+
+    private EnemyController enemyController;
     private void Awake()
     {
+        this.enemyController = GameObject.Find("EnemyManager").GetComponent<EnemyController>();
         this.sandWalk = this.transform.parent.GetComponent<SandWalk>();
         this.playerC = GameObject.Find("Players").GetComponent<SwitchPlayer>();
         this.cam = this.transform.Find("Camera").GetComponent<Camera>();
@@ -34,6 +37,7 @@ public class AnimationController : MonoBehaviour
     }
     public void StartAnimation()
     {
+        this.enemyController.disableAll();
         this.index = 0;
         this.sandWalk.StopSlide();
         this.playerC.disableCamera(cam);
@@ -74,6 +78,7 @@ public class AnimationController : MonoBehaviour
     }
     public void EndAnimation()
     {
+        this.enemyController.enableAll();
         this.playerC.activateCamera(cam);
         this.wormAnimator.SetBool("isSing", false);
         this.sandWalk.StartSlide();

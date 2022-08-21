@@ -9,6 +9,7 @@ public class GameControlScript : MonoBehaviour
     private GameInput input;
     private bool isPaused;
     private GameObject pauseMenu;
+
     private PlayerInput playerInput;
     private MenuInput menuInput;
 

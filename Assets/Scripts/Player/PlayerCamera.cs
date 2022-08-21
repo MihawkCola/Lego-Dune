@@ -44,8 +44,12 @@ public class PlayerCamera : MonoBehaviour
     private float magnitude = 1f;
     private bool goShake = false;
 
+
+    private EnemyController enemyController;
+    private bool isStart = true;
     private void Start()
     {
+        this.enemyController = GameObject.Find("EnemyManager").GetComponent<EnemyController>();
         distanceStart = distance;
         distance = changeDistanceStart;
         inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
@@ -125,8 +129,9 @@ public class PlayerCamera : MonoBehaviour
             inputs.Disable();
         else
             GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput().Disable();
-        
-        
+
+        this.enemyController.disableAll();
+
         camPlayerVectorBetween = CamPlayerVectorBetween();
         this.target = target;
         if (camPlayerVectorBetween == Vector3.zero) {
@@ -159,8 +164,12 @@ public class PlayerCamera : MonoBehaviour
 
             if (Vector3.Distance(transform.position, target.transform.position + camPlayerVectorBetween) < cameraSwitchMinDistance)
             {
+                if(!isStart) this.enemyController.enableAll();
+
                 isCameraMoving = false;
+                isStart = false;
                 inputs.Enable();
+                
                 //Debug.Log("False!");
             }
                 

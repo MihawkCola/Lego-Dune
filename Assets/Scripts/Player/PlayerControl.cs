@@ -43,6 +43,7 @@ public class PlayerControl : MonoBehaviour
     private NavMeshAgent agent;
 
     private SecondPlayerAi secondPlayerAi;
+    private HealthScript healthScript;
 
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class PlayerControl : MonoBehaviour
         maxSpeed = maxSpeedNormal;
         agent = GetComponent<NavMeshAgent>();
         secondPlayerAi = GetComponent<SecondPlayerAi>();
+        healthScript = GetComponent<HealthScript>();
     }
 
     public void InputOn() {
@@ -61,6 +63,7 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Sneaking.canceled += isSneaking;
         inputs.Player.Attack.started += isAttacking;
         movEnable = true;
+        healthScript.activeDeath = true;
         secondPlayerAi.enabled = false;
     }
 
@@ -75,7 +78,8 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Sneaking.canceled -= isSneaking;
         inputs.Player.Attack.started -= isAttacking;
         movEnable = false;
-        secondPlayerAi.enabled = true;
+        healthScript.activeDeath = false;
+        if(!healthScript.isDeath()) secondPlayerAi.enabled = true;
     }
 
     public bool IsInputsSet()
