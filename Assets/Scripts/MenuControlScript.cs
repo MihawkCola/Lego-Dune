@@ -60,6 +60,9 @@ public class MenuControlScript : MonoBehaviour
             text.color = Color.white;
         }
     }
+    public MenuInput getMenuInput() { 
+        return this.input;
+    }
 
 
 }

@@ -9,10 +9,16 @@ public class GameControlScript : MonoBehaviour
     private GameInput input;
     private bool isPaused;
     private GameObject pauseMenu;
+    private PlayerInput playerInput;
+    private MenuInput menuInput;
 
     private void Awake()
     {
         input = new GameInput();
+        playerInput = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
+
+
+        input.GameControl.Pause.started += pauseGame;
     }
 
     private void OnEnable()
@@ -26,10 +32,14 @@ public class GameControlScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerInput = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
+        menuInput = GameObject.Find("Menu").GetComponent<MenuControlScript>().getMenuInput();
+
         pauseMenu = GameObject.Find("PauseMenu");
         pauseMenu.SetActive(false);
         isPaused = false;
-        GameObject.Find("Menu").GetComponent<MenuControlScript>().enabled = false;
+
+        //GameObject.Find("Menu").GetComponent<MenuControlScript>().enabled = false;
         //GameObject.Find("PlayerInput").GetComponent<PlayerControl>().enabled = true;
         //input.GameControl.Pause.performed += _ => pauseGame2();
     }
@@ -52,23 +62,36 @@ public class GameControlScript : MonoBehaviour
     private void pauseGame(InputAction.CallbackContext obj)
     {
         Debug.Log("ESC");
-        /*if (!isPaused)
+        if (!isPaused)
         {
             pauseMenu.SetActive(true);
             isPaused = true;
-            GameObject.Find("PlayerInput").GetComponent<PlayerInput>().Disable();
-            GameObject.Find("Menu").GetComponent<PlayerInput>().Enable();
+            playerInput.Disable();
+            menuInput.Enable();
             Time.timeScale = 0;
+
+            AudioSource[] audios = FindObjectsOfType<AudioSource>();
+
+            foreach (AudioSource audio in audios) { 
+                audio.Pause();
+            }
         }
 
         else
         {
             pauseMenu.SetActive(false);
             isPaused = false;
-            GameObject.Find("Menu").GetComponent<PlayerInput>().Disable();
-            GameObject.Find("PlayerInput").GetComponent<PlayerInput>().Enable();
+            menuInput.Disable();
+            playerInput.Enable();
             Time.timeScale = 1;
-        }*/
+
+            AudioSource[] audios = FindObjectsOfType<AudioSource>();
+
+            foreach (AudioSource audio in audios)
+            {
+                audio.UnPause();
+            }
+        }
     }
 
 }

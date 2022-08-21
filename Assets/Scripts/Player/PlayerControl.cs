@@ -20,7 +20,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
 
 
-   [SerializeField] private float firstJumpForce = 10;
+    [SerializeField] private float firstJumpForce = 10;
     [SerializeField] private float secondJumpForce = 5;
     [SerializeField] private float movmentForce = 10.0f;
     [SerializeField] private float fallVelocity = 1.0f;
