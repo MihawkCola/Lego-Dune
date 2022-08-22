@@ -235,6 +235,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Mother
       objectReference: {fileID: 0}
+    - target: {fileID: 6183574115368516479, guid: 801dfd09b243b9a4f9074a25f543d616, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 64f7c4117458ed249b4ea1f8882822fe, type: 2}
+    - target: {fileID: 8581310045584603456, guid: 801dfd09b243b9a4f9074a25f543d616, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b8ff1c8b9cdd85a439ec9a94d16fc07e, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 801dfd09b243b9a4f9074a25f543d616, type: 3}
@@ -256,6 +264,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 8515080486510992075}
     m_Modifications:
+    - target: {fileID: 2698964174387456111, guid: 0f9c2be24cbbabc47b95e84154a3b36f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f708d524ebba9b64db6472f617867f27, type: 2}
     - target: {fileID: 3400621339606931979, guid: 0f9c2be24cbbabc47b95e84154a3b36f, type: 3}
       propertyPath: m_Name
       value: Player Paul
@@ -304,6 +316,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6453391021874876012, guid: 0f9c2be24cbbabc47b95e84154a3b36f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 64f7c4117458ed249b4ea1f8882822fe, type: 2}
+    - target: {fileID: 7911296421692164799, guid: 0f9c2be24cbbabc47b95e84154a3b36f, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 56e16a72e7280c6498a54533b3e2fe4a, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f9c2be24cbbabc47b95e84154a3b36f, type: 3}
