@@ -24,7 +24,6 @@ public class SwitchPlayer : MonoBehaviour
 
     private void Awake()
     {
-        inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
 
         this.enemyController = GameObject.Find("EnemyManager").GetComponent<EnemyController>();
 
@@ -40,7 +39,8 @@ public class SwitchPlayer : MonoBehaviour
 
     private void Start()
     {
-        
+        inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
+
         this.player1C.setCam(mainCam);
         this.player2C.setCam(mainCam);
 
