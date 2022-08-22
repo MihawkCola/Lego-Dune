@@ -12,14 +12,15 @@ public class GameControlScript : MonoBehaviour
 
     private PlayerInput playerInput;
     private MenuInput menuInput;
+    private AudioSource[] audios;
 
     private void Awake()
     {
         input = new GameInput();
         playerInput = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
 
-
-        input.GameControl.Pause.started += pauseGame;
+        //input.GameControl.Pause.started += pauseGame;
+        InputOn();
     }
 
     private void OnEnable()
@@ -39,13 +40,8 @@ public class GameControlScript : MonoBehaviour
         pauseMenu = GameObject.Find("PauseMenu");
         pauseMenu.SetActive(false);
         isPaused = false;
-
-        //GameObject.Find("Menu").GetComponent<MenuControlScript>().enabled = false;
-        //GameObject.Find("PlayerInput").GetComponent<PlayerControl>().enabled = true;
-        //input.GameControl.Pause.performed += _ => pauseGame2();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -62,7 +58,6 @@ public class GameControlScript : MonoBehaviour
 
     private void pauseGame(InputAction.CallbackContext obj)
     {
-        Debug.Log("ESC");
         if (!isPaused)
         {
             pauseMenu.SetActive(true);
@@ -71,7 +66,7 @@ public class GameControlScript : MonoBehaviour
             menuInput.Enable();
             Time.timeScale = 0;
 
-            AudioSource[] audios = FindObjectsOfType<AudioSource>();
+            audios = FindObjectsOfType<AudioSource>();
 
             foreach (AudioSource audio in audios) { 
                 audio.Pause();
@@ -86,7 +81,7 @@ public class GameControlScript : MonoBehaviour
             playerInput.Enable();
             Time.timeScale = 1;
 
-            AudioSource[] audios = FindObjectsOfType<AudioSource>();
+            //AudioSource[] audios = FindObjectsOfType<AudioSource>();
 
             foreach (AudioSource audio in audios)
             {

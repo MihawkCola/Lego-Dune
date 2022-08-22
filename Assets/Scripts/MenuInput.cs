@@ -24,6 +24,107 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
     ""name"": ""MenuInput"",
     ""maps"": [
         {
+            ""name"": ""Pause"",
+            ""id"": ""ea1977e5-67bc-4909-a9a8-029bd16d9445"",
+            ""actions"": [
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""a5c01596-fd85-4603-9e2e-4ce895286ad0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""c51dca54-42d2-4d8f-adee-75fedd6e5493"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""d5420180-9f6d-4ce5-85ae-da6b02597f8b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""2f0bab41-afe4-4418-aa26-634966b2a79d"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c39ce7d5-6d9f-48ab-b4c1-a40f4e7c9dc6"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b972a2e1-6a14-4087-8462-35580b033594"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b33db88-d3fd-454e-a9ad-db48704c4c7d"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""165cd66d-3f16-4e39-9acc-b07c832bdecd"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed706f3c-5e05-4a93-be63-e9e0e541cdf0"",
+                    ""path"": ""<Gamepad>/select"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""Main"",
             ""id"": ""6506b6bd-6cbc-46b6-8205-86d1ecb65175"",
             ""actions"": [
@@ -52,13 +153,22 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Pause"",
-            ""id"": ""ea1977e5-67bc-4909-a9a8-029bd16d9445"",
+            ""name"": ""Option1"",
+            ""id"": ""b442d5a3-d378-4a4e-b07b-367c10dc0cce"",
             ""actions"": [
                 {
-                    ""name"": ""Test"",
+                    ""name"": ""Red"",
                     ""type"": ""Button"",
-                    ""id"": ""a5c01596-fd85-4603-9e2e-4ce895286ad0"",
+                    ""id"": ""90549cc0-c037-4d53-9aad-94d7b550434a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Green"",
+                    ""type"": ""Button"",
+                    ""id"": ""d51f1087-35e1-4254-9839-60b187921daf"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -68,23 +178,23 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""2f0bab41-afe4-4418-aa26-634966b2a79d"",
-                    ""path"": ""<Keyboard>/x"",
+                    ""id"": ""46d0dbfc-8662-48ca-a3fc-471ff3bcd7ab"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Test"",
+                    ""action"": ""Red"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""c39ce7d5-6d9f-48ab-b4c1-a40f4e7c9dc6"",
-                    ""path"": """",
+                    ""id"": ""f12f9172-87cc-49b2-8a74-d0842789ca2e"",
+                    ""path"": ""<Keyboard>/g"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Test"",
+                    ""action"": ""Green"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -93,12 +203,18 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
     ],
     ""controlSchemes"": []
 }");
+        // Pause
+        m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
+        m_Pause_Up = m_Pause.FindAction("Up", throwIfNotFound: true);
+        m_Pause_Down = m_Pause.FindAction("Down", throwIfNotFound: true);
+        m_Pause_Select = m_Pause.FindAction("Select", throwIfNotFound: true);
         // Main
         m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
         m_Main_Newaction = m_Main.FindAction("New action", throwIfNotFound: true);
-        // Pause
-        m_Pause = asset.FindActionMap("Pause", throwIfNotFound: true);
-        m_Pause_Test = m_Pause.FindAction("Test", throwIfNotFound: true);
+        // Option1
+        m_Option1 = asset.FindActionMap("Option1", throwIfNotFound: true);
+        m_Option1_Red = m_Option1.FindAction("Red", throwIfNotFound: true);
+        m_Option1_Green = m_Option1.FindAction("Green", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -155,6 +271,55 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
         return asset.FindBinding(bindingMask, out action);
     }
 
+    // Pause
+    private readonly InputActionMap m_Pause;
+    private IPauseActions m_PauseActionsCallbackInterface;
+    private readonly InputAction m_Pause_Up;
+    private readonly InputAction m_Pause_Down;
+    private readonly InputAction m_Pause_Select;
+    public struct PauseActions
+    {
+        private @MenuInput m_Wrapper;
+        public PauseActions(@MenuInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Up => m_Wrapper.m_Pause_Up;
+        public InputAction @Down => m_Wrapper.m_Pause_Down;
+        public InputAction @Select => m_Wrapper.m_Pause_Select;
+        public InputActionMap Get() { return m_Wrapper.m_Pause; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(PauseActions set) { return set.Get(); }
+        public void SetCallbacks(IPauseActions instance)
+        {
+            if (m_Wrapper.m_PauseActionsCallbackInterface != null)
+            {
+                @Up.started -= m_Wrapper.m_PauseActionsCallbackInterface.OnUp;
+                @Up.performed -= m_Wrapper.m_PauseActionsCallbackInterface.OnUp;
+                @Up.canceled -= m_Wrapper.m_PauseActionsCallbackInterface.OnUp;
+                @Down.started -= m_Wrapper.m_PauseActionsCallbackInterface.OnDown;
+                @Down.performed -= m_Wrapper.m_PauseActionsCallbackInterface.OnDown;
+                @Down.canceled -= m_Wrapper.m_PauseActionsCallbackInterface.OnDown;
+                @Select.started -= m_Wrapper.m_PauseActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_PauseActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_PauseActionsCallbackInterface.OnSelect;
+            }
+            m_Wrapper.m_PauseActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Up.started += instance.OnUp;
+                @Up.performed += instance.OnUp;
+                @Up.canceled += instance.OnUp;
+                @Down.started += instance.OnDown;
+                @Down.performed += instance.OnDown;
+                @Down.canceled += instance.OnDown;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+            }
+        }
+    }
+    public PauseActions @Pause => new PauseActions(this);
+
     // Main
     private readonly InputActionMap m_Main;
     private IMainActions m_MainActionsCallbackInterface;
@@ -188,44 +353,59 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
     }
     public MainActions @Main => new MainActions(this);
 
-    // Pause
-    private readonly InputActionMap m_Pause;
-    private IPauseActions m_PauseActionsCallbackInterface;
-    private readonly InputAction m_Pause_Test;
-    public struct PauseActions
+    // Option1
+    private readonly InputActionMap m_Option1;
+    private IOption1Actions m_Option1ActionsCallbackInterface;
+    private readonly InputAction m_Option1_Red;
+    private readonly InputAction m_Option1_Green;
+    public struct Option1Actions
     {
         private @MenuInput m_Wrapper;
-        public PauseActions(@MenuInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Test => m_Wrapper.m_Pause_Test;
-        public InputActionMap Get() { return m_Wrapper.m_Pause; }
+        public Option1Actions(@MenuInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Red => m_Wrapper.m_Option1_Red;
+        public InputAction @Green => m_Wrapper.m_Option1_Green;
+        public InputActionMap Get() { return m_Wrapper.m_Option1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(PauseActions set) { return set.Get(); }
-        public void SetCallbacks(IPauseActions instance)
+        public static implicit operator InputActionMap(Option1Actions set) { return set.Get(); }
+        public void SetCallbacks(IOption1Actions instance)
         {
-            if (m_Wrapper.m_PauseActionsCallbackInterface != null)
+            if (m_Wrapper.m_Option1ActionsCallbackInterface != null)
             {
-                @Test.started -= m_Wrapper.m_PauseActionsCallbackInterface.OnTest;
-                @Test.performed -= m_Wrapper.m_PauseActionsCallbackInterface.OnTest;
-                @Test.canceled -= m_Wrapper.m_PauseActionsCallbackInterface.OnTest;
+                @Red.started -= m_Wrapper.m_Option1ActionsCallbackInterface.OnRed;
+                @Red.performed -= m_Wrapper.m_Option1ActionsCallbackInterface.OnRed;
+                @Red.canceled -= m_Wrapper.m_Option1ActionsCallbackInterface.OnRed;
+                @Green.started -= m_Wrapper.m_Option1ActionsCallbackInterface.OnGreen;
+                @Green.performed -= m_Wrapper.m_Option1ActionsCallbackInterface.OnGreen;
+                @Green.canceled -= m_Wrapper.m_Option1ActionsCallbackInterface.OnGreen;
             }
-            m_Wrapper.m_PauseActionsCallbackInterface = instance;
+            m_Wrapper.m_Option1ActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Test.started += instance.OnTest;
-                @Test.performed += instance.OnTest;
-                @Test.canceled += instance.OnTest;
+                @Red.started += instance.OnRed;
+                @Red.performed += instance.OnRed;
+                @Red.canceled += instance.OnRed;
+                @Green.started += instance.OnGreen;
+                @Green.performed += instance.OnGreen;
+                @Green.canceled += instance.OnGreen;
             }
         }
     }
-    public PauseActions @Pause => new PauseActions(this);
+    public Option1Actions @Option1 => new Option1Actions(this);
+    public interface IPauseActions
+    {
+        void OnUp(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+    }
     public interface IMainActions
     {
         void OnNewaction(InputAction.CallbackContext context);
     }
-    public interface IPauseActions
+    public interface IOption1Actions
     {
-        void OnTest(InputAction.CallbackContext context);
+        void OnRed(InputAction.CallbackContext context);
+        void OnGreen(InputAction.CallbackContext context);
     }
 }
