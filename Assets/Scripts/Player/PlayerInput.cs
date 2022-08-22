@@ -143,15 +143,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""4bd8106c-950e-4bab-b5d1-a62e5cbd384e"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -418,28 +409,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""52e0c4b5-877d-4e0d-ac05-c390932eab42"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""41e22f6e-9c56-4e76-8571-40b45b29ae08"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -467,7 +436,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player_CoinsPlus = m_Player.FindAction("CoinsPlus", throwIfNotFound: true);
         m_Player_CoinsMinus = m_Player.FindAction("CoinsMinus", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
-        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -540,7 +508,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CoinsPlus;
     private readonly InputAction m_Player_CoinsMinus;
     private readonly InputAction m_Player_Attack;
-    private readonly InputAction m_Player_Pause;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -558,7 +525,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @CoinsPlus => m_Wrapper.m_Player_CoinsPlus;
         public InputAction @CoinsMinus => m_Wrapper.m_Player_CoinsMinus;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
-        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -607,9 +573,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
-                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
-                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
-                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -653,9 +616,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
-                @Pause.started += instance.OnPause;
-                @Pause.performed += instance.OnPause;
-                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -684,6 +644,5 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnCoinsPlus(InputAction.CallbackContext context);
         void OnCoinsMinus(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnPause(InputAction.CallbackContext context);
     }
 }
