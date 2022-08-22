@@ -61,6 +61,8 @@ public class PlayerCamera : MonoBehaviour
         if (!isCameraMoving) this.updateCamera();
     }
     public void updateCamera() {
+
+        if(target == null) return;
         //Debug.Log(inputs.Player.Camera.ReadValue<Vector2>());
         Vector2 mouseInput = inputs.Player.Camera.ReadValue<Vector2>();
 
@@ -130,6 +132,7 @@ public class PlayerCamera : MonoBehaviour
         else
             GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput().Disable();
 
+        this.checkEnemyController();
         this.enemyController.disableAll();
 
         camPlayerVectorBetween = CamPlayerVectorBetween();
@@ -193,6 +196,10 @@ public class PlayerCamera : MonoBehaviour
         this.duration = Time.time + duration;
         this.magnitude = magnitude;
         this.goShake = true;
+    }
+    private void checkEnemyController() {
+        if (this.enemyController != null) return;
+        this.enemyController = GameObject.Find("EnemyManager").GetComponent<EnemyController>();
     }
 
 }
