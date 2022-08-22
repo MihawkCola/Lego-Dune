@@ -13,16 +13,24 @@ public class EnemyController : MonoBehaviour
 
     private SwitchPlayer switchPlayer;
 
-    void Start()
+    public bool isStart = false;
+
+    private void Awake()
     {
         enemylist = this.transform.Find("Enemys");
 
         spawnPoints = this.transform.Find("SpawnPoint");
 
         switchPlayer = GameObject.Find("Players").GetComponent<SwitchPlayer>();
+    }
 
+    void Start()
+    {
         spawnRandomEnemy(this.getRandomSpawn());
-        disableAll();
+        foreach (Transform child in enemylist)
+        {
+            child.GetComponent<NavMeshAgent>().enabled = false;
+        }
     }
     private Vector3 getRandomSpawn() {
         return spawnPoints.GetChild((int)(Random.Range(0, spawnPoints.childCount - 1) + 0.5f)).position;
@@ -39,18 +47,21 @@ public class EnemyController : MonoBehaviour
     }
 
     public void disableAll() {
+        if (!isStart) return;
         foreach (Transform child in enemylist) {
             child.GetComponent<NavMeshAgent>().enabled = false;
         }
     }
     public void enableAll()
     {
+        if (!isStart) return;
         foreach (Transform child in enemylist)
         {
             child.GetComponent<NavMeshAgent>().enabled = true;
         }
     }
     public void changeAllTarget(Transform target) {
+        if (!isStart) return;
         foreach (Transform child in enemylist)
         {
             child.GetComponent<EnemyInterface>().setTarget(target);

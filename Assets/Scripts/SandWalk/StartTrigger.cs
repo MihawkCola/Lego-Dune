@@ -17,6 +17,7 @@ public class StartTrigger : MonoBehaviour
     {
         if (other.tag != "Player") return;
         sandWalk.StartGame();
+        enemyController.isStart = true;
         Destroy(this.gameObject);
     }
 }
