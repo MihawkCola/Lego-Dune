@@ -61,7 +61,6 @@ public class EnemyController : MonoBehaviour
         }
     }
     public void changeAllTarget(Transform target) {
-        if (!isStart) return;
         foreach (Transform child in enemylist)
         {
             child.GetComponent<EnemyInterface>().setTarget(target);
