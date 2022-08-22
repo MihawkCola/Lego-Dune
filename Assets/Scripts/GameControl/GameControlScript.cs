@@ -8,19 +8,17 @@ public class GameControlScript : MonoBehaviour
 {
     private GameInput input;
     private bool isPaused;
-    private GameObject pauseMenu;
 
     private PlayerInput playerInput;
     private MenuInput menuInput;
+    private GameObject pauseMenu;
     private AudioSource[] audios;
 
     private void Awake()
     {
         input = new GameInput();
         playerInput = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
-
-        //input.GameControl.Pause.started += pauseGame;
-        InputOn();
+        input.GameControl.Pause.started += pauseGame;
     }
 
     private void OnEnable()
@@ -36,7 +34,6 @@ public class GameControlScript : MonoBehaviour
     {
         playerInput = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
         menuInput = GameObject.Find("Menu").GetComponent<MenuControlScript>().getMenuInput();
-
         pauseMenu = GameObject.Find("PauseMenu");
         pauseMenu.SetActive(false);
         isPaused = false;
@@ -45,15 +42,6 @@ public class GameControlScript : MonoBehaviour
     void Update()
     {
         
-    }
-    public void InputOn()
-    {
-        input.GameControl.Pause.started += pauseGame;
-    }
-
-    public void InputOff()
-    {
-        input.GameControl.Pause.started -= pauseGame;
     }
 
     private void pauseGame(InputAction.CallbackContext obj)

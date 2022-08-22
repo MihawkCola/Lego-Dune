@@ -144,7 +144,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Green",
+                    "name": "Back",
                     "type": "Button",
                     "id": "d51f1087-35e1-4254-9839-60b187921daf",
                     "expectedControlType": "Button",
@@ -168,11 +168,11 @@
                 {
                     "name": "",
                     "id": "f12f9172-87cc-49b2-8a74-d0842789ca2e",
-                    "path": "<Keyboard>/g",
+                    "path": "<Keyboard>/backspace",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Green",
+                    "action": "Back",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

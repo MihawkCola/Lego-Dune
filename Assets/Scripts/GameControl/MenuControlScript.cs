@@ -10,8 +10,8 @@ public class MenuControlScript : MonoBehaviour
 {
 
     private MenuInput input;
-    private Text[] text;
     private GameObject pauseMenu;
+    private Text[] text;
     private GameObject[] opMenus;
     private int active;
     private int options;
@@ -24,18 +24,23 @@ public class MenuControlScript : MonoBehaviour
     private void OnEnable()
     {
         input.Enable();
-        text = GameObject.Find("PauseMenu").GetComponentsInChildren<Text>();
+        init();
+    }
+
+    public void init()
+    {
+        pauseMenu = GameObject.Find("PauseMenu");
+        text = pauseMenu.GetComponentsInChildren<Text>();
         text[1].color = Color.yellow;
         options = text.Length - 1;
-        Debug.Log("ops: " + options);
         opMenus = new GameObject[options];
         for (int i = 1; i <= options; i++)
         {
-            opMenus[i-1] = GameObject.Find("Option" + i + "Menu");
-            opMenus[i-1].SetActive(false);
+            opMenus[i - 1] = GameObject.Find("Option" + i + "Menu");
+            opMenus[i - 1].SetActive(false);
         }
-
     }
+
     private void OnDisable()
     {
         input.Disable();
@@ -60,7 +65,7 @@ public class MenuControlScript : MonoBehaviour
         input.Pause.Down.started += down;
         input.Pause.Select.started += select;
         input.Option1.Red.started += red;
-
+        input.Option1.Back.started += back;
     }
 
     public void InputOff()
@@ -69,21 +74,24 @@ public class MenuControlScript : MonoBehaviour
         input.Pause.Down.started -= down;
         input.Pause.Select.started -= select;
         input.Option1.Red.started -= red;
-
+        input.Option1.Back.started -= back;
     }
 
+    private void back(InputAction.CallbackContext obj)
+    {
+        pauseMenu.SetActive(true);
+        opMenus[active].SetActive(false);
+        input.Option1.Disable();
+        input.Pause.Enable();
+    }
 
     private void red(InputAction.CallbackContext obj)
     {
-        //opMenus[1].GetComponent<Text>().color = Color.red;
         GameObject.Find("Option1").GetComponent<Text>().color = Color.red;
-        Debug.Log("RED");
     }
 
     private void up(InputAction.CallbackContext obj)
     {
-        Debug.Log("UP");
-
         text[active + 1].color = Color.white;
         active = ((active - 1) >= 0) ? (active - 1) : (options - 1);
         text[active + 1].color = Color.yellow;
@@ -97,12 +105,25 @@ public class MenuControlScript : MonoBehaviour
     }                                                                     
     private void select(InputAction.CallbackContext obj)
     {
-        pauseMenu = GameObject.Find("PauseMenu");
-
         pauseMenu.SetActive(false);
         opMenus[active].SetActive(true);
         input.Pause.Disable();
-        input.Option1.Enable();
+        switch (active)
+        {
+            case 1:
+                input.Option1.Enable();
+                break;
+
+            case 2:
+                break;
+
+            case 3:
+                break;
+
+            default:
+                break;
+        }
+        
     }
     public MenuInput getMenuInput() { 
         return this.input;
