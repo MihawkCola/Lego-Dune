@@ -16,13 +16,30 @@ public class SwitchPlayer : MonoBehaviour
 
     private bool isSwitch = false;
 
-    private void Start()
+    private HealthController healthController;
+
+    private GameObject activePlayer;
+
+    private EnemyController enemyController;
+
+    private void Awake()
     {
         inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
+
+        this.enemyController = GameObject.Find("EnemyManager").GetComponent<EnemyController>();
+
+        this.healthController = this.GetComponent<HealthController>();
 
         this.player1C = player1.GetComponent<PlayerControl>();
         this.player2C = player2.GetComponent<PlayerControl>();
         this.cameraC = this.mainCam.GetComponent<PlayerCamera>();
+
+        this.activePlayer = this.player1;
+
+    }
+
+    private void Start()
+    {
         
         this.player1C.setCam(mainCam);
         this.player2C.setCam(mainCam);
@@ -31,10 +48,7 @@ public class SwitchPlayer : MonoBehaviour
         this.InputOn();
         StartCoroutine(EnableInputFirstPlayer());
 
-        this.player1.GetComponent<HealthScript>().activeDeath = true;
         //this.GetComponentInParent<SandWalkScript>().setPlayer(player1);
-
-
     }
     public void InputOn()
     {
@@ -57,15 +71,19 @@ public class SwitchPlayer : MonoBehaviour
 
     private void isPlayer(InputAction.CallbackContext obj)
     {
+        if (this.healthController.isOneDeath()) return;
+
+        this.switchPlayer();
+    }
+
+    public void switchPlayer() { 
         if(isSwitch = !isSwitch) 
         {
             this.cameraC.changeCameraTarget(player2);
             this.player1C.InputOff();
             this.player2C.InputOn();
 
-            this.player2.GetComponent<HealthScript>().activeDeath = true;
-            this.player1.GetComponent<HealthScript>().activeDeath = false;
-
+            this.activePlayer = this.player2;
         }
         else
         {
@@ -73,10 +91,11 @@ public class SwitchPlayer : MonoBehaviour
             this.player2C.InputOff();
             this.player1C.InputOn();
 
-            this.player1.GetComponent<HealthScript>().activeDeath = true;
-            this.player2.GetComponent<HealthScript>().activeDeath = false;
+            this.activePlayer = this.player1;
         }
+        enemyController.changeAllTarget(this.activePlayer.transform);
     }
+
     public void disableCamera(Camera other) 
     {
         this.mainCam.gameObject.SetActive(false);
@@ -92,5 +111,18 @@ public class SwitchPlayer : MonoBehaviour
     public void shakePlayerCamera(float duration, float magnitude)
     {
         this.cameraC.startSake(duration, magnitude);
+    }
+
+    public void checkDeathPlayerActive() {
+        if (!this.activePlayer.GetComponent<HealthScript>().isDeath()) return;
+
+        if (this.healthController.allDeath()) return;
+
+        this.switchPlayer();
+    }
+
+    public Transform getActivePlayer()
+    {
+        return activePlayer.transform;
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,15 +27,25 @@ public class SecondPlayerAi : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        disableAgent();
         rangeSpeed();
-        if(!notWalk) goToPlayer();
+        if(agent.enabled) goToPlayer();
+    }
+
+    private void disableAgent()
+    {
+        bool enableAgent = !notWalk;
+        if(this.distanceTarget() < 2)
+            enableAgent = false;
+
+        agent.enabled = enableAgent;
     }
 
     private void goToPlayer() {
         agent.SetDestination(target.position);
     }
     private void rangeSpeed() {
-        float rangeToTarget = Vector3.Distance(this.transform.position, target.position);
+        float rangeToTarget = this.distanceTarget();
 
         if (rangeToTarget > rangeMaxSpeed) {
             agent.speed = control.maxSpeedRun;
@@ -50,5 +61,8 @@ public class SecondPlayerAi : MonoBehaviour
     private void OnEnable()
     {
         agent.enabled = true;
+    }
+    public float distanceTarget() {
+        return Vector3.Distance(this.transform.position, target.position);
     }
 }

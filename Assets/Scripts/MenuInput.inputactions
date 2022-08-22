@@ -1,0 +1,73 @@
+{
+    "name": "MenuInput",
+    "maps": [
+        {
+            "name": "Main",
+            "id": "6506b6bd-6cbc-46b6-8205-86d1ecb65175",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "ad93e8e7-b51c-4427-b895-d940b0ff6348",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "49fcc4e4-cc0a-4d25-a451-a824d22fce32",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Pause",
+            "id": "ea1977e5-67bc-4909-a9a8-029bd16d9445",
+            "actions": [
+                {
+                    "name": "Test",
+                    "type": "Button",
+                    "id": "a5c01596-fd85-4603-9e2e-4ce895286ad0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2f0bab41-afe4-4418-aa26-634966b2a79d",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Test",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c39ce7d5-6d9f-48ab-b4c1-a40f4e7c9dc6",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Test",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

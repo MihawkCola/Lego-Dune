@@ -20,13 +20,15 @@ public class HealthScript : MonoBehaviour
     public bool activeDeath = false;
     public Camera deathCam;
     
-    private SwitchPlayer playerScript;
+    private SwitchPlayer switchplayer;
     
     [SerializeField] private GameObject playerModel;
 
     private AudioSource[] sounds;
     AudioSource deathSound;
     AudioSource hitSound;
+
+    private HealthController healthController;
 
     void Start()
     {
@@ -37,12 +39,13 @@ public class HealthScript : MonoBehaviour
         this.wormObeject = this.transform.Find("LEGOWormAnimations").gameObject;
         this.wormAnimator = wormObeject.GetComponent<Animator>();
         
-        this.playerScript = this.transform.parent.GetComponent<SwitchPlayer>();
+        this.switchplayer = this.transform.parent.GetComponent<SwitchPlayer>();
 
         sounds = GetComponents<AudioSource>();
         deathSound = sounds[1];
         hitSound = sounds[0];
 
+        healthController = this.GetComponentInParent<HealthController>();
     }
 
     void increaseHealth() { 
@@ -81,44 +84,45 @@ public class HealthScript : MonoBehaviour
                 this.death(damageType);
             }
         }
-        return health <= 0;
+        return isDeath();
     }
     private void damageAnimation(DamageTyp damageType)
     {
         if (damageType == DamageTyp.Worm) {
-            this.playerScript.shakePlayerCamera(1.5f, Math.Abs(health - healthHearts.Length) * 0.07f + 0.03f);
-            if (activeDeath) 
-                hitSound.Play();
-            return;
+            this.switchplayer.shakePlayerCamera(1.5f, Math.Abs(health - healthHearts.Length) * 0.07f + 0.03f);
         }
-
+        hitSound.Play();
         // weitere als if hinzufuegen
     }
 
     private void death(DamageTyp damageType)
     {
+        this.GetComponent<SecondPlayerAi>().enabled = false;
+        this.switchplayer.checkDeathPlayerActive();
+
         if (!activeDeath) return;
 
-        deathType(damageType);
+        this.healthController.gameover();
+        gameoverType(damageType);
         
         StartCoroutine(resetLevel());
     }
-    private void deathType(DamageTyp damageType)
+    private void gameoverType(DamageTyp damageType)
     {
-        if (damageType == DamageTyp.Worm) {
-            this.playerScript.disableCamera(this.deathCam);
+        this.switchplayer.disableCamera(this.deathCam);
 
-            wormObeject.SetActive(true);
-            wormObeject.transform.parent = null;
+        wormObeject.SetActive(true);
+        wormObeject.transform.parent = null;
 
-            this.deathCam.transform.parent = null;
-            wormAnimator.SetTrigger("death");
+        this.deathCam.transform.parent = null;
+        wormAnimator.SetTrigger("death");
 
-            GameObject hud = GameObject.Find("HUD");
-            hud.SetActive(false);
-            return;
-        }
+        GameObject hud = GameObject.Find("HUD");
+        hud.SetActive(false);
         // weitere als if hinzufuegen
+
+
+        deathSound.Play();
     }
     private IEnumerator resetLevel() {
         yield return new WaitForSeconds(8f);
@@ -182,5 +186,10 @@ public class HealthScript : MonoBehaviour
     {
         //decreaseHealth();
        
+    }
+
+    public bool isDeath() {
+        return this.health <= 0;
+    
     }
 }

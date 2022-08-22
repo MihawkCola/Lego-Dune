@@ -17,6 +17,9 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] private Camera cam;
 
+    [SerializeField] private GameObject pauseMenu;
+
+
     [SerializeField] private float firstJumpForce = 10;
     [SerializeField] private float secondJumpForce = 5;
     [SerializeField] private float movmentForce = 10.0f;
@@ -28,8 +31,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float groundDetection = 0.2f;
 
     private AudioSource[] sounds;
-    AudioSource jumpSound;
-    AudioSource attackSound;
+    private AudioSource jumpSound;
+    private AudioSource attackSound;
 
     private Vector3 forceDirection = Vector3.zero;
 
@@ -40,6 +43,7 @@ public class PlayerControl : MonoBehaviour
     private NavMeshAgent agent;
 
     private SecondPlayerAi secondPlayerAi;
+    private HealthScript healthScript;
 
     private void Awake()
     {
@@ -47,6 +51,7 @@ public class PlayerControl : MonoBehaviour
         maxSpeed = maxSpeedNormal;
         agent = GetComponent<NavMeshAgent>();
         secondPlayerAi = GetComponent<SecondPlayerAi>();
+        healthScript = GetComponent<HealthScript>();
     }
 
     public void InputOn() {
@@ -58,8 +63,11 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Sneaking.canceled += isSneaking;
         inputs.Player.Attack.started += isAttacking;
         movEnable = true;
+        healthScript.activeDeath = true;
         secondPlayerAi.enabled = false;
     }
+
+
     public void InputOff()
     {
         inputs.Player.Jump.started -= firstJump;
@@ -70,7 +78,8 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Sneaking.canceled -= isSneaking;
         inputs.Player.Attack.started -= isAttacking;
         movEnable = false;
-        secondPlayerAi.enabled = true;
+        healthScript.activeDeath = false;
+        if(!healthScript.isDeath()) secondPlayerAi.enabled = true;
     }
 
     public bool IsInputsSet()

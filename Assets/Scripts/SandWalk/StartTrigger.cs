@@ -5,9 +5,13 @@ using UnityEngine;
 public class StartTrigger : MonoBehaviour
 {
     private SandWalk sandWalk;
+
+    private EnemyController enemyController;
+
     private void Start()
     {
         sandWalk = this.transform.parent.GetComponent<SandWalk>();
+        this.enemyController = GameObject.Find("EnemyManager").GetComponent<EnemyController>();
     }
     private void OnTriggerEnter(Collider other)
     {

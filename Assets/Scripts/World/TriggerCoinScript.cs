@@ -7,7 +7,7 @@ public class TriggerCoinScript : MonoBehaviour
 
     private GameObject hud;
     private int value;
-    AudioSource coinSound;
+    private AudioSource coinSound;
 
     // Start is called before the first frame update
     void Start()
