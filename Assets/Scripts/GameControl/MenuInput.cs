@@ -125,46 +125,9 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Main"",
-            ""id"": ""6506b6bd-6cbc-46b6-8205-86d1ecb65175"",
-            ""actions"": [
-                {
-                    ""name"": ""New action"",
-                    ""type"": ""Button"",
-                    ""id"": ""ad93e8e7-b51c-4427-b895-d940b0ff6348"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                }
-            ],
-            ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""49fcc4e4-cc0a-4d25-a451-a824d22fce32"",
-                    ""path"": """",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""New action"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Option1"",
+            ""name"": ""Volume"",
             ""id"": ""b442d5a3-d378-4a4e-b07b-367c10dc0cce"",
             ""actions"": [
-                {
-                    ""name"": ""Red"",
-                    ""type"": ""Button"",
-                    ""id"": ""90549cc0-c037-4d53-9aad-94d7b550434a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
                 {
                     ""name"": ""Back"",
                     ""type"": ""Button"",
@@ -173,20 +136,45 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""4a863672-da75-4bb5-b1cd-16abc1c0dfab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""779e6144-bf09-4c33-bd03-b07b85145129"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Plus"",
+                    ""type"": ""Button"",
+                    ""id"": ""ee4932e0-877d-41d6-9a52-a2db827c8b2e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Minus"",
+                    ""type"": ""Button"",
+                    ""id"": ""7aaac96d-7f1a-4708-94a1-1496bcb2b93a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""46d0dbfc-8662-48ca-a3fc-471ff3bcd7ab"",
-                    ""path"": ""<Keyboard>/r"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Red"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""f12f9172-87cc-49b2-8a74-d0842789ca2e"",
@@ -195,6 +183,105 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55f4755d-52f9-412b-b124-ca66e3516778"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e51f4260-054d-4c93-959e-0a9a7d2d4e3f"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f750638-080e-406b-8366-2bd59cc4d000"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ab88c847-899e-4341-a376-0067e9d7eca6"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f95549c-c58a-4221-a478-236ce014eea8"",
+                    ""path"": ""<Keyboard>/numpadPlus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Plus"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f5550894-b0aa-451e-b8d0-b4c2e25a4ad3"",
+                    ""path"": ""<Keyboard>/#(+)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Plus"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5cc1eb87-de38-43f0-bd18-8d3a8d9ffc1c"",
+                    ""path"": ""<Keyboard>/minus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Minus"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2ed73f21-16e2-4013-a396-4a1cc2c0c0c2"",
+                    ""path"": ""<Keyboard>/numpadMinus"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Minus"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dcd78948-47dd-4390-8d03-4ca61f5b65d2"",
+                    ""path"": ""<Keyboard>/#(-)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Minus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -208,13 +295,13 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
         m_Pause_Up = m_Pause.FindAction("Up", throwIfNotFound: true);
         m_Pause_Down = m_Pause.FindAction("Down", throwIfNotFound: true);
         m_Pause_Select = m_Pause.FindAction("Select", throwIfNotFound: true);
-        // Main
-        m_Main = asset.FindActionMap("Main", throwIfNotFound: true);
-        m_Main_Newaction = m_Main.FindAction("New action", throwIfNotFound: true);
-        // Option1
-        m_Option1 = asset.FindActionMap("Option1", throwIfNotFound: true);
-        m_Option1_Red = m_Option1.FindAction("Red", throwIfNotFound: true);
-        m_Option1_Back = m_Option1.FindAction("Back", throwIfNotFound: true);
+        // Volume
+        m_Volume = asset.FindActionMap("Volume", throwIfNotFound: true);
+        m_Volume_Back = m_Volume.FindAction("Back", throwIfNotFound: true);
+        m_Volume_Up = m_Volume.FindAction("Up", throwIfNotFound: true);
+        m_Volume_Down = m_Volume.FindAction("Down", throwIfNotFound: true);
+        m_Volume_Plus = m_Volume.FindAction("Plus", throwIfNotFound: true);
+        m_Volume_Minus = m_Volume.FindAction("Minus", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -320,92 +407,82 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
     }
     public PauseActions @Pause => new PauseActions(this);
 
-    // Main
-    private readonly InputActionMap m_Main;
-    private IMainActions m_MainActionsCallbackInterface;
-    private readonly InputAction m_Main_Newaction;
-    public struct MainActions
+    // Volume
+    private readonly InputActionMap m_Volume;
+    private IVolumeActions m_VolumeActionsCallbackInterface;
+    private readonly InputAction m_Volume_Back;
+    private readonly InputAction m_Volume_Up;
+    private readonly InputAction m_Volume_Down;
+    private readonly InputAction m_Volume_Plus;
+    private readonly InputAction m_Volume_Minus;
+    public struct VolumeActions
     {
         private @MenuInput m_Wrapper;
-        public MainActions(@MenuInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_Main_Newaction;
-        public InputActionMap Get() { return m_Wrapper.m_Main; }
+        public VolumeActions(@MenuInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Back => m_Wrapper.m_Volume_Back;
+        public InputAction @Up => m_Wrapper.m_Volume_Up;
+        public InputAction @Down => m_Wrapper.m_Volume_Down;
+        public InputAction @Plus => m_Wrapper.m_Volume_Plus;
+        public InputAction @Minus => m_Wrapper.m_Volume_Minus;
+        public InputActionMap Get() { return m_Wrapper.m_Volume; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MainActions set) { return set.Get(); }
-        public void SetCallbacks(IMainActions instance)
+        public static implicit operator InputActionMap(VolumeActions set) { return set.Get(); }
+        public void SetCallbacks(IVolumeActions instance)
         {
-            if (m_Wrapper.m_MainActionsCallbackInterface != null)
+            if (m_Wrapper.m_VolumeActionsCallbackInterface != null)
             {
-                @Newaction.started -= m_Wrapper.m_MainActionsCallbackInterface.OnNewaction;
-                @Newaction.performed -= m_Wrapper.m_MainActionsCallbackInterface.OnNewaction;
-                @Newaction.canceled -= m_Wrapper.m_MainActionsCallbackInterface.OnNewaction;
+                @Back.started -= m_Wrapper.m_VolumeActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_VolumeActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_VolumeActionsCallbackInterface.OnBack;
+                @Up.started -= m_Wrapper.m_VolumeActionsCallbackInterface.OnUp;
+                @Up.performed -= m_Wrapper.m_VolumeActionsCallbackInterface.OnUp;
+                @Up.canceled -= m_Wrapper.m_VolumeActionsCallbackInterface.OnUp;
+                @Down.started -= m_Wrapper.m_VolumeActionsCallbackInterface.OnDown;
+                @Down.performed -= m_Wrapper.m_VolumeActionsCallbackInterface.OnDown;
+                @Down.canceled -= m_Wrapper.m_VolumeActionsCallbackInterface.OnDown;
+                @Plus.started -= m_Wrapper.m_VolumeActionsCallbackInterface.OnPlus;
+                @Plus.performed -= m_Wrapper.m_VolumeActionsCallbackInterface.OnPlus;
+                @Plus.canceled -= m_Wrapper.m_VolumeActionsCallbackInterface.OnPlus;
+                @Minus.started -= m_Wrapper.m_VolumeActionsCallbackInterface.OnMinus;
+                @Minus.performed -= m_Wrapper.m_VolumeActionsCallbackInterface.OnMinus;
+                @Minus.canceled -= m_Wrapper.m_VolumeActionsCallbackInterface.OnMinus;
             }
-            m_Wrapper.m_MainActionsCallbackInterface = instance;
+            m_Wrapper.m_VolumeActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Newaction.started += instance.OnNewaction;
-                @Newaction.performed += instance.OnNewaction;
-                @Newaction.canceled += instance.OnNewaction;
-            }
-        }
-    }
-    public MainActions @Main => new MainActions(this);
-
-    // Option1
-    private readonly InputActionMap m_Option1;
-    private IOption1Actions m_Option1ActionsCallbackInterface;
-    private readonly InputAction m_Option1_Red;
-    private readonly InputAction m_Option1_Back;
-    public struct Option1Actions
-    {
-        private @MenuInput m_Wrapper;
-        public Option1Actions(@MenuInput wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Red => m_Wrapper.m_Option1_Red;
-        public InputAction @Back => m_Wrapper.m_Option1_Back;
-        public InputActionMap Get() { return m_Wrapper.m_Option1; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(Option1Actions set) { return set.Get(); }
-        public void SetCallbacks(IOption1Actions instance)
-        {
-            if (m_Wrapper.m_Option1ActionsCallbackInterface != null)
-            {
-                @Red.started -= m_Wrapper.m_Option1ActionsCallbackInterface.OnRed;
-                @Red.performed -= m_Wrapper.m_Option1ActionsCallbackInterface.OnRed;
-                @Red.canceled -= m_Wrapper.m_Option1ActionsCallbackInterface.OnRed;
-                @Back.started -= m_Wrapper.m_Option1ActionsCallbackInterface.OnBack;
-                @Back.performed -= m_Wrapper.m_Option1ActionsCallbackInterface.OnBack;
-                @Back.canceled -= m_Wrapper.m_Option1ActionsCallbackInterface.OnBack;
-            }
-            m_Wrapper.m_Option1ActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @Red.started += instance.OnRed;
-                @Red.performed += instance.OnRed;
-                @Red.canceled += instance.OnRed;
                 @Back.started += instance.OnBack;
                 @Back.performed += instance.OnBack;
                 @Back.canceled += instance.OnBack;
+                @Up.started += instance.OnUp;
+                @Up.performed += instance.OnUp;
+                @Up.canceled += instance.OnUp;
+                @Down.started += instance.OnDown;
+                @Down.performed += instance.OnDown;
+                @Down.canceled += instance.OnDown;
+                @Plus.started += instance.OnPlus;
+                @Plus.performed += instance.OnPlus;
+                @Plus.canceled += instance.OnPlus;
+                @Minus.started += instance.OnMinus;
+                @Minus.performed += instance.OnMinus;
+                @Minus.canceled += instance.OnMinus;
             }
         }
     }
-    public Option1Actions @Option1 => new Option1Actions(this);
+    public VolumeActions @Volume => new VolumeActions(this);
     public interface IPauseActions
     {
         void OnUp(InputAction.CallbackContext context);
         void OnDown(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
     }
-    public interface IMainActions
+    public interface IVolumeActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
-    }
-    public interface IOption1Actions
-    {
-        void OnRed(InputAction.CallbackContext context);
         void OnBack(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnPlus(InputAction.CallbackContext context);
+        void OnMinus(InputAction.CallbackContext context);
     }
 }
