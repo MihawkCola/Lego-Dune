@@ -15,6 +15,13 @@ public class BuildController : MonoBehaviour
 
     private bool isBuild;
 
+    public float delayBetween = 0.2f;
+    private float delayTimer = 0.0f;
+
+    public float speed = 2f;
+
+    public int stoneParallel = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,36 +37,58 @@ public class BuildController : MonoBehaviour
     private void building()
     {
         if (!isBuild) return;
-        Debug.Log("build");
-        Transform stone = this.stones.GetChild(this.buildIndex);
-        Destroy(stone.GetComponent<Rigidbody>());
+        if (delayTimer > Time.time) return;
+        this.delayTimer += delayBetween;
 
-        StoneLerp lerpScript = stone.gameObject.AddComponent<StoneLerp>();
-        lerpScript.goToTarget(this.build.GetChild(this.buildIndex));
-        this.buildIndex++;
-        finish();
+        int limit = this.buildIndex + stoneParallel;
+        if (limit > build.childCount)
+            limit = build.childCount;
+
+        Debug.Log("build");
+        for (int i = this.buildIndex; this.buildIndex < limit; this.buildIndex++) {
+            Transform stone = this.stones.GetChild(this.buildIndex);
+
+            StoneLerp lerpScript = stone.gameObject.AddComponent<StoneLerp>();
+            lerpScript.goToTarget(this.build.GetChild(this.buildIndex), speed);
+            Debug.Log(buildIndex);
+        }
+        checkFinish();
     }
 
-    private void finish()
+    private void checkFinish()
     {
         if (this.buildIndex < build.childCount) return;
         isBuild = false;
-        inputs.Player.Build.started -= buildGo;
-        inputs.Player.Build.canceled -= buildGo;
     }
 
     public void canBuild() {
-        inputs.Player.Build.started += buildGo;
-        inputs.Player.Build.canceled += buildGo;
+        this.GetComponent<Collider>().enabled = true;
     }
 
     private void buildGo(InputAction.CallbackContext obj)
     {
+        delayTimer = Time.time;
         isBuild = true;
     }
     private void buildStop(InputAction.CallbackContext obj)
     {
         isBuild= false;
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag != "Player") return;
+        inputs.Player.Build.Enable();
+        inputs.Player.Build.started += buildGo;
+        inputs.Player.Build.canceled += buildStop;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag != "Player") return;
+
+        inputs.Player.Build.started -= buildGo;
+        inputs.Player.Build.canceled -= buildStop;
+        inputs.Player.Build.Disable();
+
     }
 
 }

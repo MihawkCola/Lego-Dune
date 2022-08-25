@@ -167,7 +167,7 @@ public class PlayerCamera : MonoBehaviour
 
             if (Vector3.Distance(transform.position, target.transform.position + camPlayerVectorBetween) < cameraSwitchMinDistance)
             {
-                if(!isStart) this.enemyController.enableAll();
+                this.enemyController.enableAll();
 
                 isCameraMoving = false;
                 isStart = false;
