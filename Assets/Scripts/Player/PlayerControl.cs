@@ -31,7 +31,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float groundDetection = 0.2f;
 
     private AudioSource[] sounds;
-    private AudioSource jumpSound;
+    private AudioSource jumpSound1;
+    private AudioSource jumpSound2;
     private AudioSource attackSound;
 
     private Vector3 forceDirection = Vector3.zero;
@@ -97,7 +98,8 @@ public class PlayerControl : MonoBehaviour
         this.animator = GetComponentInChildren<Animator>(true);
 
         sounds = GetComponents<AudioSource>();
-        jumpSound = sounds[3];
+        jumpSound1 = sounds[3];
+        jumpSound2 = sounds[4];
         attackSound = sounds[2];
     }
     // Update is called once per frame
@@ -190,7 +192,7 @@ public class PlayerControl : MonoBehaviour
     private void firstJump(InputAction.CallbackContext obj)
     {
         if (!this.isGrounded()) return;
-        jumpSound.Play();
+        jumpSound1.Play();
         this.forceDirection = Vector3.up * this.firstJumpForce;
         canDoubleJump = true;
         Debug.Log("JUMP");
@@ -198,6 +200,7 @@ public class PlayerControl : MonoBehaviour
     private void secondJump(InputAction.CallbackContext obj)
     {
         if (!canDoubleJump || this.isGrounded()) return;
+        jumpSound2.Play();
         this.forceDirection = Vector3.up * this.secondJumpForce;
         canDoubleJump = false;
         Debug.Log("SECOND JUMP");

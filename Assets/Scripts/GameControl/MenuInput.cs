@@ -286,6 +286,116 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Resolution"",
+            ""id"": ""1d1a8c79-71c3-4f00-ac81-8aa03531be0d"",
+            ""actions"": [
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""445d54f9-0a77-4fad-a113-91f0b3f6abb9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""97c6478b-388f-430e-9026-26ee3eeff5b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""4a31249d-84f8-4b52-9698-77718ab5dc15"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""93d957ac-bcfc-473c-a27f-f46415ffbb58"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""d2ccb924-7bea-4406-b215-a48b50de513a"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""282f05f3-817a-453b-a071-2d427fae46a1"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""aa57975e-a3b7-4fa6-8773-bef87d450038"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ccd4ee2-d0c4-4108-ae02-716a77802b3a"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a35e3438-6664-40a4-abbb-19fb808eacfb"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""970f48a1-1f6c-479b-bf06-e5c9a97d7dc3"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -302,6 +412,12 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
         m_Volume_Down = m_Volume.FindAction("Down", throwIfNotFound: true);
         m_Volume_Plus = m_Volume.FindAction("Plus", throwIfNotFound: true);
         m_Volume_Minus = m_Volume.FindAction("Minus", throwIfNotFound: true);
+        // Resolution
+        m_Resolution = asset.FindActionMap("Resolution", throwIfNotFound: true);
+        m_Resolution_Back = m_Resolution.FindAction("Back", throwIfNotFound: true);
+        m_Resolution_Up = m_Resolution.FindAction("Up", throwIfNotFound: true);
+        m_Resolution_Down = m_Resolution.FindAction("Down", throwIfNotFound: true);
+        m_Resolution_Select = m_Resolution.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -471,6 +587,63 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
         }
     }
     public VolumeActions @Volume => new VolumeActions(this);
+
+    // Resolution
+    private readonly InputActionMap m_Resolution;
+    private IResolutionActions m_ResolutionActionsCallbackInterface;
+    private readonly InputAction m_Resolution_Back;
+    private readonly InputAction m_Resolution_Up;
+    private readonly InputAction m_Resolution_Down;
+    private readonly InputAction m_Resolution_Select;
+    public struct ResolutionActions
+    {
+        private @MenuInput m_Wrapper;
+        public ResolutionActions(@MenuInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Back => m_Wrapper.m_Resolution_Back;
+        public InputAction @Up => m_Wrapper.m_Resolution_Up;
+        public InputAction @Down => m_Wrapper.m_Resolution_Down;
+        public InputAction @Select => m_Wrapper.m_Resolution_Select;
+        public InputActionMap Get() { return m_Wrapper.m_Resolution; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ResolutionActions set) { return set.Get(); }
+        public void SetCallbacks(IResolutionActions instance)
+        {
+            if (m_Wrapper.m_ResolutionActionsCallbackInterface != null)
+            {
+                @Back.started -= m_Wrapper.m_ResolutionActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_ResolutionActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_ResolutionActionsCallbackInterface.OnBack;
+                @Up.started -= m_Wrapper.m_ResolutionActionsCallbackInterface.OnUp;
+                @Up.performed -= m_Wrapper.m_ResolutionActionsCallbackInterface.OnUp;
+                @Up.canceled -= m_Wrapper.m_ResolutionActionsCallbackInterface.OnUp;
+                @Down.started -= m_Wrapper.m_ResolutionActionsCallbackInterface.OnDown;
+                @Down.performed -= m_Wrapper.m_ResolutionActionsCallbackInterface.OnDown;
+                @Down.canceled -= m_Wrapper.m_ResolutionActionsCallbackInterface.OnDown;
+                @Select.started -= m_Wrapper.m_ResolutionActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_ResolutionActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_ResolutionActionsCallbackInterface.OnSelect;
+            }
+            m_Wrapper.m_ResolutionActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
+                @Up.started += instance.OnUp;
+                @Up.performed += instance.OnUp;
+                @Up.canceled += instance.OnUp;
+                @Down.started += instance.OnDown;
+                @Down.performed += instance.OnDown;
+                @Down.canceled += instance.OnDown;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+            }
+        }
+    }
+    public ResolutionActions @Resolution => new ResolutionActions(this);
     public interface IPauseActions
     {
         void OnUp(InputAction.CallbackContext context);
@@ -484,5 +657,12 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
         void OnDown(InputAction.CallbackContext context);
         void OnPlus(InputAction.CallbackContext context);
         void OnMinus(InputAction.CallbackContext context);
+    }
+    public interface IResolutionActions
+    {
+        void OnBack(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }
