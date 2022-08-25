@@ -67,7 +67,7 @@ public class Stage : MonoBehaviour
     {
         for (int i = 0; i < this.buttonsCount; i++)
         {
-            this.buttonGameobject[i].Find("Button_Outer_Ring").gameObject.GetComponent<Renderer>().material.SetColor("_Color", this.sandWalk.getColors()[i]);
+            this.buttonGameobject[i].Find("Button_Outer_Ring").gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", this.sandWalk.getColors()[i]);
         }
     }
     private void initSequence(int size)
