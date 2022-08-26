@@ -38,13 +38,14 @@ public class MenuControlScript : MonoBehaviour
     private void Awake()
     {
         input = new MenuInput();
-        InputOnPause();
+        //InputOnPause();
     }
 
     private void OnEnable()
     {
         input.Enable();
         initPause();
+        InputOnPause();
     }
 
     private void initPause()
@@ -65,21 +66,18 @@ public class MenuControlScript : MonoBehaviour
     {
         lautstaerkeMenu = GameObject.Find("Option1Menu");
         textLautstaerke = lautstaerkeMenu.GetComponentsInChildren<Text>();
-        textLautstaerke[1].color = Color.yellow;
-        textLautstaerke[2].color = Color.white; //Nach fix prüfen, ob noch nötig
+        textLautstaerke[activeLautstaerke + 1].color = Color.yellow;
         optionsLautstaerke = textLautstaerke.Length - 1;
         lautstaerkeSlider = lautstaerkeMenu.GetComponentsInChildren<Slider>();
         lautstaerkeSlider[0].value = GameObject.Find("Level").GetComponent<AudioSource>().volume;
-        lautstaerkeSlider[1].value = 1;
+        lautstaerkeSlider[1].value = GetComponent<AudioSource>().volume;
     }
 
     private void initAufloesung()
     {
         aufloesungMenu = GameObject.Find("Option2Menu");
         textAufloesung = aufloesungMenu.GetComponentsInChildren<Text>();
-        textAufloesung[1].color = Color.yellow;
-        textAufloesung[2].color = Color.white; //Nach fix prüfen, ob noch nötig
-        textAufloesung[3].color = Color.white; //Nach fix prüfen, ob noch nötig
+        textAufloesung[activeAufloesung + 1].color = Color.yellow;
         optionsAufloesung = textAufloesung.Length - 1;
         
     }
@@ -87,9 +85,7 @@ public class MenuControlScript : MonoBehaviour
     {
         spielmodiMenu = GameObject.Find("Option3Menu");
         textModi = spielmodiMenu.GetComponentsInChildren<Text>();
-        textModi[1].color = Color.yellow;
-        textModi[2].color = Color.white; //Nach fix prüfen, ob noch nötig
-        textModi[3].color = Color.white; //Nach fix prüfen, ob noch nötig
+        textModi[activeModi + 1].color = Color.yellow;
         optionsModi = textModi.Length - 1;
 
     }
@@ -166,7 +162,13 @@ public class MenuControlScript : MonoBehaviour
         //input.Modes.Select.started -= selectSpielmodi;
     }
 
-   
+    public void escape()
+    {
+        foreach (GameObject menu in opMenus)
+        {
+            menu.SetActive(false);
+        }
+    }
 
     private void back(InputAction.CallbackContext obj)
     {
@@ -181,10 +183,6 @@ public class MenuControlScript : MonoBehaviour
         InputOffResolution();
         InputOffModes();
         InputOnPause();
-
-        /*input.Volume.Disable();
-        input.Resolution.Disable();
-        input.Pause.Enable();*/
     }
 
     private void upPause(InputAction.CallbackContext obj)
@@ -272,8 +270,8 @@ public class MenuControlScript : MonoBehaviour
                 break;
 
             case 1:
-                initAufloesung(); 
-                InputOnResolution();
+                initAufloesung();
+                StartCoroutine(WaitForRealSeconds (0.1f));
                 break;
 
             case 2:
@@ -286,6 +284,17 @@ public class MenuControlScript : MonoBehaviour
         }
         
     }
+    //Quelle: https://forum.unity.com/threads/waitforseconds-while-time-scale-0.272786/
+    IEnumerator WaitForRealSeconds(float seconds)
+    {
+        float startTime = Time.realtimeSinceStartup;
+        while (Time.realtimeSinceStartup - startTime < seconds)
+        {
+            yield return null;
+        }
+        InputOnResolution();
+    }
+
     public MenuInput getMenuInput() { 
         return this.input;
     }
@@ -328,7 +337,8 @@ public class MenuControlScript : MonoBehaviour
                     audio.volume -= 0.1f;
                 }
                 GameObject.Find("Level").GetComponent<AudioSource>().volume = backgroundMusicVol;
-                audioSources[1].Play();
+                GetComponent<AudioSource>().Play();
+                //audioSources[1].Play();
 
                 break;
             default:

@@ -64,6 +64,7 @@ public class GameControlScript : MonoBehaviour
         else
         {
             pauseMenu.SetActive(false);
+            GameObject.Find("Menu").GetComponent<MenuControlScript>().escape();
             isPaused = false;
             menuInput.Disable();
             playerInput.Enable();
