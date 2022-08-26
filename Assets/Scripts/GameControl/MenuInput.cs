@@ -387,7 +387,128 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""970f48a1-1f6c-479b-bf06-e5c9a97d7dc3"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""Modes"",
+            ""id"": ""8d0f3124-47e7-4f97-91f1-c71d064bebb1"",
+            ""actions"": [
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f0d68b3-5289-49b7-94eb-4db73e131666"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""38376636-f95d-42d7-9dcf-1116516cf4af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Up"",
+                    ""type"": ""Button"",
+                    ""id"": ""5209a210-7023-43f9-b27c-63fc918de9f9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Down"",
+                    ""type"": ""Button"",
+                    ""id"": ""946adeba-9a24-4023-9796-734f1c4ad052"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5c4d6185-8b89-4e1f-8ba0-51ec7237f014"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""acc8eaf9-9f36-4722-8bd4-b46c56b5dcea"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8fcc7a1f-3a18-4845-9c57-89760c36ba84"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Up"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1120ded-337d-4849-8965-078d6a63abe3"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""90d2e854-6202-40f4-804d-027661d0be73"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""02ef9f95-c773-4739-a43e-a7082862af05"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""192d41aa-1e79-4a5a-93c6-9269099697ef"",
+                    ""path"": ""<Gamepad>/select"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -418,6 +539,12 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
         m_Resolution_Up = m_Resolution.FindAction("Up", throwIfNotFound: true);
         m_Resolution_Down = m_Resolution.FindAction("Down", throwIfNotFound: true);
         m_Resolution_Select = m_Resolution.FindAction("Select", throwIfNotFound: true);
+        // Modes
+        m_Modes = asset.FindActionMap("Modes", throwIfNotFound: true);
+        m_Modes_Back = m_Modes.FindAction("Back", throwIfNotFound: true);
+        m_Modes_Select = m_Modes.FindAction("Select", throwIfNotFound: true);
+        m_Modes_Up = m_Modes.FindAction("Up", throwIfNotFound: true);
+        m_Modes_Down = m_Modes.FindAction("Down", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -644,6 +771,63 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
         }
     }
     public ResolutionActions @Resolution => new ResolutionActions(this);
+
+    // Modes
+    private readonly InputActionMap m_Modes;
+    private IModesActions m_ModesActionsCallbackInterface;
+    private readonly InputAction m_Modes_Back;
+    private readonly InputAction m_Modes_Select;
+    private readonly InputAction m_Modes_Up;
+    private readonly InputAction m_Modes_Down;
+    public struct ModesActions
+    {
+        private @MenuInput m_Wrapper;
+        public ModesActions(@MenuInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Back => m_Wrapper.m_Modes_Back;
+        public InputAction @Select => m_Wrapper.m_Modes_Select;
+        public InputAction @Up => m_Wrapper.m_Modes_Up;
+        public InputAction @Down => m_Wrapper.m_Modes_Down;
+        public InputActionMap Get() { return m_Wrapper.m_Modes; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ModesActions set) { return set.Get(); }
+        public void SetCallbacks(IModesActions instance)
+        {
+            if (m_Wrapper.m_ModesActionsCallbackInterface != null)
+            {
+                @Back.started -= m_Wrapper.m_ModesActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_ModesActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_ModesActionsCallbackInterface.OnBack;
+                @Select.started -= m_Wrapper.m_ModesActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_ModesActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_ModesActionsCallbackInterface.OnSelect;
+                @Up.started -= m_Wrapper.m_ModesActionsCallbackInterface.OnUp;
+                @Up.performed -= m_Wrapper.m_ModesActionsCallbackInterface.OnUp;
+                @Up.canceled -= m_Wrapper.m_ModesActionsCallbackInterface.OnUp;
+                @Down.started -= m_Wrapper.m_ModesActionsCallbackInterface.OnDown;
+                @Down.performed -= m_Wrapper.m_ModesActionsCallbackInterface.OnDown;
+                @Down.canceled -= m_Wrapper.m_ModesActionsCallbackInterface.OnDown;
+            }
+            m_Wrapper.m_ModesActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+                @Up.started += instance.OnUp;
+                @Up.performed += instance.OnUp;
+                @Up.canceled += instance.OnUp;
+                @Down.started += instance.OnDown;
+                @Down.performed += instance.OnDown;
+                @Down.canceled += instance.OnDown;
+            }
+        }
+    }
+    public ModesActions @Modes => new ModesActions(this);
     public interface IPauseActions
     {
         void OnUp(InputAction.CallbackContext context);
@@ -664,5 +848,12 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
         void OnUp(InputAction.CallbackContext context);
         void OnDown(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+    }
+    public interface IModesActions
+    {
+        void OnBack(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnUp(InputAction.CallbackContext context);
+        void OnDown(InputAction.CallbackContext context);
     }
 }

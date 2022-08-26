@@ -29,14 +29,16 @@ public class MenuControlScript : MonoBehaviour
     private int activeAufloesung;
     private int optionsAufloesung;
 
+    private GameObject spielmodiMenu;
+    private Text[] textModi;
+    private int activeModi;
+    private int optionsModi;
+
 
     private void Awake()
     {
         input = new MenuInput();
         InputOnPause();
-        input.Volume.Disable();
-        input.Resolution.Disable();
-
     }
 
     private void OnEnable()
@@ -49,7 +51,7 @@ public class MenuControlScript : MonoBehaviour
     {
         pauseMenu = GameObject.Find("PauseMenu");
         textPause = pauseMenu.GetComponentsInChildren<Text>();
-        textPause[1].color = Color.yellow;
+        textPause[activePause + 1].color = Color.yellow;
         optionsPause = textPause.Length - 1;
         opMenus = new GameObject[optionsPause];
         for (int i = 1; i <= optionsPause; i++)
@@ -81,6 +83,16 @@ public class MenuControlScript : MonoBehaviour
         optionsAufloesung = textAufloesung.Length - 1;
         
     }
+    private void initSpielmodi()
+    {
+        spielmodiMenu = GameObject.Find("Option3Menu");
+        textModi = spielmodiMenu.GetComponentsInChildren<Text>();
+        textModi[1].color = Color.yellow;
+        textModi[2].color = Color.white; //Nach fix prüfen, ob noch nötig
+        textModi[3].color = Color.white; //Nach fix prüfen, ob noch nötig
+        optionsModi = textModi.Length - 1;
+
+    }
     private void OnDisable()
     {
         input.Disable();
@@ -89,7 +101,6 @@ public class MenuControlScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        activePause = 0;
         audioSources = FindObjectsOfType<AudioSource>();
     }
 
@@ -98,30 +109,12 @@ public class MenuControlScript : MonoBehaviour
     {
         
     }
-    public void InputOn()
-    {
-        input.Pause.Up.started += upPause;
-        input.Pause.Down.started += downPause;
-        input.Pause.Select.started += selectMenu;
-    
-        input.Volume.Up.started += upLautstaerke;
-        input.Volume.Down.started += downLautstaerke;
-        input.Volume.Plus.started += plus;
-        input.Volume.Minus.started += minus;
-        input.Volume.Back.started += back;
-    
-        input.Resolution.Up.started += upAufloesung;
-        input.Resolution.Down.started += downAufloesung;
-        input.Resolution.Back.started += back;
-        input.Resolution.Select.started += selectResolution;
-    }
     public void InputOnPause()
     {
         input.Pause.Up.started += upPause;
         input.Pause.Down.started += downPause;
         input.Pause.Select.started += selectMenu;
     }
-
     public void InputOnVolume()
     {
         input.Volume.Up.started += upLautstaerke;
@@ -137,23 +130,164 @@ public class MenuControlScript : MonoBehaviour
         input.Resolution.Back.started += back;
         input.Resolution.Select.started += selectResolution;
     }
-
-    public void InputOff()
+    public void InputOnModes()
+    {
+        input.Modes.Up.started += upSpielmodi;
+        input.Modes.Down.started += downSpielmodi;
+        input.Modes.Back.started += back;
+        //input.Modes.Select.started += selectSpielmodi;
+    }
+    public void InputOffPause()
     {
         input.Pause.Up.started -= upPause;
         input.Pause.Down.started -= downPause;
         input.Pause.Select.started -= selectMenu;
-
+    }
+    public void InputOffVolume()
+    {
         input.Volume.Up.started -= upLautstaerke;
         input.Volume.Down.started -= downLautstaerke;
         input.Volume.Plus.started -= plus;
         input.Volume.Minus.started -= minus;
         input.Volume.Back.started -= back;
-
+    }
+    public void InputOffResolution()
+    {
         input.Resolution.Up.started -= upAufloesung;
         input.Resolution.Down.started -= downAufloesung;
         input.Resolution.Back.started -= back;
         input.Resolution.Select.started -= selectResolution;
+    }
+    public void InputOffModes()
+    {
+        input.Modes.Up.started -= upSpielmodi;
+        input.Modes.Down.started -= downSpielmodi;
+        input.Modes.Back.started -= back;
+        //input.Modes.Select.started -= selectSpielmodi;
+    }
+
+   
+
+    private void back(InputAction.CallbackContext obj)
+    {
+        back();
+    }
+
+    private void back()
+    {
+        pauseMenu.SetActive(true);
+        opMenus[activePause].SetActive(false);
+        InputOffVolume();
+        InputOffResolution();
+        InputOffModes();
+        InputOnPause();
+
+        /*input.Volume.Disable();
+        input.Resolution.Disable();
+        input.Pause.Enable();*/
+    }
+
+    private void upPause(InputAction.CallbackContext obj)
+    {
+        activePause = up(textPause, activePause, optionsPause);
+    }
+    private void upLautstaerke(InputAction.CallbackContext obj)
+    {
+        activeLautstaerke = up(textLautstaerke, activeLautstaerke, optionsLautstaerke);
+    }
+    private void upAufloesung(InputAction.CallbackContext obj)
+    {
+        activeAufloesung = up(textAufloesung, activeAufloesung, optionsAufloesung);
+    }
+    private void upSpielmodi(InputAction.CallbackContext obj)
+    {
+        activeModi = up(textModi, activeModi, optionsModi);
+    }
+    private int up(Text[] text, int active, int options)
+    {
+        text[active + 1].color = Color.white;
+        active = ((active - 1) >= 0) ? (active - 1) : (options - 1);
+        text[active + 1].color = Color.yellow;
+        return active;
+    }
+
+    private void downPause(InputAction.CallbackContext obj)
+    {
+        activePause = down(textPause, activePause, optionsPause);
+    }
+    private void downLautstaerke(InputAction.CallbackContext obj)
+    {
+        activeLautstaerke = down(textLautstaerke, activeLautstaerke, optionsLautstaerke);
+    }
+    private void downAufloesung(InputAction.CallbackContext obj)
+    {
+        activeAufloesung = down(textAufloesung, activeAufloesung, optionsAufloesung);
+    }
+    private void downSpielmodi(InputAction.CallbackContext obj)
+    {
+        activeModi = down(textModi, activeModi, optionsModi);
+    }
+    private int down(Text[] text, int active, int options)
+    {
+        text[active + 1].color = Color.white;
+        active = (active + 1) % options;
+        text[active + 1].color = Color.yellow;
+        return active;
+    }
+
+    private void selectResolution(InputAction.CallbackContext obj)
+    {
+        Debug.Log("Res1: " + Screen.width + " x " + Screen.height);
+        switch (activeAufloesung)
+        {
+            case 0:
+                Screen.SetResolution(720, 576, Screen.fullScreenMode);
+                break;
+
+            case 1:
+                Screen.SetResolution(1280, 720, Screen.fullScreenMode);
+                break;
+
+            case 2:
+                Screen.SetResolution(1920, 1080, Screen.fullScreenMode);
+                break;
+
+            default:
+                break;
+        }
+        Debug.Log("Res2: " + Screen.width + " x "+ Screen.height);
+        back();
+    }
+    private void selectMenu(InputAction.CallbackContext obj)
+    {
+        InputOffPause();
+        pauseMenu.SetActive(false);
+        opMenus[activePause].SetActive(true);
+
+        switch (activePause)
+        {
+            case 0:
+                initLautstaerke();
+                InputOnVolume();
+                break;
+
+            case 1:
+                initAufloesung(); 
+                InputOnResolution();
+                break;
+
+            case 2:
+                initSpielmodi();
+                InputOnModes();
+                break;
+
+            default:
+                break;
+        }
+        
+    }
+    public MenuInput getMenuInput() { 
+        return this.input;
     }
 
     private void plus(InputAction.CallbackContext obj)
@@ -201,119 +335,5 @@ public class MenuControlScript : MonoBehaviour
                 break;
         }
     }
-
-    private void back(InputAction.CallbackContext obj)
-    {
-        back();
-    }
-
-    private void back()
-    {
-        pauseMenu.SetActive(true);
-        opMenus[activePause].SetActive(false);
-        input.Volume.Disable();
-        input.Resolution.Disable();
-        input.Pause.Enable();
-    }
-
-    private void upPause(InputAction.CallbackContext obj)
-    {
-        activePause = up(textPause, activePause, optionsPause);
-    }
-    private void upLautstaerke(InputAction.CallbackContext obj)
-    {
-        activeLautstaerke = up(textLautstaerke, activeLautstaerke, optionsLautstaerke);
-    }
-    private void upAufloesung(InputAction.CallbackContext obj)
-    {
-        activeAufloesung = up(textAufloesung, activeAufloesung, optionsAufloesung);
-    }
-    private int up(Text[] text, int active, int options)
-    {
-        text[active + 1].color = Color.white;
-        active = ((active - 1) >= 0) ? (active - 1) : (options - 1);
-        text[active + 1].color = Color.yellow;
-        return active;
-    }
-
-    private void downPause(InputAction.CallbackContext obj)
-    {
-        activePause = down(textPause, activePause, optionsPause);
-    }
-    private void downLautstaerke(InputAction.CallbackContext obj)
-    {
-        activeLautstaerke = down(textLautstaerke, activeLautstaerke, optionsLautstaerke);
-    }
-    private void downAufloesung(InputAction.CallbackContext obj)
-    {
-        activeAufloesung = down(textAufloesung, activeAufloesung, optionsAufloesung);
-    }
-
-    private int down(Text[] text, int active, int options)
-    {
-        text[active + 1].color = Color.white;
-        active = (active + 1) % options;
-        text[active + 1].color = Color.yellow;
-        return active;
-    }
-
-    private void selectResolution(InputAction.CallbackContext obj)
-    {
-        switch (activeAufloesung)
-        {
-            case 0:
-                Screen.SetResolution(720, 576, false);
-                break;
-
-            case 1:
-                Screen.SetResolution(1280, 720, false);
-                break;
-
-            case 2:
-                Screen.SetResolution(1920, 1080, false);
-                break;
-
-            default:
-                break;
-        }
-        Debug.Log("Res: " + Screen.currentResolution);
-        back();
-    }
-    private void selectMenu(InputAction.CallbackContext obj)
-    {
-        pauseMenu.SetActive(false);
-        opMenus[activePause].SetActive(true);
-        input.Pause.Disable();
-        
-        switch (activePause)
-        {
-            case 0:
-                input.Resolution.Disable();
-                input.Volume.Enable();
-
-                initLautstaerke();
-                //InputOnVolume();
-                break;
-
-            case 1:
-                input.Volume.Disable();
-                input.Resolution.Enable();
-
-                initAufloesung();
-                //InputOnResolution();
-                break;
-
-            case 2:
-                break;
-
-            default:
-                break;
-        }
-        
-    }
-    public MenuInput getMenuInput() { 
-        return this.input;
-    }
-
 
 }
