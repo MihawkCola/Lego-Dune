@@ -219,6 +219,7 @@ GameObject:
   - component: {fileID: 3711745839667190424}
   - component: {fileID: 913181340822448168}
   - component: {fileID: 7318564990192133094}
+  - component: {fileID: 7748813319907700089}
   m_Layer: 3
   m_Name: Player Mother
   m_TagString: Player
@@ -885,6 +886,19 @@ MonoBehaviour:
   target: {fileID: 0}
   rangeMaxSpeed: 6.5
   notWalk: 0
+--- !u!114 &7748813319907700089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5772766560352065108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c98f7aeac258e444088978af2a2f7e89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canBuild: 0
 --- !u!1 &8191817080127321468
 GameObject:
   m_ObjectHideFlags: 0
