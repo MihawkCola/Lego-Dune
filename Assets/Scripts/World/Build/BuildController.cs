@@ -65,30 +65,28 @@ public class BuildController : MonoBehaviour
         this.GetComponent<Collider>().enabled = true;
     }
 
-    private void buildGo(InputAction.CallbackContext obj)
+    public void buildGo()
     {
         delayTimer = Time.time;
         isBuild = true;
     }
-    private void buildStop(InputAction.CallbackContext obj)
+    public void buildStop()
     {
         isBuild= false;
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Player") return;
-        inputs.Player.Build.Enable();
-        inputs.Player.Build.started += buildGo;
-        inputs.Player.Build.canceled += buildStop;
+        BuildPlayerController player = other.GetComponent<BuildPlayerController>();
+        if (player != null)
+            player.addBuild(this);
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag != "Player") return;
-
-        inputs.Player.Build.started -= buildGo;
-        inputs.Player.Build.canceled -= buildStop;
-        inputs.Player.Build.Disable();
-
+        BuildPlayerController player = other.GetComponent<BuildPlayerController>();
+        if (player != null)
+            player.removeBuild(this);
     }
 
 }

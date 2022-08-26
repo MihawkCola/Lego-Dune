@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour
     private Animator animator;
 
     private PlayerInput inputs;
-    private bool movEnable = false;
+    public bool movEnable = false;
 
     [SerializeField] private Camera cam;
 
@@ -102,9 +102,6 @@ public class PlayerControl : MonoBehaviour
         jumpSound1 = sounds[3];
         jumpSound2 = sounds[4];
         attackSound = sounds[2];
-
-        inputs.Player.Build.started += isBuilding;
-        inputs.Player.Build.canceled += notBuilding;
     }
     // Update is called once per frame
     void Update()
@@ -238,16 +235,7 @@ public class PlayerControl : MonoBehaviour
             maxSpeed = this.maxSpeedNormal;
         }
     }
-    public void isBuilding(InputAction.CallbackContext obj)
-    {
-        if (!movEnable) return;
-        animator.SetBool("build", true);
-    }
-    public void notBuilding(InputAction.CallbackContext obj)
-    {
-        if (!movEnable) return;
-        animator.SetBool("build", false);
-    }
+
 
     private void isAttacking(InputAction.CallbackContext obj)
     {
