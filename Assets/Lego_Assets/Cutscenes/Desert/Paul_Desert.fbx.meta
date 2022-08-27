@@ -12,6 +12,51 @@ ModelImporter:
   - first:
       74: 5648634212636666328
     second: PaulAtreidesRig|PaulWakeUp
+  - first:
+      74: -7349510914897086023
+    second: PaulAtreidesRig|Camera1
+  - first:
+      74: -6405458411616928131
+    second: PaulAtreidesRig|Camera2
+  - first:
+      74: 2478585160910334514
+    second: Torso|Camera1
+  - first:
+      74: 4889629190699200744
+    second: Torso|Camera2
+  - first:
+      74: 2134695072924618964
+    second: Leg.L|Camera1
+  - first:
+      74: -5530994273250209795
+    second: Leg.L|Camera2
+  - first:
+      74: 836753265121035631
+    second: Head.001|Camera1
+  - first:
+      74: 6954791179752719219
+    second: Head.001|Camera2
+  - first:
+      74: -5299804648825444819
+    second: Arm.R|Camera1
+  - first:
+      74: 7699921882471056658
+    second: Arm.R|Camera2
+  - first:
+      74: 838123560417898894
+    second: Camera.001|Camera1
+  - first:
+      74: 5294434614563960044
+    second: Camera.001|Camera2
+  - first:
+      74: 6864830934281105499
+    second: PaulAtreidesRig|Cam1
+  - first:
+      74: 8639888698262564184
+    second: PaulAtreidesRig|Cam2
+  - first:
+      74: -2431020438200086913
+    second: PaulAtreidesRig|PauleWakeUp2
   externalObjects: {}
   materials:
     materialImportMode: 2

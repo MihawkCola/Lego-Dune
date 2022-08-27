@@ -12,6 +12,12 @@ ModelImporter:
   - first:
       74: -5363357140681553602
     second: MotherRig.001|PaulWakeUp
+  - first:
+      74: -4732515134715348350
+    second: MotherRig.001|Camera1
+  - first:
+      74: -154545503109962928
+    second: MotherRig.001|Camera2
   externalObjects: {}
   materials:
     materialImportMode: 2
