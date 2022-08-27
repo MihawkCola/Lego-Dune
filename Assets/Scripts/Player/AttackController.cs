@@ -13,4 +13,9 @@ public class AttackController : MonoBehaviour
     {
         this.weapon.GetComponent<Collider>().enabled = false;
     }
+    private void attacksound() {
+        AudioSource hit = GetComponent<AudioSource>();
+        if (null == hit) return;
+        hit.Play();
+    }
 }

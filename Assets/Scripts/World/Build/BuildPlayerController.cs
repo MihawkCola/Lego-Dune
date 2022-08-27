@@ -28,8 +28,6 @@ public class BuildPlayerController : MonoBehaviour
 
     public void addBuild(BuildController buildController) { 
         this.buildControllers.Add(buildController);
-        Debug.Log("add");
-        Debug.Log(buildControllers);
         this.addInput();
     }
     public void removeBuild(BuildController buildController)
@@ -47,24 +45,28 @@ public class BuildPlayerController : MonoBehaviour
         if (this.buildControllers.Count > 0) return;
         inputs.Player.Build.started -= buildGo;
         inputs.Player.Build.canceled -= buildStop;
+        this.animator.SetBool("build", false);
+        this.playerControl.movEnable = true;
     }
     private void buildStop(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        if (!this.playerControl.movEnable) return;
+        if (!this.playerControl.getActive()) return;
         foreach (BuildController build in this.buildControllers)
         {
             build.buildStop();
         }
         this.animator.SetBool("build", false);
+        this.playerControl.movEnable = true;
     }
 
     private void buildGo(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        if(!this.playerControl.movEnable) return;
+        if(!this.playerControl.getActive()) return;
         foreach (BuildController build in this.buildControllers) {
             build.buildGo();
         }
         this.animator.SetBool("build", true);
+        this.playerControl.movEnable = false;
     }
 
     

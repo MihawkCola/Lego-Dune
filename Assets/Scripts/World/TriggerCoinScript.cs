@@ -37,20 +37,22 @@ public class TriggerCoinScript : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
-        {
-            GameObject coinGameobject = this.transform.parent.gameObject;
-            this.GetComponent<Collider>().enabled = false;
+        if (other.tag != "Player") return;
+        PlayerControl playerControl = other.GetComponent<PlayerControl>();
+        if (!playerControl.getActive()) return;
 
-            coinSound.Play();
-            hud.GetComponent<CoinsScript>().increaseCoinAmount(value);
+        GameObject coinGameobject = this.transform.parent.gameObject;
+        this.GetComponent<Collider>().enabled = false;
+
+        coinSound.Play();
+        hud.GetComponent<CoinsScript>().increaseCoinAmount(value);
 
 
-            this.transform.parent = null;
-            Destroy(coinGameobject);
-            StartCoroutine(destroySelf());
-            //Destroy(this.gameObject);
-        }
+        this.transform.parent = null;
+        Destroy(coinGameobject);
+        StartCoroutine(destroySelf());
+        //Destroy(this.gameObject);
+
     }
     private IEnumerator destroySelf()
     {

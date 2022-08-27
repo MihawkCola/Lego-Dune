@@ -14,6 +14,7 @@ public class PlayerControl : MonoBehaviour
 
     private PlayerInput inputs;
     public bool movEnable = false;
+    private bool active = false;
 
     [SerializeField] private Camera cam;
 
@@ -65,6 +66,7 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Sneaking.canceled += isSneaking;
         inputs.Player.Attack.started += isAttacking;
         movEnable = true;
+        active = true;
         healthScript.activeDeath = true;
         secondPlayerAi.enabled = false;
     }
@@ -80,10 +82,14 @@ public class PlayerControl : MonoBehaviour
         inputs.Player.Sneaking.canceled -= isSneaking;
         inputs.Player.Attack.started -= isAttacking;
         movEnable = false;
+        active = false;
         healthScript.activeDeath = false;
         if(!healthScript.isDeath()) secondPlayerAi.enabled = true;
     }
 
+    public bool getActive() {
+        return active;
+    }
     public bool IsInputsSet()
     {
         return inputs != null;
@@ -118,12 +124,19 @@ public class PlayerControl : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        checkMovActive();
         animator.SetBool("isGround", this.isGrounded());
         if(this.movEnable) this.movementUpdate();
 
         this.rotiereMovement();
         this.setMovmentAnimation();
         this.velocityDown();
+    }
+
+    private void checkMovActive()
+    {
+        if(!active)
+            movEnable = false;
     }
 
     private void movementUpdate() {
@@ -193,6 +206,8 @@ public class PlayerControl : MonoBehaviour
     private void firstJump(InputAction.CallbackContext obj)
     {
         if (!this.isGrounded()) return;
+        if (!movEnable) return;
+
         jumpSound1.Play();
         this.forceDirection = Vector3.up * this.firstJumpForce;
         canDoubleJump = true;
@@ -201,16 +216,18 @@ public class PlayerControl : MonoBehaviour
     private void secondJump(InputAction.CallbackContext obj)
     {
         if (!canDoubleJump || this.isGrounded()) return;
+        if (!movEnable) return;
         jumpSound2.Play();
         this.forceDirection = Vector3.up * this.secondJumpForce;
         canDoubleJump = false;
+        this.animator.SetTrigger("secondJump");
         Debug.Log("SECOND JUMP");
     }
 
     private void isRunning(InputAction.CallbackContext obj)
     {
         //if (animator.GetBool("isSneaking")) return;
-        
+        if (!movEnable) return;
 
         animator.SetBool("isRun", !animator.GetBool("isRun"));
         if (animator.GetBool("isRun")) {
@@ -224,6 +241,7 @@ public class PlayerControl : MonoBehaviour
     private void isSneaking(InputAction.CallbackContext obj)
     {
         //if (animator.GetBool("isRun")) return;
+        if (!movEnable) return;
 
         animator.SetBool("isSneak", !animator.GetBool("isSneak"));
         if (animator.GetBool("isSneak"))
@@ -239,7 +257,8 @@ public class PlayerControl : MonoBehaviour
 
     private void isAttacking(InputAction.CallbackContext obj)
     {
-        attackSound.Play();
+        //attackSound.Play();
+        if (!movEnable) return;
         animator.SetTrigger("Attack");
     }
     private bool isGrounded() {

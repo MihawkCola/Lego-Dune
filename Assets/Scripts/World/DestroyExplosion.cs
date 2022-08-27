@@ -13,6 +13,7 @@ public class DestroyExplosion : MonoBehaviour
     private GameObject coinEploxionG;
 
     private NavMeshObstacle obstacle;
+    public bool dissolve = true;
 
     void Start()
     {
@@ -33,11 +34,17 @@ public class DestroyExplosion : MonoBehaviour
             stone.gameObject.layer = LayerMask.NameToLayer("Ignore Player");
             Rigidbody rb = stone.gameObject.AddComponent<Rigidbody>();
             rb.mass = 0.01f;
-
+                
             Vector3 localPosFromHit = this.transform.position - other.transform.position;
             localPosFromHit.y = 0;
             if (rb != null)
                 rb.AddExplosionForce(this.power, this.transform.position - localPosFromHit.normalized, this.radius, this.upwardsModifier);
+
+            if (dissolve)
+            {
+                StoneDissolve stoneDissolve = stone.gameObject.AddComponent<StoneDissolve>();
+                stoneDissolve.start(1f, 6f);
+            }
         }
 
         this.obstacle.enabled = false;

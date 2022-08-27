@@ -7,6 +7,8 @@ public class StoneLerp : MonoBehaviour
 {
     private Transform target;
     private bool build = false;
+    private int indexStone;
+    private BuildController buildController;
 
     private float speed = 2f;
     
@@ -27,21 +29,26 @@ public class StoneLerp : MonoBehaviour
         if (Vector3.Distance(this.transform.position, target.position) > 0.01f) return;
         //if (Quaternion. > 0.1f) return;
         target.gameObject.SetActive(true);
-        Debug.Log("Finish");
+
+        this.buildController.checkLastStone(indexStone);
         this.build = false;
         this.enabled = false;
     }
 
-    public void goToTarget(Transform target)
+
+
+    public void goToTarget(Transform target, int indexStone, BuildController buildController)
     {
         prepareStone();
+        this.indexStone = indexStone;
+        this.buildController = buildController;
         this.target = target;
         build = true;
     }
-    public void goToTarget(Transform target, float speed)
+    public void goToTarget(Transform target, float speed, int indexStone, BuildController buildController)
     {
         this.speed = speed;
-        this.goToTarget(target);
+        this.goToTarget(target, indexStone, buildController);
     }
     private void prepareStone() {
         Rigidbody rb = this.GetComponent<Rigidbody>();

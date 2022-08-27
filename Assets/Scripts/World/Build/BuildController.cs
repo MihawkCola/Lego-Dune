@@ -22,10 +22,13 @@ public class BuildController : MonoBehaviour
 
     public int stoneParallel = 1;
 
+    private List<BuildPlayerController> controllerList;
+
     // Start is called before the first frame update
     void Start()
     {
         inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
+        controllerList = new List<BuildPlayerController>();
     }
 
     // Update is called once per frame
@@ -44,21 +47,34 @@ public class BuildController : MonoBehaviour
         if (limit > build.childCount)
             limit = build.childCount;
 
-        Debug.Log("build");
         for (int i = this.buildIndex; this.buildIndex < limit; this.buildIndex++) {
             Transform stone = this.stones.GetChild(this.buildIndex);
 
             StoneLerp lerpScript = stone.gameObject.AddComponent<StoneLerp>();
-            lerpScript.goToTarget(this.build.GetChild(this.buildIndex), speed);
+            lerpScript.goToTarget(this.build.GetChild(this.buildIndex), speed, this.buildIndex, this);
             Debug.Log(buildIndex);
         }
         checkFinish();
+    }
+
+    internal void checkLastStone(int indexStone)
+    {
+        if (indexStone != build.childCount - 1) return;
+        Transform coins = this.transform.Find("CoinExplosion");
+        if(coins != null)
+            Destroy(coins.gameObject);
     }
 
     private void checkFinish()
     {
         if (this.buildIndex < build.childCount) return;
         isBuild = false;
+
+        foreach (BuildPlayerController player in controllerList) {
+            player.removeBuild(this);
+        }
+        controllerList.Clear();
+        GetComponent<SphereCollider>().enabled = false;
     }
 
     public void canBuild() {
@@ -79,14 +95,20 @@ public class BuildController : MonoBehaviour
         if (other.tag != "Player") return;
         BuildPlayerController player = other.GetComponent<BuildPlayerController>();
         if (player != null)
+        {
             player.addBuild(this);
+            this.controllerList.Add(player);
+        }
+            
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag != "Player") return;
         BuildPlayerController player = other.GetComponent<BuildPlayerController>();
         if (player != null)
+        {
             player.removeBuild(this);
+            this.controllerList.Remove(player);
+        }   
     }
-
 }
