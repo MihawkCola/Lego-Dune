@@ -36,6 +36,8 @@ public class GameControlScript : MonoBehaviour
         menuInput = GameObject.Find("Menu").GetComponent<MenuControlScript>().getMenuInput();
         pauseMenu = GameObject.Find("PauseMenu");
         pauseMenu.SetActive(false);
+        menuInput.Disable();
+
         isPaused = false;
     }
 
