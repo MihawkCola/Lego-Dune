@@ -17,7 +17,7 @@ public class SimpleEnemyAI : MonoBehaviour, EnemyInterface
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
         nextAttackTime = Time.time;
     }

@@ -1356,7 +1356,7 @@ GameObject:
   - component: {fileID: 1827943868493296086}
   - component: {fileID: 3253469355787383991}
   - component: {fileID: 2584447355944653006}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: RebuildableStairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
