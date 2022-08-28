@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,14 +12,24 @@ public class GameControlScript : MonoBehaviour
 
     private PlayerInput playerInput;
     private MenuInput menuInput;
+    private StartOrQuitInput endscreenInput;
     private GameObject pauseMenu;
     private AudioSource[] audios;
+
+    private GameObject endscreen;
 
     private void Awake()
     {
         input = new GameInput();
         playerInput = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
         input.GameControl.Pause.started += pauseGame;
+        input.GameControl.Test.started += test;
+
+    }
+
+    private void test(InputAction.CallbackContext obj)
+    {
+        showEndscreen();
     }
 
     private void OnEnable()
@@ -34,10 +45,13 @@ public class GameControlScript : MonoBehaviour
     {
         playerInput = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
         menuInput = GameObject.Find("Menu").GetComponent<MenuControlScript>().getMenuInput();
+        endscreenInput = GameObject.Find("Endscreen").GetComponent<EndscreenScript>().getEndscreenInput();
+        endscreen = GameObject.Find("Endscreen");
+        endscreen.SetActive(false);
         pauseMenu = GameObject.Find("PauseMenu");
         pauseMenu.SetActive(false);
         menuInput.Disable();
-
+        endscreenInput.Disable();
         isPaused = false;
     }
 
@@ -81,6 +95,13 @@ public class GameControlScript : MonoBehaviour
             }
             GameObject.Find("Menu").GetComponents<AudioSource>()[2].Pause();
         }
+    }
+
+    private void showEndscreen()
+    {
+        endscreen.SetActive(true);
+        playerInput.Disable();
+        endscreenInput.Enable();
     }
 
 }

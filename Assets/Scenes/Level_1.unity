@@ -1664,7 +1664,7 @@ GameObject:
   - component: {fileID: 315228882}
   - component: {fileID: 315228881}
   m_Layer: 5
-  m_Name: Modus2
+  m_Name: Beenden
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1737,7 +1737,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Modus 2
+  m_Text: Beenden
 --- !u!222 &315228883
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3794,9 +3794,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Spielmodi
-
-'
+  m_Text: Neustart/Beenden
 --- !u!222 &647518970
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9536,7 +9534,7 @@ GameObject:
   - component: {fileID: 1668990995}
   - component: {fileID: 1668990994}
   m_Layer: 5
-  m_Name: Standard
+  m_Name: Neustart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9609,7 +9607,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Standard
+  m_Text: Neustart
 --- !u!222 &1668990996
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9881,7 +9879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1722154117
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9900,7 +9898,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -260}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 190, y: 59}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1722154118
 MonoBehaviour:

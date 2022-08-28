@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Startscreen : MonoBehaviour
@@ -24,6 +25,13 @@ public class Startscreen : MonoBehaviour
     void Start()
     {
         init();
+        InputOn();
+    }
+    private void OnEnable()
+    {
+        input.Enable();
+        init();
+        InputOn();
     }
     private void init()
     {
@@ -50,7 +58,7 @@ public class Startscreen : MonoBehaviour
         for (int i = 1; i < text.Length; i++)
         {
             text[i].fontSize = (int)textSize;
-            text[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(text[i].GetComponent<RectTransform>().anchoredPosition.x, (-0.2f * i - 0.2f) * Screen.height);
+            text[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(text[i].GetComponent<RectTransform>().anchoredPosition.x, (-0.2f * i - 0.3f) * Screen.height);
         }
     }
 
@@ -72,11 +80,14 @@ public class Startscreen : MonoBehaviour
     {
         if (active == 1)
         {
-            //TODO START
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            //SceneManager.LoadScene("Level_1");
         }
         else
         {
-            //TODO BEENDEN
+            Debug.Log("quit");
+            Application.Quit();
+            UnityEditor.EditorApplication.isPlaying = false;
         }
     }
 }

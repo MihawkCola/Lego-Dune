@@ -35,6 +35,15 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Test"",
+                    ""type"": ""Button"",
+                    ""id"": ""dbb9eea3-ecd2-4acc-bfe0-d10f68b2e08d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -59,6 +68,17 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2a42c5e6-1a64-4e29-b6ea-8034790211f1"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Test"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -68,6 +88,7 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
         // GameControl
         m_GameControl = asset.FindActionMap("GameControl", throwIfNotFound: true);
         m_GameControl_Pause = m_GameControl.FindAction("Pause", throwIfNotFound: true);
+        m_GameControl_Test = m_GameControl.FindAction("Test", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -128,11 +149,13 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_GameControl;
     private IGameControlActions m_GameControlActionsCallbackInterface;
     private readonly InputAction m_GameControl_Pause;
+    private readonly InputAction m_GameControl_Test;
     public struct GameControlActions
     {
         private @GameInput m_Wrapper;
         public GameControlActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_GameControl_Pause;
+        public InputAction @Test => m_Wrapper.m_GameControl_Test;
         public InputActionMap Get() { return m_Wrapper.m_GameControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -145,6 +168,9 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_GameControlActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_GameControlActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_GameControlActionsCallbackInterface.OnPause;
+                @Test.started -= m_Wrapper.m_GameControlActionsCallbackInterface.OnTest;
+                @Test.performed -= m_Wrapper.m_GameControlActionsCallbackInterface.OnTest;
+                @Test.canceled -= m_Wrapper.m_GameControlActionsCallbackInterface.OnTest;
             }
             m_Wrapper.m_GameControlActionsCallbackInterface = instance;
             if (instance != null)
@@ -152,6 +178,9 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Test.started += instance.OnTest;
+                @Test.performed += instance.OnTest;
+                @Test.canceled += instance.OnTest;
             }
         }
     }
@@ -159,5 +188,6 @@ public partial class @GameInput : IInputActionCollection2, IDisposable
     public interface IGameControlActions
     {
         void OnPause(InputAction.CallbackContext context);
+        void OnTest(InputAction.CallbackContext context);
     }
 }

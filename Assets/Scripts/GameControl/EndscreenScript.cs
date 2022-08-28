@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EndscreenScript : MonoBehaviour
@@ -34,6 +35,10 @@ public class EndscreenScript : MonoBehaviour
         endscreen.GetComponentsInChildren<Text>()[2].text = GameObject.Find("HUD").GetComponent<CoinsScript>().getCoinAmount().ToString();
         active = 3;
         text[active].color = Color.yellow;
+    }
+    public StartOrQuitInput getEndscreenInput()
+    {
+        return this.input;
     }
 
     // Start is called before the first frame update
@@ -86,11 +91,14 @@ public class EndscreenScript : MonoBehaviour
     {
         if (active == 3)
         {
-            //TODO NEUSTART
+            //SceneManager.LoadScene("Level_1");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         }
         else
         {
-            //TODO BEENDEN
+            Debug.Log("quit");
+            Application.Quit();
+            UnityEditor.EditorApplication.isPlaying = false;
         }
     }
 }

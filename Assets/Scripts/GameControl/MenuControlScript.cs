@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -337,12 +338,14 @@ public class MenuControlScript : MonoBehaviour
         switch (activeModi)
         {
             case 0:
+                //SceneManager.LoadScene("Level_1");
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
                 break;
 
             case 1:
-                break;
-
-            case 2:
+                Debug.Log("quit");
+                Application.Quit();
+                UnityEditor.EditorApplication.isPlaying = false;
                 break;
 
             default:
