@@ -63,15 +63,15 @@ public class GameControlScript : MonoBehaviour
 
         else
         {
+            if (!pauseMenu.activeSelf)
+            {
+                GameObject.Find("Menu").GetComponent<MenuControlScript>().back();
+            }
             pauseMenu.SetActive(false);
-            GameObject.Find("Menu").GetComponent<MenuControlScript>().escape();
             isPaused = false;
             menuInput.Disable();
             playerInput.Enable();
             Time.timeScale = 1;
-
-            //AudioSource[] audios = FindObjectsOfType<AudioSource>();
-
             foreach (AudioSource audio in audios)
             {
                 audio.UnPause();

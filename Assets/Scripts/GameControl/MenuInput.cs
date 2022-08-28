@@ -497,7 +497,7 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""02ef9f95-c773-4739-a43e-a7082862af05"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

@@ -27,7 +27,6 @@ public class CoinsScript : MonoBehaviour
     void Update()
     {
     }
-
     public void increaseCoinAmount(int coins)
     {
         //Debug.Log("Click"+coins);

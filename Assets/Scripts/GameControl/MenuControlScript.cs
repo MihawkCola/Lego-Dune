@@ -34,11 +34,12 @@ public class MenuControlScript : MonoBehaviour
     private int activeModi;
     private int optionsModi;
 
+    private float headingSize;
+    private float textSize;
 
     private void Awake()
     {
         input = new MenuInput();
-        //InputOnPause();
     }
 
     private void OnEnable()
@@ -46,6 +47,11 @@ public class MenuControlScript : MonoBehaviour
         input.Enable();
         initPause();
         InputOnPause();
+    }
+
+    public MenuInput getMenuInput()
+    {
+        return this.input;
     }
 
     private void initPause()
@@ -105,6 +111,61 @@ public class MenuControlScript : MonoBehaviour
     {
         
     }
+
+    void OnGUI()
+    {
+        if (pauseMenu.activeSelf)
+        {
+            setFontSizes(textPause);
+        }
+        else if (opMenus[0].activeSelf)
+        {
+            setFontSizesAndSlider(textLautstaerke, lautstaerkeSlider);
+        }
+        else if (opMenus[1].activeSelf)
+        {
+            setFontSizes(textAufloesung);
+        }
+        else if (opMenus[2].activeSelf)
+        {
+            setFontSizes(textModi);
+        }
+    }
+
+    private void setFontSizes(Text[] text)
+    {
+        headingSize = (Screen.width + Screen.height) / 20;
+        textSize = (Screen.width + Screen.height) / 30;
+
+        text[0].fontSize = (int)headingSize;
+        text[0].GetComponent<RectTransform>().anchoredPosition = new Vector2(text[0].GetComponent<RectTransform>().anchoredPosition.x, -0.2f * Screen.height);
+
+        for (int i = 1; i < text.Length; i++)
+        {
+            text[i].fontSize = (int) textSize;
+            text[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(text[i].GetComponent<RectTransform>().anchoredPosition.x, (-0.15f * i - 0.3f) * Screen.height);
+        }
+    }
+    private void setFontSizesAndSlider(Text[] text, Slider[] slider)
+    {
+        headingSize = (Screen.width + Screen.height) / 20;
+        textSize = (Screen.width + Screen.height) / 30;
+
+        text[0].fontSize = (int)headingSize;
+        text[0].GetComponent<RectTransform>().anchoredPosition = new Vector2(text[0].GetComponent<RectTransform>().anchoredPosition.x, -0.2f * Screen.height);
+
+        for (int i = 1; i < text.Length; i++)
+        {
+            text[i].fontSize = (int)textSize;
+            text[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(text[i].GetComponent<RectTransform>().anchoredPosition.x, (-0.25f * i - 0.2f) * Screen.height);
+        }
+        for (int i = 0; i < slider.Length; i++)
+        {
+            slider[i].GetComponent<RectTransform>().sizeDelta = new Vector2(0.5f * Screen.width, 20);
+            slider[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(slider[i].GetComponent<RectTransform>().anchoredPosition.x, (-0.25f * i - 0.1f) * Screen.height);
+        }
+    }
+
     public void InputOnPause()
     {
         input.Pause.Up.started += upPause;
@@ -131,7 +192,7 @@ public class MenuControlScript : MonoBehaviour
         input.Modes.Up.started += upSpielmodi;
         input.Modes.Down.started += downSpielmodi;
         input.Modes.Back.started += back;
-        //input.Modes.Select.started += selectSpielmodi;
+        input.Modes.Select.started += selectSpielmodi;
     }
     public void InputOffPause()
     {
@@ -159,15 +220,7 @@ public class MenuControlScript : MonoBehaviour
         input.Modes.Up.started -= upSpielmodi;
         input.Modes.Down.started -= downSpielmodi;
         input.Modes.Back.started -= back;
-        //input.Modes.Select.started -= selectSpielmodi;
-    }
-
-    public void escape()
-    {
-        foreach (GameObject menu in opMenus)
-        {
-            menu.SetActive(false);
-        }
+        input.Modes.Select.started -= selectSpielmodi;
     }
 
     private void back(InputAction.CallbackContext obj)
@@ -175,7 +228,7 @@ public class MenuControlScript : MonoBehaviour
         back();
     }
 
-    private void back()
+    public void back()
     {
         pauseMenu.SetActive(true);
         opMenus[activePause].SetActive(false);
@@ -235,7 +288,6 @@ public class MenuControlScript : MonoBehaviour
 
     private void selectResolution(InputAction.CallbackContext obj)
     {
-        Debug.Log("Res1: " + Screen.width + " x " + Screen.height);
         switch (activeAufloesung)
         {
             case 0:
@@ -253,7 +305,24 @@ public class MenuControlScript : MonoBehaviour
             default:
                 break;
         }
-        Debug.Log("Res2: " + Screen.width + " x "+ Screen.height);
+        back();
+    }
+    private void selectSpielmodi(InputAction.CallbackContext obj) //TODO
+    {
+        switch (activeModi)
+        {
+            case 0:
+                break;
+
+            case 1:
+                break;
+
+            case 2:
+                break;
+
+            default:
+                break;
+        }
         back();
     }
     private void selectMenu(InputAction.CallbackContext obj)
@@ -271,12 +340,12 @@ public class MenuControlScript : MonoBehaviour
 
             case 1:
                 initAufloesung();
-                StartCoroutine(WaitForRealSeconds (0.1f));
+                StartCoroutine(WaitForRealSeconds(0.1f, true));
                 break;
 
             case 2:
                 initSpielmodi();
-                InputOnModes();
+                StartCoroutine(WaitForRealSeconds(0.1f, false));
                 break;
 
             default:
@@ -285,64 +354,70 @@ public class MenuControlScript : MonoBehaviour
         
     }
     //Quelle: https://forum.unity.com/threads/waitforseconds-while-time-scale-0.272786/
-    IEnumerator WaitForRealSeconds(float seconds)
+    IEnumerator WaitForRealSeconds(float seconds, bool resolution)
     {
         float startTime = Time.realtimeSinceStartup;
         while (Time.realtimeSinceStartup - startTime < seconds)
         {
             yield return null;
         }
-        InputOnResolution();
-    }
-
-    public MenuInput getMenuInput() { 
-        return this.input;
+        if (resolution) 
+        {
+            InputOnResolution();
+        }
+        else
+        {
+            InputOnModes();
+        }
     }
 
     private void plus(InputAction.CallbackContext obj)
     {
-        lautstaerkeSlider[activeLautstaerke].value += 0.1f;
-        switch (activeLautstaerke)
+        if(lautstaerkeSlider[activeLautstaerke].value < 1)
         {
-            case 0:
-                GameObject.Find("Level").GetComponent<AudioSource>().volume += 0.1f;
-                break;
-            case 1:
-                float backgroundMusicVol = GameObject.Find("Level").GetComponent<AudioSource>().volume;
-                foreach (AudioSource audio in audioSources)
-                {
-                    audio.volume += 0.1f;
-                }
-                GameObject.Find("Level").GetComponent<AudioSource>().volume = backgroundMusicVol;
-
-                audioSources[1].Play();
-                break;
-            default:
-                break;
+            lautstaerkeSlider[activeLautstaerke].value += 0.1f;
+            switch (activeLautstaerke)
+            {
+                case 0:
+                    GameObject.Find("Level").GetComponent<AudioSource>().volume += 0.1f;
+                    break;
+                case 1:
+                    float backgroundMusicVol = GameObject.Find("Level").GetComponent<AudioSource>().volume;
+                    foreach (AudioSource audio in audioSources)
+                    {
+                        audio.volume += 0.1f;
+                    }
+                    GameObject.Find("Level").GetComponent<AudioSource>().volume = backgroundMusicVol;
+                    GetComponent<AudioSource>().Play();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     private void minus(InputAction.CallbackContext obj)
     {
-        lautstaerkeSlider[activeLautstaerke].value -= 0.1f;
-        switch (activeLautstaerke)
+        if (lautstaerkeSlider[activeLautstaerke].value > 0)
         {
-            case 0:
-                GameObject.Find("Level").GetComponent<AudioSource>().volume -= 0.1f;
-                break;
-            case 1:
-                float backgroundMusicVol = GameObject.Find("Level").GetComponent<AudioSource>().volume;
-                foreach (AudioSource audio in audioSources)
-                {
-                    audio.volume -= 0.1f;
-                }
-                GameObject.Find("Level").GetComponent<AudioSource>().volume = backgroundMusicVol;
-                GetComponent<AudioSource>().Play();
-                //audioSources[1].Play();
-
-                break;
-            default:
-                break;
+            lautstaerkeSlider[activeLautstaerke].value -= 0.1f;
+            switch (activeLautstaerke)
+            {
+                case 0:
+                    GameObject.Find("Level").GetComponent<AudioSource>().volume -= 0.1f;
+                    break;
+                case 1:
+                    float backgroundMusicVol = GameObject.Find("Level").GetComponent<AudioSource>().volume;
+                    foreach (AudioSource audio in audioSources)
+                    {
+                        audio.volume -= 0.1f;
+                    }
+                    GameObject.Find("Level").GetComponent<AudioSource>().volume = backgroundMusicVol;
+                    GetComponent<AudioSource>().Play();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
