@@ -28,10 +28,16 @@ public class ButtonScript : MonoBehaviour
     {
         if (this.animator.GetBool("isSuccess") || this.animator.GetBool("isFailed")) return;
             
-        if (this.stage.checkSuccess(number)) 
+        if (this.stage.checkSuccess(number))
+        {
             animator.SetBool("isSuccess", true);
-        else 
+            GetComponents<AudioSource>()[0].Play();
+        }
+        else
+        {
             animator.SetBool("isFailed", true);
+            GetComponents<AudioSource>()[1].Play();
+        }
     }
     private void OnTriggerExit(Collider other)
     {

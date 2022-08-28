@@ -34,7 +34,7 @@ public class BuildPlayerController : MonoBehaviour
     {
         this.buildControllers.Remove(buildController);
         this.removeInput();
-
+        GetComponents<AudioSource>()[5].Stop();
     }
     private void addInput() {
         inputs.Player.Build.started += buildGo;
@@ -54,6 +54,7 @@ public class BuildPlayerController : MonoBehaviour
         foreach (BuildController build in this.buildControllers)
         {
             build.buildStop();
+            GetComponents<AudioSource>()[5].Stop();
         }
         this.animator.SetBool("build", false);
         this.playerControl.movEnable = true;
@@ -64,6 +65,7 @@ public class BuildPlayerController : MonoBehaviour
         if(!this.playerControl.getActive()) return;
         foreach (BuildController build in this.buildControllers) {
             build.buildGo();
+            GetComponents<AudioSource>()[5].Play();
         }
         this.animator.SetBool("build", true);
         this.playerControl.movEnable = false;

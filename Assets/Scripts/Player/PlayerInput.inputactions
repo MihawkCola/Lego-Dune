@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Hit",
-                    "type": "Button",
-                    "id": "de4475b9-965d-4b2c-9da6-f92cbcc27190",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Camera",
                     "type": "PassThrough",
                     "id": "8a665b44-92b2-4674-831f-a94e1451c18f",
@@ -223,17 +214,6 @@
                 },
                 {
                     "name": "",
-                    "id": "4eb7c280-aec2-44c2-bd6d-aeace49141e1",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Hit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "4163b92f-5a70-404d-8ec4-50ced7ed5add",
                     "path": "<Gamepad>/rightStick",
                     "interactions": "",
@@ -389,7 +369,7 @@
                 {
                     "name": "",
                     "id": "03c2afee-a178-48dd-a59f-3f9e8b4dc633",
-                    "path": "<Gamepad>/rightTrigger",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -401,6 +381,17 @@
                     "name": "",
                     "id": "6cb831ea-c6e4-4a40-be9c-b5b6eb599262",
                     "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Build",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fcce7bf3-3420-4785-92d7-2d152d480a3b",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

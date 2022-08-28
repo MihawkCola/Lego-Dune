@@ -46,15 +46,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Hit"",
-                    ""type"": ""Button"",
-                    ""id"": ""de4475b9-965d-4b2c-9da6-f92cbcc27190"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Camera"",
                     ""type"": ""PassThrough"",
                     ""id"": ""8a665b44-92b2-4674-831f-a94e1451c18f"",
@@ -245,17 +236,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""4eb7c280-aec2-44c2-bd6d-aeace49141e1"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Hit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""4163b92f-5a70-404d-8ec4-50ced7ed5add"",
                     ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
@@ -411,7 +391,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""03c2afee-a178-48dd-a59f-3f9e8b4dc633"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -423,6 +403,17 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""6cb831ea-c6e4-4a40-be9c-b5b6eb599262"",
                     ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Build"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fcce7bf3-3420-4785-92d7-2d152d480a3b"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -445,7 +436,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movment = m_Player.FindAction("Movment", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
-        m_Player_Hit = m_Player.FindAction("Hit", throwIfNotFound: true);
         m_Player_Camera = m_Player.FindAction("Camera", throwIfNotFound: true);
         m_Player_Running = m_Player.FindAction("Running", throwIfNotFound: true);
         m_Player_Sneaking = m_Player.FindAction("Sneaking", throwIfNotFound: true);
@@ -518,7 +508,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movment;
     private readonly InputAction m_Player_Jump;
-    private readonly InputAction m_Player_Hit;
     private readonly InputAction m_Player_Camera;
     private readonly InputAction m_Player_Running;
     private readonly InputAction m_Player_Sneaking;
@@ -536,7 +525,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movment => m_Wrapper.m_Player_Movment;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
-        public InputAction @Hit => m_Wrapper.m_Player_Hit;
         public InputAction @Camera => m_Wrapper.m_Player_Camera;
         public InputAction @Running => m_Wrapper.m_Player_Running;
         public InputAction @Sneaking => m_Wrapper.m_Player_Sneaking;
@@ -563,9 +551,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
-                @Hit.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHit;
-                @Hit.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHit;
-                @Hit.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnHit;
                 @Camera.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamera;
                 @Camera.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamera;
                 @Camera.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnCamera;
@@ -609,9 +594,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
-                @Hit.started += instance.OnHit;
-                @Hit.performed += instance.OnHit;
-                @Hit.canceled += instance.OnHit;
                 @Camera.started += instance.OnCamera;
                 @Camera.performed += instance.OnCamera;
                 @Camera.canceled += instance.OnCamera;
@@ -662,7 +644,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     {
         void OnMovment(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
-        void OnHit(InputAction.CallbackContext context);
         void OnCamera(InputAction.CallbackContext context);
         void OnRunning(InputAction.CallbackContext context);
         void OnSneaking(InputAction.CallbackContext context);

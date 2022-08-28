@@ -407,6 +407,7 @@ public class MenuControlScript : MonoBehaviour
                 case 0:
                     GameObject.Find("Level").GetComponent<AudioSource>().volume += 0.1f;
                     GetComponents<AudioSource>()[0].volume += 0.1f;
+                    GetComponents<AudioSource>()[2].volume += 0.1f;
                     break;
                 case 1:
                     float backgroundMusicVol = GameObject.Find("Level").GetComponent<AudioSource>().volume;
@@ -416,6 +417,7 @@ public class MenuControlScript : MonoBehaviour
                     }
                     GameObject.Find("Level").GetComponent<AudioSource>().volume = backgroundMusicVol;
                     GetComponents<AudioSource>()[0].volume = backgroundMusicVol;
+                    GetComponents<AudioSource>()[2].volume = backgroundMusicVol;
                     GetComponents<AudioSource>()[1].Play();
                     break;
                 default:
@@ -434,6 +436,7 @@ public class MenuControlScript : MonoBehaviour
                 case 0:
                     GameObject.Find("Level").GetComponent<AudioSource>().volume -= 0.1f;
                     GetComponents<AudioSource>()[0].volume -= 0.1f;
+                    GetComponents<AudioSource>()[2].volume -= 0.1f;
                     break;
                 case 1:
                     float backgroundMusicVol = GameObject.Find("Level").GetComponent<AudioSource>().volume;
@@ -442,7 +445,8 @@ public class MenuControlScript : MonoBehaviour
                         audio.volume -= 0.1f;
                     }
                     GameObject.Find("Level").GetComponent<AudioSource>().volume = backgroundMusicVol;
-                    GetComponents<AudioSource>()[0].volume = backgroundMusicVol;
+                    GetComponents<AudioSource>()[0].volume = backgroundMusicVol; 
+                    GetComponents<AudioSource>()[2].volume = backgroundMusicVol;
                     GetComponents<AudioSource>()[1].Play();
                     break;
                 default:
