@@ -14,6 +14,7 @@ public class EndscreenScript : MonoBehaviour
     private int active;
     private int headingSize;
     private int textSize;
+    private int imageSize;
 
     private void Awake()
     {
@@ -30,11 +31,7 @@ public class EndscreenScript : MonoBehaviour
     {
         endscreen = GameObject.Find("Endscreen");
         text = endscreen.GetComponentsInChildren<Text>();
-        //endscreen.GetComponentsInChildren<Text>()[2].text = 
-        endscreen.GetComponentsInChildren<Text>()[2].text = "gufuzddözdzu"; //GameObject.Find("HUD").GetComponent<CoinsScript>().getCoinAmount().ToString();
-        GetComponentsInChildren<Image>()[0].GetComponent<RectTransform>().anchoredPosition = new Vector2(-endscreen.GetComponentsInChildren<Text>()[2].GetComponent<RectTransform>().sizeDelta.x / 2 - GetComponentsInChildren<Image>()[0].GetComponent<RectTransform>().sizeDelta.x / 2, -223);
-        GetComponentsInChildren<Image>()[1].GetComponent<RectTransform>().anchoredPosition = new Vector2(endscreen.GetComponentsInChildren<Text>()[2].GetComponent<RectTransform>().sizeDelta.x / 2 + GetComponentsInChildren<Image>()[1].GetComponent<RectTransform>().sizeDelta.x / 2, -223);
-
+        endscreen.GetComponentsInChildren<Text>()[2].text = GameObject.Find("HUD").GetComponent<CoinsScript>().getCoinAmount().ToString();
         active = 3;
         text[active].color = Color.yellow;
     }
@@ -48,13 +45,13 @@ public class EndscreenScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     void OnGUI()
     {
         headingSize = (Screen.width + Screen.height) / 20;
         textSize = (Screen.width + Screen.height) / 30;
+        imageSize = (Screen.width + Screen.height) / 25;
 
         text[0].fontSize = (int)headingSize;
         text[0].GetComponent<RectTransform>().anchoredPosition = new Vector2(text[0].GetComponent<RectTransform>().anchoredPosition.x, -0.1f * Screen.height);
@@ -64,8 +61,10 @@ public class EndscreenScript : MonoBehaviour
             text[i].fontSize = (int)textSize;
             text[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(text[i].GetComponent<RectTransform>().anchoredPosition.x, (-0.15f * i - 0.2f) * Screen.height);
         }
-        GetComponentsInChildren<Image>()[0].GetComponent<RectTransform>().anchoredPosition = new Vector2(-endscreen.GetComponentsInChildren<Text>()[2].GetComponent<RectTransform>().sizeDelta.x / 2 - GetComponentsInChildren<Image>()[0].GetComponent<RectTransform>().sizeDelta.x / 2, text[2].GetComponent<RectTransform>().sizeDelta.y);
-        GetComponentsInChildren<Image>()[1].GetComponent<RectTransform>().anchoredPosition = new Vector2(endscreen.GetComponentsInChildren<Text>()[2].GetComponent<RectTransform>().sizeDelta.x / 2 + GetComponentsInChildren<Image>()[1].GetComponent<RectTransform>().sizeDelta.x / 2, -223);
+        GetComponentsInChildren<Image>()[1].GetComponent<RectTransform>().anchoredPosition = new Vector2(-endscreen.GetComponentsInChildren<Text>()[2].GetComponent<RectTransform>().sizeDelta.x / 2 - GetComponentsInChildren<Image>()[1].GetComponent<RectTransform>().sizeDelta.x / 2, -0.55f * Screen.height);
+        GetComponentsInChildren<Image>()[2].GetComponent<RectTransform>().anchoredPosition = new Vector2(endscreen.GetComponentsInChildren<Text>()[2].GetComponent<RectTransform>().sizeDelta.x / 2 + GetComponentsInChildren<Image>()[2].GetComponent<RectTransform>().sizeDelta.x / 2, -0.55f * Screen.height);
+        GetComponentsInChildren<Image>()[1].GetComponent<RectTransform>().sizeDelta = new Vector2(imageSize, imageSize);
+        GetComponentsInChildren<Image>()[2].GetComponent<RectTransform>().sizeDelta = new Vector2(imageSize, imageSize);
 
     }
 
@@ -78,11 +77,20 @@ public class EndscreenScript : MonoBehaviour
 
     private void upAndDown(InputAction.CallbackContext obj)
     {
-        throw new NotImplementedException();
+        text[active].color = Color.white;
+        active = (active == 3) ? 4 : 3;
+        text[active].color = Color.yellow;
     }
 
     private void select(InputAction.CallbackContext obj)
     {
-        throw new NotImplementedException();
+        if (active == 3)
+        {
+            //TODO NEUSTART
+        }
+        else
+        {
+            //TODO BEENDEN
+        }
     }
 }
