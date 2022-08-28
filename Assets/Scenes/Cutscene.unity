@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 402.1266, g: 314.84766, b: 262.8308, a: 1}
+  m_IndirectSpecularColor: {r: 401.97772, g: 314.7046, b: 262.72217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1404,9 +1404,11 @@ PlayableDirector:
     - a755c7812ccd843d0a8e7919ef8da6c4: {fileID: 87558174}
     - 58e4f28feb5db4ab0abe12bbce5a2944: {fileID: 1775087483}
     - 492f074cc485a41478ad490cd13cdf45: {fileID: 0}
+    - e7735bfc7b5004d998a56f44188770d3: {fileID: 0}
     - 7a11b9338147549ab96c6a26f0fb369a: {fileID: 1292156945}
     - 420904922011641168fc3c0277a9f508: {fileID: 87558174}
     - e6d59ce7259ac4fb6acd9dedb7390347: {fileID: 2098226297}
+    - 8e31adaedab1e40679d6e5e9fbae5191: {fileID: 1775087483}
     - e84b6935f9704408bafd5ec65758e8df: {fileID: 0}
     - 2a287146188f94ea8b1be99587eb9dda: {fileID: 1808129143}
     - f1ebbfc9ce53345c1862d09dbc4f4fe5: {fileID: 4004066}
