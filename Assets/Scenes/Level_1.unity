@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181280732}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8884083eae302466cb46b6f56f9f888e, type: 3}
   m_Name: 
@@ -11261,7 +11261,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dddd0f664b0b792489ddf3e5b40bcd95, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4ee54cc3e8e167d4593fec57295d2df0, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
@@ -12804,6 +12804,21 @@ PrefabInstance:
     - target: {fileID: 2952951711721869968, guid: 0c9ab0784a181dd4e8c46157cc77275b, type: 3}
       propertyPath: m_SizeDelta.y
       value: 28
+<<<<<<< Updated upstream
+=======
+      objectReference: {fileID: 0}
+    - target: {fileID: 2952951711729028148, guid: 0c9ab0784a181dd4e8c46157cc77275b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2952951711729028148, guid: 0c9ab0784a181dd4e8c46157cc77275b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2952951711729028148, guid: 0c9ab0784a181dd4e8c46157cc77275b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 2952951712282857904, guid: 0c9ab0784a181dd4e8c46157cc77275b, type: 3}
       propertyPath: m_SizeDelta.x
@@ -12812,6 +12827,25 @@ PrefabInstance:
     - target: {fileID: 2952951712282857904, guid: 0c9ab0784a181dd4e8c46157cc77275b, type: 3}
       propertyPath: m_SizeDelta.y
       value: 28
+<<<<<<< Updated upstream
+=======
+      objectReference: {fileID: 0}
+    - target: {fileID: 2952951712304158217, guid: 0c9ab0784a181dd4e8c46157cc77275b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2952951712304158217, guid: 0c9ab0784a181dd4e8c46157cc77275b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2952951712304158217, guid: 0c9ab0784a181dd4e8c46157cc77275b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2952951712304158217, guid: 0c9ab0784a181dd4e8c46157cc77275b, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+>>>>>>> Stashed changes
       objectReference: {fileID: 0}
     - target: {fileID: 2952951712876881596, guid: 0c9ab0784a181dd4e8c46157cc77275b, type: 3}
       propertyPath: m_SizeDelta.x
