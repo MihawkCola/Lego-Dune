@@ -59,6 +59,7 @@ public class GameControlScript : MonoBehaviour
             foreach (AudioSource audio in audios) { 
                 audio.Pause();
             }
+            GameObject.Find("Menu").GetComponents<AudioSource>()[2].Play();
         }
 
         else
@@ -76,6 +77,7 @@ public class GameControlScript : MonoBehaviour
             {
                 audio.UnPause();
             }
+            GameObject.Find("Menu").GetComponents<AudioSource>()[2].Pause();
         }
     }
 

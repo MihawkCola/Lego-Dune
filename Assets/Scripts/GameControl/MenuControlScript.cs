@@ -76,7 +76,15 @@ public class MenuControlScript : MonoBehaviour
         optionsLautstaerke = textLautstaerke.Length - 1;
         lautstaerkeSlider = lautstaerkeMenu.GetComponentsInChildren<Slider>();
         lautstaerkeSlider[0].value = GameObject.Find("Level").GetComponent<AudioSource>().volume;
-        lautstaerkeSlider[1].value = GetComponent<AudioSource>().volume;
+        lautstaerkeSlider[1].value = GetComponents<AudioSource>()[1].volume;
+        if (activeLautstaerke == 0)
+        {
+            GetComponents<AudioSource>()[0].Play();
+        }
+        else
+        {
+            GetComponents<AudioSource>()[1].Play();
+        }
     }
 
     private void initAufloesung()
@@ -104,12 +112,6 @@ public class MenuControlScript : MonoBehaviour
     void Start()
     {
         audioSources = FindObjectsOfType<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnGUI()
@@ -230,6 +232,11 @@ public class MenuControlScript : MonoBehaviour
 
     public void back()
     {
+        if(activePause == 0)
+        {
+            GetComponents<AudioSource>()[0].Pause();
+            GetComponents<AudioSource>()[2].Play();
+        }
         pauseMenu.SetActive(true);
         opMenus[activePause].SetActive(false);
         InputOffVolume();
@@ -245,6 +252,15 @@ public class MenuControlScript : MonoBehaviour
     private void upLautstaerke(InputAction.CallbackContext obj)
     {
         activeLautstaerke = up(textLautstaerke, activeLautstaerke, optionsLautstaerke);
+        if (activeLautstaerke == 0)
+        {
+            GetComponents<AudioSource>()[0].Play();
+        }
+        else
+        {
+            GetComponents<AudioSource>()[0].Pause(); 
+            GetComponents<AudioSource>()[1].Play();
+        }
     }
     private void upAufloesung(InputAction.CallbackContext obj)
     {
@@ -269,6 +285,15 @@ public class MenuControlScript : MonoBehaviour
     private void downLautstaerke(InputAction.CallbackContext obj)
     {
         activeLautstaerke = down(textLautstaerke, activeLautstaerke, optionsLautstaerke);
+        if(activeLautstaerke == 0)
+        {
+            GetComponents<AudioSource>()[0].Play();
+        }
+        else
+        {
+            GetComponents<AudioSource>()[0].Pause();
+            GetComponents<AudioSource>()[1].Play();
+        }
     }
     private void downAufloesung(InputAction.CallbackContext obj)
     {
@@ -335,7 +360,8 @@ public class MenuControlScript : MonoBehaviour
         {
             case 0:
                 initLautstaerke();
-                InputOnVolume();
+                InputOnVolume(); 
+                GetComponents<AudioSource>()[2].Pause();
                 break;
 
             case 1:
@@ -380,6 +406,7 @@ public class MenuControlScript : MonoBehaviour
             {
                 case 0:
                     GameObject.Find("Level").GetComponent<AudioSource>().volume += 0.1f;
+                    GetComponents<AudioSource>()[0].volume += 0.1f;
                     break;
                 case 1:
                     float backgroundMusicVol = GameObject.Find("Level").GetComponent<AudioSource>().volume;
@@ -388,7 +415,8 @@ public class MenuControlScript : MonoBehaviour
                         audio.volume += 0.1f;
                     }
                     GameObject.Find("Level").GetComponent<AudioSource>().volume = backgroundMusicVol;
-                    GetComponent<AudioSource>().Play();
+                    GetComponents<AudioSource>()[0].volume = backgroundMusicVol;
+                    GetComponents<AudioSource>()[1].Play();
                     break;
                 default:
                     break;
@@ -405,6 +433,7 @@ public class MenuControlScript : MonoBehaviour
             {
                 case 0:
                     GameObject.Find("Level").GetComponent<AudioSource>().volume -= 0.1f;
+                    GetComponents<AudioSource>()[0].volume -= 0.1f;
                     break;
                 case 1:
                     float backgroundMusicVol = GameObject.Find("Level").GetComponent<AudioSource>().volume;
@@ -413,7 +442,8 @@ public class MenuControlScript : MonoBehaviour
                         audio.volume -= 0.1f;
                     }
                     GameObject.Find("Level").GetComponent<AudioSource>().volume = backgroundMusicVol;
-                    GetComponent<AudioSource>().Play();
+                    GetComponents<AudioSource>()[0].volume = backgroundMusicVol;
+                    GetComponents<AudioSource>()[1].Play();
                     break;
                 default:
                     break;
