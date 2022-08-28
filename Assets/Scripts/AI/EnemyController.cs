@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
 {
     public GameObject[] enemy;
 
-    public Transform enemylist;
+    private Transform enemylist;
 
     private Transform spawnPoints;
 

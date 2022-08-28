@@ -1397,7 +1397,7 @@ MonoBehaviour:
   stones: {fileID: 8501448892719425304}
   delayBetween: 0.2
   speed: 4
-  stoneParallel: 1
+  stoneParallel: 2
 --- !u!135 &2584447355944653006
 SphereCollider:
   m_ObjectHideFlags: 0

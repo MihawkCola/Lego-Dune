@@ -118,6 +118,7 @@ public class SwitchPlayer : MonoBehaviour
 
         if (this.healthController.allDeath()) return;
 
+        Debug.Log("switch");
         this.switchPlayer();
     }
 
