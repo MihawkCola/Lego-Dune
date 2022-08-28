@@ -70,4 +70,9 @@ public class CoinsScript : MonoBehaviour
     {
         decreaseCoinAmount(99);
     }
+
+    public int getCoinAmount()
+    {
+        return coinAmount;
+    }
 }
