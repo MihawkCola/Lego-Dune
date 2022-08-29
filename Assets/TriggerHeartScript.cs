@@ -11,12 +11,6 @@ public class TriggerHeartScript : MonoBehaviour
         ploppSound = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Player") return;
