@@ -338,6 +338,8 @@ public class MenuControlScript : MonoBehaviour
         switch (activeModi)
         {
             case 0:
+                GameObject.Find("GameControl").GetComponent<GameControlScript>().un_pauseGame();
+                GameObject.Find("GameControl").GetComponent<GameControlScript>().setInputRestart();
                 //SceneManager.LoadScene("Level_1");
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
                 break;

@@ -21,8 +21,8 @@ public class GameControlScript : MonoBehaviour
     private void Awake()
     {
         input = new GameInput();
-        playerInput = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
-        input.GameControl.Pause.started += pauseGame;
+        //playerInput = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
+        input.GameControl.Pause.started += escape;
         input.GameControl.Test.started += test;
 
     }
@@ -60,7 +60,12 @@ public class GameControlScript : MonoBehaviour
         
     }
 
-    private void pauseGame(InputAction.CallbackContext obj)
+    private void escape(InputAction.CallbackContext obj)
+    {
+        un_pauseGame();
+    }
+
+    public void un_pauseGame()
     {
         if (!isPaused)
         {
@@ -72,7 +77,8 @@ public class GameControlScript : MonoBehaviour
 
             audios = FindObjectsOfType<AudioSource>();
 
-            foreach (AudioSource audio in audios) { 
+            foreach (AudioSource audio in audios)
+            {
                 audio.Pause();
             }
             GameObject.Find("Menu").GetComponents<AudioSource>()[2].Play();
@@ -102,6 +108,12 @@ public class GameControlScript : MonoBehaviour
         endscreen.SetActive(true);
         playerInput.Disable();
         endscreenInput.Enable();
+    }
+    public void setInputRestart()
+    {
+        endscreenInput.Disable();
+        menuInput.Disable();
+        playerInput.Enable();
     }
 
 }
