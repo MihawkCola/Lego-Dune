@@ -2095,7 +2095,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   attackCooldown: 2
-  despawnTimer: 5
+  despawnTimer: 8
 --- !u!54 &8810662698439282671
 Rigidbody:
   m_ObjectHideFlags: 0
