@@ -97,7 +97,7 @@ public class GameControlScript : MonoBehaviour
         }
     }
 
-    private void showEndscreen()
+    public void showEndscreen()
     {
         endscreen.SetActive(true);
         playerInput.Disable();
