@@ -10,7 +10,7 @@ public class CoinController : MonoBehaviour
     public GameObject purpleCoin;
     public GameObject heart;
 
-    private Transform level;
+    private Transform level = null;
     public enum Coin { Purple, Blue, Gold, Silver };
 
     AudioSource coinSound;
@@ -18,7 +18,8 @@ public class CoinController : MonoBehaviour
 
     private void Start()
     {
-        this.level = GameObject.Find("Level").transform;
+        if(GameObject.Find("Level") != null)
+            this.level = GameObject.Find("Level").transform;
         //testen
         //this.StartCoroutine(this.spawnOverTime(2f,2f,this.transform.position,10,10,10,10));
         //spawnCoins(Coin.Blue, this.transform.position, 100);

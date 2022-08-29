@@ -100,6 +100,14 @@ public class SimpleEnemyAI : MonoBehaviour, EnemyInterface
     public void setDeath()
     {
         animator.enabled = false;
+        SphereCollider collider = GetComponent<SphereCollider>();
+        if (collider != null)
+            collider.enabled = false;
+
+
+        if (rb != null)
+            Destroy(rb);
+
         this.enabled = false;
     }
 }
