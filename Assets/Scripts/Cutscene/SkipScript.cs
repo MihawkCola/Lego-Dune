@@ -17,6 +17,6 @@ public class SkipScript : MonoBehaviour
 
     private void loadLevel(InputAction.CallbackContext obj)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Level_1");
     }
 }

@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class ChangeLevel : MonoBehaviour {
     // Changelevel on activation
-    private void loadLevel(InputAction.CallbackContext obj)
+    private void OnEnable()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Level_1");
     }
 }
