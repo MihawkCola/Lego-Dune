@@ -15,6 +15,9 @@ ModelImporter:
   - first:
       74: -7172531592890466836
     second: PaulAtreidesRig|PaulWurst
+  - first:
+      74: -8735721321469394649
+    second: PaulAtreidesRig|PaulLookBack
   externalObjects: {}
   materials:
     materialImportMode: 2
