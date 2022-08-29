@@ -126,7 +126,7 @@ public class HealthScript : MonoBehaviour
         // weitere als if hinzufuegen
 
 
-        deathSound.Play();
+        //deathSound.Play();
     }
     private IEnumerator resetLevel() {
         yield return new WaitForSeconds(8f);
