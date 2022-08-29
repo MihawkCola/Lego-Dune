@@ -276,6 +276,17 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""c9e9f41c-6b0f-40c5-86a9-3d2e00de9593"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Plus"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""5cc1eb87-de38-43f0-bd18-8d3a8d9ffc1c"",
                     ""path"": ""<Keyboard>/minus"",
                     ""interactions"": """",
@@ -311,6 +322,17 @@ public partial class @MenuInput : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""1f3ed629-b6d0-43e7-aff0-3ed0e0bf59cc"",
                     ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Minus"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""18775caf-4d00-45a3-8b80-570a6d7ef803"",
+                    ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
