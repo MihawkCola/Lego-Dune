@@ -106,6 +106,7 @@ public class GameControlScript : MonoBehaviour
     public void showEndscreen()
     {
         Time.timeScale = 0;
+        GameObject.Find("HUD").SetActive(false);
         endscreen.SetActive(true);
         playerInput.Disable();
         endscreenInput.Enable();
