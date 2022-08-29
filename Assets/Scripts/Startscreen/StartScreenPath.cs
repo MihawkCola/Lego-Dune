@@ -12,6 +12,8 @@ public class StartScreenPath : MonoBehaviour, EnemyInterface
     private Animator animator;
     private Rigidbody rb;
 
+    public float startDelay = 0f;
+
     private float nextAttackTime;
     void Awake()
     {
@@ -23,6 +25,7 @@ public class StartScreenPath : MonoBehaviour, EnemyInterface
 
     void Update()
     {
+        if (startDelay >= Time.time) return;
         setMovmentAnimation();
         if (!agent.enabled || target == null) return;
 
