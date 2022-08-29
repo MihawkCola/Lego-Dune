@@ -152,18 +152,15 @@ public class HealthScript : MonoBehaviour
         inputs.Player.IncreaseHealth.started += increase;
         inputs.Player.DecreaseHealth.started += decrease;
         inputs.Player.ResetHealth.started += reset;
-
     }
 
     
 
     public void InputOff()
     {
-       
         inputs.Player.IncreaseHealth.started -= increase;
         inputs.Player.DecreaseHealth.started -= decrease;
         inputs.Player.ResetHealth.started -= reset;
-
     }
 
     private void increase(InputAction.CallbackContext obj)
@@ -185,13 +182,6 @@ public class HealthScript : MonoBehaviour
         Debug.Log("reset");
 
         resetHealth();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //decreaseHealth();
-       
     }
 
     public bool isDeath() {

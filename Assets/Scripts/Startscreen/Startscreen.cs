@@ -33,6 +33,11 @@ public class Startscreen : MonoBehaviour
         init();
         InputOn();
     }
+    private void OnDisable()
+    {
+        input.Disable();
+        InputOff();
+    }
     private void init()
     {
         startscreen = GameObject.Find("Startscreen");
@@ -68,6 +73,12 @@ public class Startscreen : MonoBehaviour
         input.StartOrQuit.Down.started += upAndDown;
         input.StartOrQuit.Select.started += select;
     }
+    public void InputOff()
+    {
+        input.StartOrQuit.Up.started -= upAndDown;
+        input.StartOrQuit.Down.started -= upAndDown;
+        input.StartOrQuit.Select.started -= select;
+    }
 
     private void upAndDown(InputAction.CallbackContext obj)
     {
@@ -80,6 +91,7 @@ public class Startscreen : MonoBehaviour
     {
         if (active == 1)
         {
+            input.Disable();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
             //SceneManager.LoadScene("Level_1");
         }
