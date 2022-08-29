@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8783ee444a77e0e488baad74ca38dcf7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  power: 5
+  power: 3
   radius: 4
   upwardsModifier: 1
   dissolve: 1
@@ -128,7 +128,8 @@ MonoBehaviour:
   numberPurple: 0
   numberBlue: 0
   numberGold: 2
-  numberSilver: 7
+  numberSilver: 5
+  probabilityHeart: 0
 --- !u!1 &8898390578162311797
 GameObject:
   m_ObjectHideFlags: 0

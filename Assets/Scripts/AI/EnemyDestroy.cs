@@ -73,13 +73,13 @@ public class EnemyDestroy : MonoBehaviour
     {
         SkinnedMeshRenderer skinnedMeshRenderer = stone.GetComponent<SkinnedMeshRenderer>();
 
-
-
         if(skinnedMeshRenderer != null)
         {
             //skinnedMeshRenderer.material;
-            MeshRenderer newMeshRenderer = stone.gameObject.AddComponent<MeshRenderer>();
-            newMeshRenderer.sharedMaterial = skinnedMeshRenderer.material;
+            if (stone.GetComponent<MeshRenderer>() == null) {
+                MeshRenderer newMeshRenderer = stone.gameObject.AddComponent<MeshRenderer>();
+                newMeshRenderer.sharedMaterial = skinnedMeshRenderer.material;
+            }
             skinnedMeshRenderer.enabled = false;
         }
             

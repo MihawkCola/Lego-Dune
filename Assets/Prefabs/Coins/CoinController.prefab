@@ -49,6 +49,7 @@ MonoBehaviour:
   goldCoin: {fileID: 4566372927325230468, guid: b9d1595774017314a87eeb253c42e0eb, type: 3}
   silverCoin: {fileID: 7625393612332823277, guid: 446d8e3585434b842bcff1224c22d877, type: 3}
   purpleCoin: {fileID: 6518848723546417843, guid: 762d4277151587f40a42daaf8a0088d3, type: 3}
+  heart: {fileID: 4657830140317977234, guid: 50ee6be214236c94890fe46a2d32b047, type: 3}
 --- !u!82 &4825423233953286082
 AudioSource:
   m_ObjectHideFlags: 0

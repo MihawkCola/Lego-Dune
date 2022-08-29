@@ -73,7 +73,8 @@ public class CoinController : MonoBehaviour
 
         if(probabilityHeart >= Random.Range(0.0f, 1.0f))
         {
-            Instantiate(heart, point, Quaternion.identity); 
+            GameObject heartGameobject = Instantiate(heart, point, Quaternion.identity);
+            heartGameobject.GetComponent<Rigidbody>().AddForce(Vector3.up * 5f);
             yield return new WaitForSeconds(betweenDelay);
         }
         

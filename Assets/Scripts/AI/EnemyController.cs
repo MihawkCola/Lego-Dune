@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
 
     public bool isStart = false;
 
+    private bool allEnable = false;
     private void Awake()
     {
         enemylist = this.transform.Find("Enemys");
@@ -26,7 +27,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        spawnRandomEnemy(this.getRandomSpawn());
+        spawnRandomEnemy();
         foreach (Transform child in enemylist)
         {
             child.GetComponent<NavMeshAgent>().enabled = false;
@@ -44,10 +45,17 @@ public class EnemyController : MonoBehaviour
         newEnemy.transform.parent = this.enemylist;
 
         newEnemy.GetComponent<EnemyInterface>().setTarget(switchPlayer.getActivePlayer());
+        newEnemy.GetComponent<NavMeshAgent>().enabled = allEnable;
+    }
+
+    public void spawnRandomEnemy()
+    {
+        spawnRandomEnemy(this.getRandomSpawn());
     }
 
     public void disableAll() {
         if (!isStart) return;
+        allEnable = false;
         foreach (Transform child in enemylist) {
             child.GetComponent<NavMeshAgent>().enabled = false;
         }
@@ -55,6 +63,7 @@ public class EnemyController : MonoBehaviour
     public void enableAll()
     {
         if (!isStart) return;
+        allEnable = true;
         foreach (Transform child in enemylist)
         {
             child.GetComponent<NavMeshAgent>().enabled = true;

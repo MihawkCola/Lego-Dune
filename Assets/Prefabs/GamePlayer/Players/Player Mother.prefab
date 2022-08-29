@@ -245,7 +245,7 @@ Transform:
   - {fileID: 2368166653583069853}
   - {fileID: 2586925867295487632}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5772766560352065106
 MeshFilter:
@@ -349,7 +349,7 @@ MonoBehaviour:
   maxSpeedNormal: 2
   maxSpeedSneaking: 0.5
   maxSpeedRun: 5
-  groundDetection: 0.3
+  groundDetection: 0.1
 --- !u!114 &5772766560352065197
 MonoBehaviour:
   m_ObjectHideFlags: 0

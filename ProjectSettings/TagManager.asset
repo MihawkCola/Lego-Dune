@@ -9,6 +9,8 @@ TagManager:
   - GoldCoin
   - SilverCoin
   - PurpleCoin
+  - EnemyWaffe
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - Ground
   - Static
   - Destroy
-  - 
+  - Enemy
   - 
   - 
   - 

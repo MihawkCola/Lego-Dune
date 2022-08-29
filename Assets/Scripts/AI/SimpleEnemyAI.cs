@@ -14,6 +14,9 @@ public class SimpleEnemyAI : MonoBehaviour, EnemyInterface
 
     public float attackCooldown = 2f;
     private float nextAttackTime;
+
+    public float despawnTimer = 5f;
+ 
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -100,14 +103,38 @@ public class SimpleEnemyAI : MonoBehaviour, EnemyInterface
     public void setDeath()
     {
         animator.enabled = false;
-        SphereCollider collider = GetComponent<SphereCollider>();
-        if (collider != null)
-            collider.enabled = false;
+        Collider[] colliders = GetComponent<Collider>().GetComponents<Collider>();
+        if (GetComponent<Collider>() != null) {
+            foreach (Collider collider in colliders)
+            {
+                collider.enabled = false;
+            }
+        }
+            
 
 
         if (rb != null)
             Destroy(rb);
 
+        StartCoroutine(despawn());
+
         this.enabled = false;
+    }
+
+    private IEnumerator despawn()
+    {
+        yield return new WaitForSeconds(this.despawnTimer);
+        this.respawnEnemy();
+        Destroy(this.gameObject);
+    }
+    private void respawnEnemy() {
+        GameObject enenmyGameobject = GameObject.Find("EnemyManager");
+        if (enenmyGameobject == null) return;
+
+        EnemyController enemyController = enenmyGameobject.GetComponent<EnemyController>();
+        if (enemyController == null) return;
+
+        enemyController.spawnRandomEnemy();
+        enemyController.spawnRandomEnemy();
     }
 }

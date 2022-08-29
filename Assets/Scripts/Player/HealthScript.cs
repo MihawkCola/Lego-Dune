@@ -67,6 +67,10 @@ public class HealthScript : MonoBehaviour
     }
     public bool decreaseHealth(DamageTyp damageType)
     {
+        return this.decreaseHealth(damageType, true);
+    }
+    public bool decreaseHealth(DamageTyp damageType, bool checkSwitch)
+    {
         if (health > 0)
         {
             health--;
@@ -81,7 +85,7 @@ public class HealthScript : MonoBehaviour
             }
             else
             {
-                this.death(damageType);
+                this.death(damageType, checkSwitch);
             }
         }
         return isDeath();
@@ -95,10 +99,10 @@ public class HealthScript : MonoBehaviour
         // weitere als if hinzufuegen
     }
 
-    private void death(DamageTyp damageType)
+    private void death(DamageTyp damageType, bool checkSwitch)
     {
         this.GetComponent<SecondPlayerAi>().enabled = false;
-        this.switchplayer.checkDeathPlayerActive();
+        if(checkSwitch) this.switchplayer.checkDeathPlayerActive();
 
         if (!activeDeath) return;
 

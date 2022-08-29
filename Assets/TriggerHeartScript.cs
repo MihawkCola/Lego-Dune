@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class TriggerHeartScript : MonoBehaviour
 {
-    private GameObject hud;
     private AudioSource ploppSound;
     // Start is called before the first frame update
     void Start()
     {
-        hud = GameObject.Find("HUD");
         ploppSound = GetComponent<AudioSource>();
     }
 
@@ -18,19 +16,23 @@ public class TriggerHeartScript : MonoBehaviour
     {
         
     }
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag != "Player") return;
         PlayerControl playerControl = other.GetComponent<PlayerControl>();
         if (!playerControl.getActive()) return;
 
-        this.GetComponent<MeshRenderer>().enabled = false;
-        this.GetComponent<BoxCollider>().enabled = false;
+        GameObject heartGameobject = this.transform.parent.gameObject;
+        this.GetComponent<Collider>().enabled = false;
 
         ploppSound.Play();
         other.GetComponent<HealthScript>().increaseHealth();
 
+        this.transform.parent = null;
+        Destroy(heartGameobject);
         StartCoroutine(destroySelf());
+        //Destroy(this.gameObject);
 
     }
     private IEnumerator destroySelf()

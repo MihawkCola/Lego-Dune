@@ -25,9 +25,19 @@ public class HealthController : MonoBehaviour
     }
     public bool decreaseHealthAll(DamageTyp damageTyp) 
     {
+        Debug.Log("test");
         bool allDeath = true;
+        bool checkSwitch = true;
+        // sonderfall wenn beide nur noch ein leben haben
+        bool bothDeath = true;
         foreach (HealthScript health in this.healthScript)
-            allDeath = allDeath & health.decreaseHealth(damageTyp);
+            bothDeath = bothDeath & health.health == 1;
+        if(bothDeath)
+            checkSwitch = false;
+        //
+
+        foreach (HealthScript health in this.healthScript)
+            allDeath = allDeath & health.decreaseHealth(damageTyp, checkSwitch);
 
         return allDeath;
     }
