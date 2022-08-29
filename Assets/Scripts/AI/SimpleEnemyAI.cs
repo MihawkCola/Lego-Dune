@@ -96,4 +96,10 @@ public class SimpleEnemyAI : MonoBehaviour, EnemyInterface
     {
         this.target = target;
     }
+
+    public void setDeath()
+    {
+        animator.enabled = false;
+        this.enabled = false;
+    }
 }

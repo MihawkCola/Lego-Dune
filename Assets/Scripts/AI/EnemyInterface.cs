@@ -5,4 +5,5 @@ using UnityEngine;
 interface EnemyInterface 
 {
     void setTarget(Transform target);
+    void setDeath();
 }
