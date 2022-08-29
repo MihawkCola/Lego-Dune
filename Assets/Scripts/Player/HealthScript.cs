@@ -48,7 +48,7 @@ public class HealthScript : MonoBehaviour
         healthController = this.GetComponentInParent<HealthController>();
     }
 
-    void increaseHealth() { 
+    public void increaseHealth() { 
         if(health < healthHearts.Length)
         {
             health++;

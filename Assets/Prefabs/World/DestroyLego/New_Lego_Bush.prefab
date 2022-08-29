@@ -83,6 +83,7 @@ MonoBehaviour:
   power: 5
   radius: 4
   upwardsModifier: 1
+  dissolve: 1
 --- !u!65 &2985921001558720296
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -162,6 +163,7 @@ MonoBehaviour:
   numberBlue: 0
   numberGold: 2
   numberSilver: 7
+  probabilityHeart: 0.1
 --- !u!1 &8004742567033540747
 GameObject:
   m_ObjectHideFlags: 0

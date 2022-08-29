@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 402.039, g: 314.73804, b: 262.71082, a: 1}
+  m_IndirectSpecularColor: {r: 402.00037, g: 314.7093, b: 262.68887, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1125,7 +1125,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 181280732}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8884083eae302466cb46b6f56f9f888e, type: 3}
   m_Name: 
@@ -10017,6 +10017,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 759cc4c6-4078-4582-9439-886f34ea74ce
     m_ActionName: GameControl/Pause[/Keyboard/escape,/Keyboard/p]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: dbb9eea3-ecd2-4acc-bfe0-d10f68b2e08d
+    m_ActionName: GameControl/Test[/Keyboard/t]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GameControl
@@ -11357,7 +11361,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7927bec8b6e5a5142b3affa7f38f2d8f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -12047,6 +12051,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7116916501990608133, guid: baf6821fd72becf40bcfd771064090a8, type: 3}
+      propertyPath: heart
+      value: 
+      objectReference: {fileID: 6556064654042024520, guid: 5bd7c7675427d2f44a242d41ab3287e7, type: 3}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: baf6821fd72becf40bcfd771064090a8, type: 3}

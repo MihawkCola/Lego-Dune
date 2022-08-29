@@ -11,6 +11,7 @@ public class CoinExplosion : MonoBehaviour
     [SerializeField] private int numberBlue;
     [SerializeField] private int numberGold;
     [SerializeField] private int numberSilver;
+    [SerializeField] private float probabilityHeart;
 
     private CoinController coinController;
 
@@ -25,6 +26,6 @@ public class CoinExplosion : MonoBehaviour
     private void OnDestroy()
     {
         if (this.coinController == null) return;
-        this.coinController.multiCoinsExplosion(explosionDelay, beetwenDelay, this.transform.position, numberPurple, numberBlue, numberGold, numberSilver);
+        this.coinController.multiCoinsExplosion(explosionDelay, beetwenDelay, this.transform.position, numberPurple, numberBlue, numberGold, numberSilver, probabilityHeart);
     }
 }

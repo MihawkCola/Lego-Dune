@@ -95,4 +95,9 @@ public class StartScreenPath : MonoBehaviour, EnemyInterface
     {
         this.target = target;
     }
+
+    public void setDeath()
+    {
+        throw new NotImplementedException();
+    }
 }

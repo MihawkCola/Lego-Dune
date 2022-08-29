@@ -82,7 +82,7 @@ public class SandWalk : MonoBehaviour
     private void finish()
     {
         Debug.Log("Sandwalk ist beendet");
-        //ToDo
+        GameObject.Find("GameControl").GetComponent<GameControlScript>().showEndscreen();
     }
     public Color[] getColors() 
     {

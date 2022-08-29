@@ -8,6 +8,7 @@ public class CoinController : MonoBehaviour
     public GameObject goldCoin;
     public GameObject silverCoin;
     public GameObject purpleCoin;
+    public GameObject heart;
 
     private Transform level;
     public enum Coin { Purple, Blue, Gold, Silver };
@@ -26,9 +27,9 @@ public class CoinController : MonoBehaviour
     }
     public void spawnCoin(Coin coin, Vector3 point)
     {
-        this.creatCoin(coin, point);
+        this.createCoin(coin, point);
     }
-    public GameObject creatCoin(Coin coin, Vector3 point)
+    public GameObject createCoin(Coin coin, Vector3 point)
     {
         GameObject tmp = silverCoin;
 
@@ -59,17 +60,23 @@ public class CoinController : MonoBehaviour
             Vector3 spawnPointOffset = Vector3.right * Random.Range(-0.4f, 0.4f) + Vector3.up * Random.Range(0f, 0.5f) + Vector3.forward * Random.Range(-0.4f, 0.4f);
             Vector3 newPoint = point + spawnPointOffset;
 
-            GameObject coinO = this.creatCoin(coin, newPoint);
+            GameObject coinO = this.createCoin(coin, newPoint);
             Rigidbody rb = coinO.GetComponent<Rigidbody>();
             rb.AddExplosionForce(250 + Random.Range(0, 100), newPoint, 5f, 1f);
             coinSound.Play();
         }
     }
-    private IEnumerator spawnOverTime(float startDelay, float betweenDelay, Vector3 point, int numberPurple, int numberBlue, int numberGold, int numberSilver)
+    private IEnumerator spawnOverTime(float startDelay, float betweenDelay, Vector3 point, int numberPurple, int numberBlue, int numberGold, int numberSilver, float probabilityHeart)
     {
         yield return new WaitForSeconds(startDelay);
 
-        if(numberSilver != 0) {
+        if(probabilityHeart >= Random.Range(0.0f, 1.0f))
+        {
+            Instantiate(heart, point, Quaternion.identity); 
+            yield return new WaitForSeconds(betweenDelay);
+        }
+        
+        if (numberSilver != 0) {
             coinExplosion(Coin.Silver, point, numberSilver);
             yield return new WaitForSeconds(betweenDelay);
         }
@@ -86,10 +93,14 @@ public class CoinController : MonoBehaviour
             yield return new WaitForSeconds(betweenDelay);
         }
 
+
         coinExplosion(Coin.Purple, point, numberPurple);
+
+        
+
     }
-    public void multiCoinsExplosion(float startDelay, float betweenDelay, Vector3 point, int numberPurple, int numberBlue, int numberGold, int numberSilver) 
+    public void multiCoinsExplosion(float startDelay, float betweenDelay, Vector3 point, int numberPurple, int numberBlue, int numberGold, int numberSilver, float probabilityHeart) 
     {
-        this.StartCoroutine(this.spawnOverTime(startDelay, betweenDelay, point, numberPurple, numberBlue, numberGold, numberSilver));
+        this.StartCoroutine(this.spawnOverTime(startDelay, betweenDelay, point, numberPurple, numberBlue, numberGold, numberSilver, probabilityHeart));
     }
 }
