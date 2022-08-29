@@ -113,20 +113,22 @@ public class HealthScript : MonoBehaviour
     }
     private void gameoverType(DamageTyp damageType)
     {
-        this.switchplayer.disableCamera(this.deathCam);
+        if (damageType == DamageTyp.Worm) {
+            this.switchplayer.disableCamera(this.deathCam);
 
-        wormObeject.SetActive(true);
-        wormObeject.transform.parent = null;
+            wormObeject.SetActive(true);
+            wormObeject.transform.parent = null;
 
-        this.deathCam.transform.parent = null;
-        wormAnimator.SetTrigger("death");
+            this.deathCam.transform.parent = null;
+            wormAnimator.SetTrigger("death");
 
-        GameObject hud = GameObject.Find("HUD");
-        hud.SetActive(false);
+            GameObject hud = GameObject.Find("HUD");
+            hud.SetActive(false);
+            return;
+        }
         // weitere als if hinzufuegen
 
-
-        //deathSound.Play();
+        deathSound.Play();
     }
     private IEnumerator resetLevel() {
         yield return new WaitForSeconds(8f);
