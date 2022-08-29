@@ -99,7 +99,6 @@ public class Startscreen : MonoBehaviour
         {
             Debug.Log("quit");
             Application.Quit();
-            UnityEditor.EditorApplication.isPlaying = false;
         }
     }
 }

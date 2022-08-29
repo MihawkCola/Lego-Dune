@@ -347,7 +347,6 @@ public class MenuControlScript : MonoBehaviour
             case 1:
                 Debug.Log("quit");
                 Application.Quit();
-                UnityEditor.EditorApplication.isPlaying = false;
                 break;
 
             default:

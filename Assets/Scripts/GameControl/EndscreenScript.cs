@@ -100,7 +100,6 @@ public class EndscreenScript : MonoBehaviour
         {
             Debug.Log("quit");
             Application.Quit();
-            UnityEditor.EditorApplication.isPlaying = false;
         }
     }
 }
