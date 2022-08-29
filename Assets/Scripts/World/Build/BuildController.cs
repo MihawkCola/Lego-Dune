@@ -24,14 +24,12 @@ public class BuildController : MonoBehaviour
 
     private List<BuildPlayerController> controllerList;
 
-    // Start is called before the first frame update
     void Start()
     {
         inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
         controllerList = new List<BuildPlayerController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         building();
@@ -64,7 +62,6 @@ public class BuildController : MonoBehaviour
         if(coins != null)
             Destroy(coins.gameObject);
     }
-
     private void checkFinish()
     {
         if (this.buildIndex < build.childCount) return;

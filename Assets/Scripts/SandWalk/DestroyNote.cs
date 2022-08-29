@@ -8,5 +8,4 @@ public class DestroyNote : MonoBehaviour
     {
         GetComponentInParent<NoteAnimation>().noteIsFinish();
     }
-
 }

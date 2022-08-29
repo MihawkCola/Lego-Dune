@@ -25,11 +25,7 @@ public class Stage : MonoBehaviour
         this.sandWalk = this.GetComponentInParent<SandWalk>();
         this.slideWormScript = this.GetComponentInParent<SlideWormScript>();
         if (this.buttonsCount > this.sandWalk.colorsPoll.Length)
-        {
-            Debug.Log("Es gibt nicht genügend Farben");
             return;
-        }
-
 
         this.buttonS = new ButtonScript[buttonsCount];
         this.buttonGameobject = new Transform[buttonsCount];
@@ -60,7 +56,6 @@ public class Stage : MonoBehaviour
     {
         this.indexSequence = 0;
         this.isFinish = false;
-        //this.initSequence(this.startSequenzNumber);
     }
 
     private void initColors()

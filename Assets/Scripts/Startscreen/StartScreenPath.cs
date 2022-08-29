@@ -48,7 +48,6 @@ public class StartScreenPath : MonoBehaviour, EnemyInterface
             this.transform.position = new Vector3(spawn.position[0], spawn.position[1], spawn.position[2]);
         }
     }
-
     private void OnDisable()
     {
         agent.enabled = false;
@@ -63,7 +62,6 @@ public class StartScreenPath : MonoBehaviour, EnemyInterface
             agent.SetDestination(this.transform.position);
             return;
         }
-
 
         agent.SetDestination(target.position);
     }

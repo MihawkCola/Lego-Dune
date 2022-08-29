@@ -5,7 +5,6 @@ using UnityEngine;
 public class TriggerHeartScript : MonoBehaviour
 {
     private AudioSource ploppSound;
-    // Start is called before the first frame update
     void Start()
     {
         ploppSound = GetComponent<AudioSource>();
@@ -26,8 +25,6 @@ public class TriggerHeartScript : MonoBehaviour
         this.transform.parent = null;
         Destroy(heartGameobject);
         StartCoroutine(destroySelf());
-        //Destroy(this.gameObject);
-
     }
     private IEnumerator destroySelf()
     {

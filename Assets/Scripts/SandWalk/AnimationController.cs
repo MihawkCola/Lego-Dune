@@ -67,7 +67,6 @@ public class AnimationController : MonoBehaviour
         Transform musicalNoteCircle = note.transform.Find("MusicalNoteCircle");
         musicalNoteCircle.transform.LookAt(cam.transform.position);
         musicalNoteCircle.transform.Rotate(0, 90, 0);
-        //cam.transform.LookAt(musicalNoteCircle.transform.position);
 
         Transform musicalNoteMain = note.transform.Find("MusicalNoteMain");
 

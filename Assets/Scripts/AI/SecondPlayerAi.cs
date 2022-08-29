@@ -15,16 +15,12 @@ public class SecondPlayerAi : MonoBehaviour
 
     public bool notWalk = false;
 
-
-
-    // Start is called before the first frame update
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         control = GetComponent<PlayerControl>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         disableAgent();

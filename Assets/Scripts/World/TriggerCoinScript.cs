@@ -9,7 +9,6 @@ public class TriggerCoinScript : MonoBehaviour
     private int value;
     private AudioSource coinSound;
 
-    // Start is called before the first frame update
     void Start()
     {
         hud = GameObject.Find("HUD");
@@ -51,8 +50,6 @@ public class TriggerCoinScript : MonoBehaviour
         this.transform.parent = null;
         Destroy(coinGameobject);
         StartCoroutine(destroySelf());
-        //Destroy(this.gameObject);
-
     }
     private IEnumerator destroySelf()
     {

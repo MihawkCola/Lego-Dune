@@ -48,12 +48,10 @@ public class ButtonScript : MonoBehaviour
         animator.SetBool("isFailed", false);
         animator.SetBool("isSuccess", false);
     }
-
     public void setNumber(int n)
     {
         number = n;
     }
-
     public int getNumber()
     {
         return number;

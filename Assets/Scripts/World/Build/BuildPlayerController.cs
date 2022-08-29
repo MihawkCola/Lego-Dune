@@ -14,7 +14,6 @@ public class BuildPlayerController : MonoBehaviour
     private PlayerInput inputs;
 
     private Animator animator;
-
     private void Awake()
     {
         this.buildControllers = new List<BuildController>();

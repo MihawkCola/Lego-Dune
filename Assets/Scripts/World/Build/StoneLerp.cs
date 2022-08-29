@@ -19,23 +19,19 @@ public class StoneLerp : MonoBehaviour
         this.transform.position = Vector3.Lerp(this.transform.position, target.position, this.speed * Time.deltaTime);
 
         this.transform.rotation = Quaternion.Lerp(this.transform.rotation, target.rotation, this.speed * Time.deltaTime);
-        //Debug.Log(this.name);
-        //Debug.Log(Vector3.Lerp(this.transform.position, target.position, 2f * Time.deltaTime));
+
         checkFinish();
     }
 
     private void checkFinish()
     {
         if (Vector3.Distance(this.transform.position, target.position) > 0.01f) return;
-        //if (Quaternion. > 0.1f) return;
         target.gameObject.SetActive(true);
 
         this.buildController.checkLastStone(indexStone);
         this.build = false;
         this.enabled = false;
     }
-
-
 
     public void goToTarget(Transform target, int indexStone, BuildController buildController)
     {

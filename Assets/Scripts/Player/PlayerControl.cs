@@ -20,7 +20,6 @@ public class PlayerControl : MonoBehaviour
 
     [SerializeField] private GameObject pauseMenu;
 
-
     [SerializeField] private float firstJumpForce = 10;
     [SerializeField] private float secondJumpForce = 5;
     [SerializeField] private float movmentForce = 10.0f;
@@ -34,7 +33,6 @@ public class PlayerControl : MonoBehaviour
     private AudioSource[] sounds;
     private AudioSource jumpSound1;
     private AudioSource jumpSound2;
-    private AudioSource attackSound;
 
     private Vector3 forceDirection = Vector3.zero;
 
@@ -54,7 +52,6 @@ public class PlayerControl : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         secondPlayerAi = GetComponent<SecondPlayerAi>();
         healthScript = GetComponent<HealthScript>();
-
     }
 
     public void InputOn() {
@@ -70,8 +67,6 @@ public class PlayerControl : MonoBehaviour
         healthScript.activeDeath = true;
         secondPlayerAi.enabled = false;
     }
-
-
     public void InputOff()
     {
         inputs.Player.Jump.started -= firstJump;
@@ -95,7 +90,6 @@ public class PlayerControl : MonoBehaviour
         return inputs != null;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
@@ -107,21 +101,8 @@ public class PlayerControl : MonoBehaviour
         sounds = GetComponents<AudioSource>();
         jumpSound1 = sounds[3];
         jumpSound2 = sounds[4];
-        attackSound = sounds[2];
     }
-    // Update is called once per frame
-    void Update()
-    {
-        //Debug.DrawRay(transform.position, Vector3.down * (distGrounded + 0.1f), Color.yellow);
-        /*Vector3 rotation = rb.velocity;
-        rotation.y = 0;
-        this.rb.rotation = Quaternion.LookRotation(rotation.normalized);*/
 
-        //if(move.x != 0 || move.y != 0) rb.velocity = Vector3.right * move.x * 10 + Vector3.forward * move.y * 10 +Vector3.up * rb.velocity.y ;
-        //rb.AddForce(Vector3.right * move.x* 1.0f + Vector3.forward * move.y * 1.0f, ForceMode.Impulse);
-        //this.transform.position += (Vector3.right * move.x  + Vector3.forward * move.y);
-
-    }
     private void FixedUpdate()
     {
         checkMovActive();
@@ -142,14 +123,12 @@ public class PlayerControl : MonoBehaviour
     private void movementUpdate() {
 
         Vector2 move = inputs.Player.Movment.ReadValue<Vector2>();
-        //Debug.Log(move);
 
-        // movement
+        // Movement
         this.forceDirection += cam.transform.right * (move.x * this.movmentForce);
         this.forceDirection += this.cameraForward() * (move.y * this.movmentForce);
 
         rb.AddForce(this.forceDirection, ForceMode.Impulse);
-        //Debug.Log(rb.velocity);
         forceDirection = Vector3.zero;
 
         // Speed limit;
@@ -157,10 +136,6 @@ public class PlayerControl : MonoBehaviour
         horizontalVelocity.y = 0;
         if (horizontalVelocity.magnitude > maxSpeed)
             rb.velocity = horizontalVelocity.normalized * maxSpeed + Vector3.up * rb.velocity.y;
-
-
-
-        //Debug.Log(rb.velocity.magnitude);
     }
     private void velocityDown() {
         if (rb.velocity.y < -0.1f) rb.velocity -= Vector3.down * Physics.gravity.y * Time.fixedDeltaTime * fallVelocity;
@@ -169,8 +144,6 @@ public class PlayerControl : MonoBehaviour
     {
         Vector3 horizontalVelocity = rb.velocity;
         horizontalVelocity.y = 0;
-        //Debug.Log(this.gameObject.name);
-        //Debug.Log(horizontalVelocity.magnitude);
 
         if (agent.velocity.magnitude > 0.1) {
             if (agent.enabled) {
@@ -192,12 +165,10 @@ public class PlayerControl : MonoBehaviour
         }
 
     }
-
-    //extra da wir bei Forward den Y wert raus nehmen m�ssen
     private Vector3 cameraForward() 
     {
         Vector3 forward = cam.transform.forward;
-        //Reset/Ignore y axis
+
         forward.y = 0;
         forward.Normalize();
         return forward;
@@ -226,7 +197,6 @@ public class PlayerControl : MonoBehaviour
 
     private void isRunning(InputAction.CallbackContext obj)
     {
-        //if (animator.GetBool("isSneaking")) return;
         if (!movEnable) return;
 
         animator.SetBool("isRun", !animator.GetBool("isRun"));
@@ -240,7 +210,6 @@ public class PlayerControl : MonoBehaviour
     }
     private void isSneaking(InputAction.CallbackContext obj)
     {
-        //if (animator.GetBool("isRun")) return;
         if (!movEnable) return;
 
         animator.SetBool("isSneak", !animator.GetBool("isSneak"));
@@ -254,10 +223,8 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-
     private void isAttacking(InputAction.CallbackContext obj)
     {
-        //attackSound.Play();
         if (!movEnable) return;
         animator.SetTrigger("Attack");
     }

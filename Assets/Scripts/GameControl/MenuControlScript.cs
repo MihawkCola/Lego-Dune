@@ -109,7 +109,6 @@ public class MenuControlScript : MonoBehaviour
         input.Disable();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         audioSources = FindObjectsOfType<AudioSource>();
@@ -345,7 +344,6 @@ public class MenuControlScript : MonoBehaviour
                 break;
 
             case 1:
-                Debug.Log("quit");
                 Application.Quit();
                 break;
 

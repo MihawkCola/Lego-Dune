@@ -23,7 +23,7 @@ public class PlayerCamera : MonoBehaviour
 
     public float height = 1.0f;
     public float distance = 7.0f;
-    private Vector3 camPosition = Vector3.zero; // eigenes Cordianten System
+    private Vector3 camPosition = Vector3.zero; // eigenes Koordinaten System
 
     public Vector3 offset = new Vector3(0.0f, 2.0f, 0.0f);
 
@@ -55,7 +55,6 @@ public class PlayerCamera : MonoBehaviour
         inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
     }
 
-    // Update is called once per frame
     void LateUpdate()
     {
         if (!isCameraMoving) this.updateCamera();
@@ -63,7 +62,6 @@ public class PlayerCamera : MonoBehaviour
     public void updateCamera() {
 
         if(target == null) return;
-        //Debug.Log(inputs.Player.Camera.ReadValue<Vector2>());
         Vector2 mouseInput = inputs.Player.Camera.ReadValue<Vector2>();
 
         if (changeDistanceStart != distanceStart) distanceStart = changeDistanceStart;
@@ -102,7 +100,6 @@ public class PlayerCamera : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(axisX, axisY, 0.0f);
 
         Vector3 rotationPosition = rotation * camPosition;
-
 
         //update camera
         Vector3 focus = target.transform.position + offset;
@@ -144,7 +141,6 @@ public class PlayerCamera : MonoBehaviour
 
             Vector3 rotationPosition = rotation * camPosition;
 
-
             //update camera
             Vector3 focus = target.transform.position + offset;
 
@@ -159,11 +155,8 @@ public class PlayerCamera : MonoBehaviour
     {
         if (isCameraMoving)
         {
-            //Debug.Log("Moving!");
 
             transform.position =  Vector3.Lerp(transform.position, target.transform.position + camPlayerVectorBetween, cameraDamping * Time.deltaTime);
-            //Debug.Log("Moving!"); 
-            //transform.LookAt(target.transform.position + offset);
 
             if (Vector3.Distance(transform.position, target.transform.position + camPlayerVectorBetween) < cameraSwitchMinDistance)
             {
@@ -172,14 +165,12 @@ public class PlayerCamera : MonoBehaviour
                 isCameraMoving = false;
                 isStart = false;
                 inputs.Enable();
-                
-                //Debug.Log("False!");
             }
                 
         }
     }
     //Quelle: https://www.youtube.com/watch?v=9A9yj8KnM8c&ab_channel=Brackeys
-    // keine 1 zu 1 Umsetzung nur Inspiration
+    // keine 1 zu 1 Umsetzung, nur Inspiration
     public void camshake() {
         if (Time.time < this.duration)
         {

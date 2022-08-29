@@ -21,7 +21,6 @@ public class Startscreen : MonoBehaviour
         input = new StartOrQuitInput();
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         init();
@@ -44,12 +43,6 @@ public class Startscreen : MonoBehaviour
         text = startscreen.GetComponentsInChildren<Text>();
         active = 1;
         text[active].color = Color.yellow;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void OnGUI()
@@ -93,11 +86,9 @@ public class Startscreen : MonoBehaviour
         {
             input.Disable();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-            //SceneManager.LoadScene("Level_1");
         }
         else
         {
-            Debug.Log("quit");
             Application.Quit();
         }
     }

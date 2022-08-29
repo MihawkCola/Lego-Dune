@@ -32,7 +32,6 @@ public class SimpleEnemyAI : MonoBehaviour, EnemyInterface
 
         rotationToPlayer();
         attackPlayer();
-        //animator.SetTrigger("Attack");
         this.goToPlayer();
     }
 
@@ -110,8 +109,6 @@ public class SimpleEnemyAI : MonoBehaviour, EnemyInterface
                 collider.enabled = false;
             }
         }
-            
-
 
         if (rb != null)
             Destroy(rb);

@@ -20,9 +20,6 @@ public class CoinController : MonoBehaviour
     {
         if(GameObject.Find("Level") != null)
             this.level = GameObject.Find("Level").transform;
-        //testen
-        //this.StartCoroutine(this.spawnOverTime(2f,2f,this.transform.position,10,10,10,10));
-        //spawnCoins(Coin.Blue, this.transform.position, 100);
 
         coinSound = GetComponent<AudioSource>();
     }
@@ -95,11 +92,7 @@ public class CoinController : MonoBehaviour
             yield return new WaitForSeconds(betweenDelay);
         }
 
-
         coinExplosion(Coin.Purple, point, numberPurple);
-
-        
-
     }
     public void multiCoinsExplosion(float startDelay, float betweenDelay, Vector3 point, int numberPurple, int numberBlue, int numberGold, int numberSilver, float probabilityHeart) 
     {

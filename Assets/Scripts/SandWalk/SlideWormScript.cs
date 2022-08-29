@@ -16,7 +16,6 @@ public class SlideWormScript : MonoBehaviour
     private HealthController healthController;
     void Awake()
     {
-        // sollte über ein HUD Controller geholt werden
         this.slider = GameObject.Find("HUD").transform.Find("Slider").GetComponent<Slider>();
         this.slider.value = 1;
     }
@@ -28,12 +27,10 @@ public class SlideWormScript : MonoBehaviour
     private void OnEnable()
     {
         coroutine = this.StartCoroutine(this.timeDecrease());
-        //this.slider.gameObject.SetActive(true);
     }
     private void OnDisable()
     {
         this.StopCoroutine(coroutine);
-        //this.slider.gameObject.SetActive(false);
     }
     public void decreaseSlider(float decrease) 
     {
@@ -42,7 +39,6 @@ public class SlideWormScript : MonoBehaviour
             slider.value = 1;
             bool allDeath = this.players.GetComponent<HealthController>().decreaseHealthAll(DamageTyp.Worm);
             if(allDeath) this.gameObject.SetActive(false);
-            //ToDo SandWalk soll die Noten neue zeigen und reset Sequence Reihenfolge
             return;
         }
 

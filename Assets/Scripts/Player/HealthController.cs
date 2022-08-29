@@ -11,7 +11,6 @@ public class HealthController : MonoBehaviour
     private HealthScript[] healthScript;
 
     private EnemyController enemyController;
-    // Start is called before the first frame update
     void Start()
     {
         inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
@@ -28,6 +27,7 @@ public class HealthController : MonoBehaviour
         Debug.Log("test");
         bool allDeath = true;
         bool checkSwitch = true;
+
         // sonderfall wenn beide nur noch ein leben haben
         bool bothDeath = true;
         foreach (HealthScript health in this.healthScript)

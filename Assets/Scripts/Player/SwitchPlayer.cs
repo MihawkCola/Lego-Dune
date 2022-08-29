@@ -24,7 +24,6 @@ public class SwitchPlayer : MonoBehaviour
 
     private void Awake()
     {
-
         this.enemyController = GameObject.Find("EnemyManager").GetComponent<EnemyController>();
 
         this.healthController = this.GetComponent<HealthController>();
@@ -34,7 +33,6 @@ public class SwitchPlayer : MonoBehaviour
         this.cameraC = this.mainCam.GetComponent<PlayerCamera>();
 
         this.activePlayer = this.player1;
-
     }
 
     private void Start()
@@ -47,8 +45,6 @@ public class SwitchPlayer : MonoBehaviour
         this.cameraC.changeCameraTarget(player1);
         this.InputOn();
         StartCoroutine(EnableInputFirstPlayer());
-
-        //this.GetComponentInParent<SandWalkScript>().setPlayer(player1);
     }
     public void InputOn()
     {
@@ -65,7 +61,6 @@ public class SwitchPlayer : MonoBehaviour
         {
             yield return new WaitForSeconds(0.1f);
         }
-
         player1C.InputOn();
     }
 
@@ -118,7 +113,6 @@ public class SwitchPlayer : MonoBehaviour
 
         if (this.healthController.allDeath()) return;
 
-        Debug.Log("switch");
         this.switchPlayer();
     }
 

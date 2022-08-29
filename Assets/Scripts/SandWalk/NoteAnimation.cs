@@ -6,7 +6,6 @@ public class NoteAnimation : MonoBehaviour
 {
     public void noteIsFinish() 
     {
-        //if (this.transform != null) return;
         if (this.transform.childCount - 1 > 0) return;
             
         this.transform.GetComponentInParent<AnimationController>().nextNote();

@@ -27,6 +27,12 @@ public class EndscreenScript : MonoBehaviour
         init();
         InputOn();
     }
+    public void InputOn()
+    {
+        input.StartOrQuit.Up.started += upAndDown;
+        input.StartOrQuit.Down.started += upAndDown;
+        input.StartOrQuit.Select.started += select;
+    }
 
     private void init()
     {
@@ -41,15 +47,9 @@ public class EndscreenScript : MonoBehaviour
         return this.input;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         init();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     void OnGUI()
@@ -71,13 +71,6 @@ public class EndscreenScript : MonoBehaviour
         GetComponentsInChildren<Image>()[1].GetComponent<RectTransform>().sizeDelta = new Vector2(imageSize, imageSize);
         GetComponentsInChildren<Image>()[2].GetComponent<RectTransform>().sizeDelta = new Vector2(imageSize, imageSize);
 
-    }
-
-    public void InputOn()
-    {
-        input.StartOrQuit.Up.started += upAndDown;
-        input.StartOrQuit.Down.started += upAndDown;
-        input.StartOrQuit.Select.started += select;
     }
 
     private void upAndDown(InputAction.CallbackContext obj)

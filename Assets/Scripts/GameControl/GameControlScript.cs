@@ -21,15 +21,7 @@ public class GameControlScript : MonoBehaviour
     private void Awake()
     {
         input = new GameInput();
-        //playerInput = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
         input.GameControl.Pause.started += escape;
-        input.GameControl.Test.started += test;
-
-    }
-
-    private void test(InputAction.CallbackContext obj)
-    {
-        showEndscreen();
     }
 
     private void OnEnable()
@@ -40,7 +32,6 @@ public class GameControlScript : MonoBehaviour
     {
         input.Disable();
     }
-    // Start is called before the first frame update
     void Start()
     {
         playerInput = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
@@ -53,11 +44,6 @@ public class GameControlScript : MonoBehaviour
         menuInput.Disable();
         endscreenInput.Disable();
         isPaused = false;
-    }
-
-    void Update()
-    {
-        
     }
 
     private void escape(InputAction.CallbackContext obj)

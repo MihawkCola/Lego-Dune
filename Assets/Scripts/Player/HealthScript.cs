@@ -12,7 +12,6 @@ public class HealthScript : MonoBehaviour
 {
     public Image[] healthHearts;
     public int health;
-    private PlayerInput inputs;
 
     private GameObject wormObeject;
     private Animator wormAnimator;
@@ -32,8 +31,6 @@ public class HealthScript : MonoBehaviour
 
     void Start()
     {
-        inputs = GameObject.Find("PlayerInput").GetComponent<InputScript>().getPlayerInput();
-        this.InputOn();
         resetHealth();
 
         this.wormObeject = this.transform.Find("LEGOWormAnimations").gameObject;
@@ -96,7 +93,6 @@ public class HealthScript : MonoBehaviour
             this.switchplayer.shakePlayerCamera(1.5f, Math.Abs(health - healthHearts.Length) * 0.07f + 0.03f);
         }
         hitSound.Play();
-        // weitere als if hinzufuegen
     }
 
     private void death(DamageTyp damageType, bool checkSwitch)
@@ -113,22 +109,17 @@ public class HealthScript : MonoBehaviour
     }
     private void gameoverType(DamageTyp damageType)
     {
-        if (damageType == DamageTyp.Worm) {
-            this.switchplayer.disableCamera(this.deathCam);
+        this.switchplayer.disableCamera(this.deathCam);
 
-            wormObeject.SetActive(true);
-            wormObeject.transform.parent = null;
+        wormObeject.SetActive(true);
+        wormObeject.transform.parent = null;
 
-            this.deathCam.transform.parent = null;
-            wormAnimator.SetTrigger("death");
+        this.deathCam.transform.parent = null;
+        wormAnimator.SetTrigger("death");
 
-            GameObject hud = GameObject.Find("HUD");
-            hud.SetActive(false);
-            return;
-        }
-        // weitere als if hinzufuegen
-
-        deathSound.Play();
+        GameObject hud = GameObject.Find("HUD");
+        hud.SetActive(false);
+        //deathSound.Play();
     }
     private IEnumerator resetLevel() {
         yield return new WaitForSeconds(8f);
@@ -145,43 +136,6 @@ public class HealthScript : MonoBehaviour
         healthHearts[healthHearts.Length - 1].GetComponent<Animator>().enabled = true;
         health = healthHearts.Length;
 
-    }
-
-    public void InputOn()
-    {
-        inputs.Player.IncreaseHealth.started += increase;
-        inputs.Player.DecreaseHealth.started += decrease;
-        inputs.Player.ResetHealth.started += reset;
-    }
-
-    
-
-    public void InputOff()
-    {
-        inputs.Player.IncreaseHealth.started -= increase;
-        inputs.Player.DecreaseHealth.started -= decrease;
-        inputs.Player.ResetHealth.started -= reset;
-    }
-
-    private void increase(InputAction.CallbackContext obj)
-    {
-        Debug.Log("icrease");
-
-        increaseHealth();
-    }
-
-    private void decrease(InputAction.CallbackContext obj)
-    {
-        Debug.Log("decrease");
-
-        decreaseHealthTest();
-    }
-
-    private void reset(InputAction.CallbackContext obj)
-    {
-        Debug.Log("reset");
-
-        resetHealth();
     }
 
     public bool isDeath() {
