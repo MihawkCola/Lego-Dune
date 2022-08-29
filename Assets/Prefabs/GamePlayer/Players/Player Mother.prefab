@@ -349,7 +349,7 @@ MonoBehaviour:
   maxSpeedNormal: 2
   maxSpeedSneaking: 0.5
   maxSpeedRun: 5
-  groundDetection: 0.1
+  groundDetection: 0.3
 --- !u!114 &5772766560352065197
 MonoBehaviour:
   m_ObjectHideFlags: 0

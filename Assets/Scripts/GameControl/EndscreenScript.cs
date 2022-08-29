@@ -94,6 +94,7 @@ public class EndscreenScript : MonoBehaviour
             //SceneManager.LoadScene("Level_1");
             GameObject.Find("GameControl").GetComponent<GameControlScript>().setInputRestart();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            Time.timeScale = 1;
         }
         else
         {
