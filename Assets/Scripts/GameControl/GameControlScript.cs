@@ -17,6 +17,7 @@ public class GameControlScript : MonoBehaviour
     private AudioSource[] audios;
 
     private GameObject endscreen;
+    private string coinAmount;
 
     private void Awake()
     {
@@ -91,11 +92,13 @@ public class GameControlScript : MonoBehaviour
 
     public void showEndscreen()
     {
+        coinAmount = GameObject.Find("HUD").GetComponent<CoinsScript>().getCoinAmount().ToString();
         Time.timeScale = 0;
-        GameObject.Find("HUD").SetActive(false);
         endscreen.SetActive(true);
         playerInput.Disable();
+        input.GameControl.Disable();
         endscreenInput.Enable();
+        GameObject.Find("HUD").SetActive(false);
     }
     public void setInputRestart()
     {
@@ -104,4 +107,8 @@ public class GameControlScript : MonoBehaviour
         playerInput.Enable();
     }
 
+    public String getCoinAmount()
+    {
+        return coinAmount;
+    }
 }

@@ -38,7 +38,8 @@ public class EndscreenScript : MonoBehaviour
     {
         endscreen = GameObject.Find("Endscreen");
         text = endscreen.GetComponentsInChildren<Text>();
-        endscreen.GetComponentsInChildren<Text>()[2].text = GameObject.Find("HUD").GetComponent<CoinsScript>().getCoinAmount().ToString();
+        endscreen.GetComponentsInChildren<Text>()[2].text = GameObject.Find("GameControl").GetComponent<GameControlScript>().getCoinAmount();
+        Debug.Log("COINS:"+endscreen.GetComponentsInChildren<Text>()[2].text);
         active = 3;
         text[active].color = Color.yellow;
     }
@@ -49,7 +50,7 @@ public class EndscreenScript : MonoBehaviour
 
     void Start()
     {
-        init();
+        //init();
     }
 
     void OnGUI()

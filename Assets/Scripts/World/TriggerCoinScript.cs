@@ -43,6 +43,8 @@ public class TriggerCoinScript : MonoBehaviour
         GameObject coinGameobject = this.transform.parent.gameObject;
         this.GetComponent<Collider>().enabled = false;
 
+        coinSound.volume = other.GetComponents<AudioSource>()[0].volume;
+
         coinSound.Play();
         hud.GetComponent<CoinsScript>().increaseCoinAmount(value);
 
