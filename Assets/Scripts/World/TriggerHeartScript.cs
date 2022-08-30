@@ -19,7 +19,7 @@ public class TriggerHeartScript : MonoBehaviour
         GameObject heartGameobject = this.transform.parent.gameObject;
         this.GetComponent<Collider>().enabled = false;
 
-        ploppSound.volume = FindObjectsOfType<AudioSource>()[1].volume;
+        ploppSound.volume = other.GetComponents<AudioSource>()[0].volume;
         ploppSound.Play();
         other.GetComponent<HealthScript>().increaseHealth();
 

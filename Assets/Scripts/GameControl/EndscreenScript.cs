@@ -85,11 +85,9 @@ public class EndscreenScript : MonoBehaviour
     {
         if (active == 3)
         {
-            //SceneManager.LoadScene("Level_1");
             GameObject.Find("GameControl").GetComponent<GameControlScript>().setInputRestart();
-            GameObject.Find("HUD").SetActive(true);
             Time.timeScale = 1;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+            SceneManager.LoadScene("Cutscene");
             
         }
         else

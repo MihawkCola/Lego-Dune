@@ -3716,7 +3716,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1519729122881713926, guid: c18d2f4ac8711d74f8159629a84b9a78, type: 3}
       propertyPath: sequenceRepetition
-      value: 3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1519729122881713926, guid: c18d2f4ac8711d74f8159629a84b9a78, type: 3}
+      propertyPath: startSequenzNumber
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1813510702162041175, guid: c18d2f4ac8711d74f8159629a84b9a78, type: 3}
       propertyPath: m_LocalScale.x
