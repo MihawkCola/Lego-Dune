@@ -18,6 +18,21 @@ ModelImporter:
   - first:
       74: -154545503109962928
     second: MotherRig.001|Camera2
+  - first:
+      74: -2354186061900163097
+    second: MotherRig.001|MotherRig.001|MotherRig.001|Camera1
+  - first:
+      74: 4445673157344675434
+    second: MotherRig.001|MotherRig.001|MotherRig.001|Camera2
+  - first:
+      74: -7134902567254297450
+    second: MotherRig.001|MotherRig.001|MotherRig.001|MotherWakeUp
+  - first:
+      74: 4449533141972992758
+    second: MotherRig.001|MotherRig.001|MotherRig.001|PaulTurnOver
+  - first:
+      74: 550151121850093917
+    second: MotherRig.001|MotherRig.001|MotherRig.001|PaulWakeUp
   externalObjects: {}
   materials:
     materialImportMode: 2

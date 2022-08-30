@@ -93,9 +93,11 @@ PlayableDirector:
   - key: {fileID: -2096878399017482857, guid: 31a6510c4ab6e489c863b31c9ce4d6cd, type: 2}
     value: {fileID: 7027456203135243144}
   - key: {fileID: 9027521419651753194, guid: 31a6510c4ab6e489c863b31c9ce4d6cd, type: 2}
-    value: {fileID: 6927867551694298601}
+    value: {fileID: 3332849195781693393}
   - key: {fileID: 3912006009230956041, guid: 31a6510c4ab6e489c863b31c9ce4d6cd, type: 2}
     value: {fileID: 6927867551694298601}
+  - key: {fileID: 8318384188260100554, guid: 31a6510c4ab6e489c863b31c9ce4d6cd, type: 2}
+    value: {fileID: 7757232102996815634}
   m_ExposedReferences:
     m_References: []
 --- !u!1001 &315763025313996628

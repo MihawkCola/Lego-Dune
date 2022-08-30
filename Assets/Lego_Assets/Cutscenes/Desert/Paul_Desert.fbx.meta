@@ -57,6 +57,75 @@ ModelImporter:
   - first:
       74: -2431020438200086913
     second: PaulAtreidesRig|PauleWakeUp2
+  - first:
+      74: 2223767456709861793
+    second: PaulAtreidesRig|PaulAtreidesRig|PaulAtreidesRig|Cam1
+  - first:
+      74: -1199685764482175897
+    second: PaulAtreidesRig|PaulAtreidesRig|PaulAtreidesRig|Cam2
+  - first:
+      74: -1845324347342015337
+    second: PaulAtreidesRig|PaulAtreidesRig|PaulAtreidesRig|Camera1
+  - first:
+      74: 3542665932406537979
+    second: PaulAtreidesRig|PaulAtreidesRig|PaulAtreidesRig|Camera2
+  - first:
+      74: 4065171902943635794
+    second: PaulAtreidesRig|PaulAtreidesRig|PaulAtreidesRig|MotherWakeUp
+  - first:
+      74: -2881219469631730844
+    second: PaulAtreidesRig|PaulAtreidesRig|PaulAtreidesRig|PauleWakeUp2
+  - first:
+      74: -58396383964913062
+    second: PaulAtreidesRig|PaulAtreidesRig|PaulAtreidesRig|PaulTurnOver
+  - first:
+      74: 2271818935626166190
+    second: PaulAtreidesRig|PaulAtreidesRig|PaulAtreidesRig|PaulWakeUp
+  - first:
+      74: 2477401989747500006
+    second: MotherTorso.001|Camera1
+  - first:
+      74: -7718929310900382080
+    second: MotherTorso.001|Camera2
+  - first:
+      74: -4732515134715348350
+    second: MotherRig.001|Camera1
+  - first:
+      74: -154545503109962928
+    second: MotherRig.001|Camera2
+  - first:
+      74: -9152185006063409013
+    second: MotherRig.001|MotherWakeUp
+  - first:
+      74: 2371080742343615090
+    second: MotherRig.001|PaulTurnOver
+  - first:
+      74: -5363357140681553602
+    second: MotherRig.001|PaulWakeUp
+  - first:
+      74: -936035863270922238
+    second: MotherArm.R.001|Camera1
+  - first:
+      74: -3108829497020343415
+    second: MotherArm.R.001|Camera2
+  - first:
+      74: -1546934333081942169
+    second: Camera.005|Camera1
+  - first:
+      74: 924985799945706977
+    second: Camera.005|Camera2
+  - first:
+      74: 2667339839301691766
+    second: Sun|Camera1
+  - first:
+      74: -1015469276491969962
+    second: Sun|Camera2
+  - first:
+      74: 7772052649198684584
+    second: Camera.002|Camera1
+  - first:
+      74: 3304235033138432532
+    second: Camera.002|Camera2
   externalObjects: {}
   materials:
     materialImportMode: 2

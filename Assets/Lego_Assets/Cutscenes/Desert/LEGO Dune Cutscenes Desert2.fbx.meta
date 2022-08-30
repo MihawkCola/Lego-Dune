@@ -6,6 +6,27 @@ ModelImporter:
   - first:
       74: -623603649343465320
     second: Scene
+  - first:
+      74: -8686927097085286639
+    second: PaulAtreidesRig|Camera.001|Scene
+  - first:
+      74: -6465890240260977941
+    second: PaulAtreidesRig|Camera.002|Scene
+  - first:
+      74: 6600961847521867778
+    second: PaulAtreidesRig|PaulAtreidesRig|Scene
+  - first:
+      74: -7363727129598072955
+    second: Camera.001|Camera.001|Scene
+  - first:
+      74: 6268619175780987758
+    second: Camera.001|Camera.002|Scene
+  - first:
+      74: -4983260966365789219
+    second: Camera.002|Camera.001|Scene
+  - first:
+      74: 835737773175085700
+    second: Camera.002|Camera.002|Scene
   externalObjects: {}
   materials:
     materialImportMode: 2
