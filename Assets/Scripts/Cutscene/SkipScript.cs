@@ -14,9 +14,15 @@ public class SkipScript : MonoBehaviour
         input.Enable();
         input.skip.skip.started += loadLevel;
     }
-
+    private void OnDestroy()
+    {
+        input.skip.skip.started -= loadLevel;
+        input.Disable();
+    }
     private void loadLevel(InputAction.CallbackContext obj)
     {
+        input.skip.skip.started -= loadLevel;
+        input.Disable();
         SceneManager.LoadScene("Level_1");
     }
 }
