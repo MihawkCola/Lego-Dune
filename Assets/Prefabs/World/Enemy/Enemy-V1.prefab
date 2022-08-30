@@ -1185,7 +1185,7 @@ MonoBehaviour:
   numberBlue: 0
   numberGold: 0
   numberSilver: 3
-  probabilityHeart: 1
+  probabilityHeart: 0.7
 --- !u!1 &4958667196817270716
 GameObject:
   m_ObjectHideFlags: 0

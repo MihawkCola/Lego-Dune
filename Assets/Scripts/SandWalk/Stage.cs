@@ -17,6 +17,8 @@ public class Stage : MonoBehaviour
 
     private SandWalk sandWalk;
     private SlideWormScript slideWormScript;
+
+    public int step = 1;
     private void Awake()
     {
         this.indexSequence = 0;
@@ -84,7 +86,9 @@ public class Stage : MonoBehaviour
         }
 
         this.indexSequence = 0;
-        this.sequence.Add(Random.Range(0, this.buttonsCount));
+        for (int i = 0; i < this.step; i++) {
+            this.sequence.Add(Random.Range(0, this.buttonsCount));
+        }
         this.slideWormScript.repetitionSuccess();
         this.sandWalk.StartAnimation();
         Debug.Log(this.sequence[this.sequence.Count - 1]);
