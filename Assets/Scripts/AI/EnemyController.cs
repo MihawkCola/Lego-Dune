@@ -7,6 +7,8 @@ public class EnemyController : MonoBehaviour
 {
     public GameObject[] enemy;
 
+    public int startEnemy = 1;
+
     private Transform enemylist;
 
     private Transform spawnPoints;
@@ -27,7 +29,7 @@ public class EnemyController : MonoBehaviour
 
     void Start()
     {
-        spawnRandomEnemy();
+        for (int i = 0; i < startEnemy; i++) spawnRandomEnemy();
         foreach (Transform child in enemylist)
         {
             child.GetComponent<NavMeshAgent>().enabled = false;

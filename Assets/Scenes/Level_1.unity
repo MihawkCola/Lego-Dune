@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 402.23236, g: 314.78613, b: 262.6599, a: 1}
+  m_IndirectSpecularColor: {r: 402.22992, g: 314.7837, b: 262.65796, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3712,15 +3712,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1519729122881713926, guid: c18d2f4ac8711d74f8159629a84b9a78, type: 3}
       propertyPath: step
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1519729122881713926, guid: c18d2f4ac8711d74f8159629a84b9a78, type: 3}
       propertyPath: sequenceRepetition
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1519729122881713926, guid: c18d2f4ac8711d74f8159629a84b9a78, type: 3}
       propertyPath: startSequenzNumber
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1813510702162041175, guid: c18d2f4ac8711d74f8159629a84b9a78, type: 3}
       propertyPath: m_LocalScale.x
@@ -10360,6 +10360,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 296346968941295789, guid: 9977d7f276f60374bb8ff1680cae0704, type: 3}
+      propertyPath: startEnemy
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 296346968941295789, guid: 9977d7f276f60374bb8ff1680cae0704, type: 3}
       propertyPath: Enemy.Array.size
       value: 1
